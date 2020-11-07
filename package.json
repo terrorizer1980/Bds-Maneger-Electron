@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Sirherobrine23/bds-maneger-gui_for-windows#readme",
   "dependencies": {
-    "electron": "^11.0.0-beta.20"
+    "electron": "^11.0.0-beta.20",
+    "electron-is": "^3.0.0"
   }
 }
