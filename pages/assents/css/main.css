@@ -1,0 +1,17 @@
+@font-face {
+    font-family: minecraft;
+    src: url(Minecraft.ttf);
+}
+@font-face {
+    font-family: minecraft-bold;
+    src: url(Mojang-Bold.ttf);
+}
+@font-face {
+    font-family: minecraft-regular;
+    src: url(Mojang-Regular.ttf);
+}
+/* Font END */
+*{
+    font-family: minecraft;
+    font-family: minecraft-regular;
+}
