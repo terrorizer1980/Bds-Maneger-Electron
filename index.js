@@ -55,3 +55,19 @@ app.on('activate', () => {
     createWindow()
   }
 })
+function kill_bedrock() {
+  var exec = require('child_process').exec;
+  var child = exec('FOR /F "usebackq tokens=2" %i% IN (`tasklist ^| findstr /r /b "bedrock_server*[.]exe"`) DO taskkill /pid /F %i%', {
+      detached: false,
+      shell: true
+  });
+  child.stdout.on('data', function (data) {
+      console.log('kill all bds servers')
+  });
+}
+// App close handler
+app.on('before-quit', function() {
+  kill_bedrock();
+});
+
+// %PROCESSOR_ARCHITECTURE%

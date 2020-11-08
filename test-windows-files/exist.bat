@@ -1,1 +1,0 @@
-IF EXIST "C:/mcpe/" ( IF EXIST "c:/mcpe/bedrock_server.exe" ( exit 0 ) ELSE ( exit 1 ) ) ELSE ( exit 1 )
