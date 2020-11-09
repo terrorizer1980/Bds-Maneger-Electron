@@ -4,7 +4,27 @@
   "description": "Minimal maneger for Minecraf Bedrock Server for Windows",
   "main": "index.js",
   "scripts": {
-    "test": "electron ."
+    "test": "electron .",
+    "build-win": "electron-builder"
+  },
+  "build": {
+    "appId": "com.Sirherobrine23.BDS-Gui",
+    "icon": "pages/assents/mcpe.png",
+    "asar": "true",
+    "win": {
+      "target": [
+        "msi",
+        "appx"
+      ]
+    },
+    "msi": {
+      "menuCategory": "Sirherobrine23"
+    },
+    "appx": {
+      "displayName": "BDS Manger for Windows (APPX)",
+      "applicationId": "BDSM12",
+      "identityName": "BDSMANEGER"
+    }
   },
   "repository": {
     "type": "git",
@@ -23,7 +43,10 @@
   },
   "homepage": "https://github.com/Sirherobrine23/bds-maneger-gui_for-windows#readme",
   "dependencies": {
-    "electron": "^11.0.0-beta.20",
     "electron-is": "^3.0.0"
+  },
+  "devDependencies": {
+    "electron": "^11.0.0-beta.20",
+    "electron-builder": "^22.9.1"
   }
 }
