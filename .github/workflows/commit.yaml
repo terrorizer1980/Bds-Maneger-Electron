@@ -20,4 +20,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Push Dist Node ${{ matrix.node-version }}
-        path: dist/
+        path: |
+          dist/*.appx
+          dist/*.msi
