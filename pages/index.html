@@ -6,19 +6,38 @@
     <title>BDS Maneger For Windows</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
-    <!-- <script src='main.js'></script> -->
+    <script src="assents/js/test_before_start.js" ></script>
+    <!-- <script>
+        var exitconfirm = confirm('you are to exit')
+    </script> -->
 </head>
 <body>
 <nav class="navbar">
     <ul class="navbar-nav">
         <!-- Logo -->
         <li class="logo">
-            <a class="nav-link" href="teste.html">
+            <a class="nav-link" href="#">
                 <span class="link-text logo-text"><p>Minecraft<p>BDS Maneger</p></p></span>
                 <svg width="5%" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="angle-double-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-angle-double-right fa-w-14 fa-5x"><g class="fa-group"><path fill="currentColor" d="M224 273L88.37 409a23.78 23.78 0 0 1-33.8 0L32 386.36a23.94 23.94 0 0 1 0-33.89l96.13-96.37L32 159.73a23.94 23.94 0 0 1 0-33.89l22.44-22.79a23.78 23.78 0 0 1 33.8 0L223.88 239a23.94 23.94 0 0 1 .1 34z" class="fa-secondary"></path><path fill="currentColor" d="M415.89 273L280.34 409a23.77 23.77 0 0 1-33.79 0L224 386.26a23.94 23.94 0 0 1 0-33.89L320.11 256l-96-96.47a23.94 23.94 0 0 1 0-33.89l22.52-22.59a23.77 23.77 0 0 1 33.79 0L416 239a24 24 0 0 1-.11 34z" class="fa-primary"></path></g></svg>
             </a>
         </li>
         <a class="nav-link"></a>
+        <!--  -->
+        <!-- Stop Server -->
+        <li class="nav-item" onclick="stopserver()">
+            <a href="#" class="nav-link">
+                <svg width="1%" viewBox="0 0 16 16" class="bi bi-pause" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/></svg>
+                <span class="link-text">Stop</span>
+            </a>
+        </li>
+        <!--  -->
+        <!-- Start Server -->
+        <li class="nav-item" onclick="stopserver();window.location.reload(true);">
+            <a href="#" class="nav-link">
+                <svg width="1%" viewBox="0 0 16 16" class="bi bi-play" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.804 8L5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/></svg>
+                <span class="link-text">Start Server</span>
+            </a>
+            </li>
         <!--  -->
         <!-- Theme -->
         <li class="nav-item" id="themeButton">
@@ -31,10 +50,18 @@
         </li>
         <!--  -->
         <!-- Backup -->
-        <li class="nav-item" id="backupbutton">
+        <li class="nav-item" onclick="backupMAP();">
             <a href="#" class="nav-link">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="1%" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
                 <span class="link-text">Backup</span>
+            </a>
+        </li>
+        <!--  -->
+        <!-- Informações do projeto -->
+        <li class="nav-item" id="InfoB">
+            <a href="#" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="2%" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                <span class="link-text">About</span>
             </a>
         </li>
     </ul>
@@ -43,42 +70,45 @@
     <div class="root">
         <div>
             <textarea id="LOG"></textarea><br>
-            <input id="cmds" size="100%" placeholder="Command to send to server" type="text">
-            <input type="submit" id='btn' onclick="sendcomand();return false">
+            <input id="cmds" id="btn2" size="100%" placeholder="Command to send to server: /" onkeydown="sendco(this)" type="text">
+            <input type="submit" id='comsen' onclick="sendcomand();return false">
         </div>
         <!-- End ROOT Div -->
     </div>
+          <!-- Info -->
+      <!-- The Modal -->
+      <div id="Info" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="infoclose">&times;</span>
+          <div class="info">
+            <fieldset>
+              <img src="assents/mcpe.png" width="7%">
+              <a>BDS MANEGER GUI &#9400;</a>
+                <div class="mantedor">
+                  <a>Lista de Mantedores</a>
+                    <br>
+                  <p><a>Matheus Sampaio Queiroga (Sirherobrine23)</a></p>
+                </div>
+                <div class="copyright">
+                  <!-- copyright -->
+                  <p><a>Este programa se baseia no Electron, Tendo Suas restrições e condutas de uso como copyright.</a></p>
+                  <p><a>Tendo a implementações como NodeJS, e usados como seu submodulos com seus direitos autorais.</a></p>
+                  <p><a>O Windows é um Sistema Fetchado de propriedades da Microsoft.</a></p>
+                  <p><a>O Bds-Maneger For Windows é um grenciador para o servidor para Minecraft Bedrock Server For Windows na qual podemos personalizar com Uma Pagina HTML5.</a></p>
+                  <p>O Bds Maneger são de Direitos de Sirherobrine23, Seu Codigo aberto ajuda para manutenção e melhoria dos programas</p>
+                </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
 </body>
-<script>
-    var status = localStorage.getItem('bds_status')
-    var blank = ''
-    if (status == blank){
-        console.log('Init server')
-        localStorage.setItem('bds_status', 'stoped')
-    }
-    if (status == 'started') {
-            var spawn = require('child_process').spawn;
-            var killbds = spawn('FOR /F "usebackq tokens=2" %i IN (`tasklist ^| findstr /r /b "bedrock_server*[.]exe"`) DO taskkill /f /pid %i', {
-                shell: true
-            });
-            // alert('Killing bds-maneger')
-            killbds.on('exit', function (code) {
-            console.log (`code ${code}`)
-            if (code == 0){
-                localStorage.setItem('bds_status', 'stoped')
-                killbds.stdin.end();
-                window.location.reload(true);
-            } else {
-                alert('Erro in kill process')
-                // app.quit();
-            } 
-            });
-    }
-</script>
 <div id="scr">
     <script src="assents/js/theme.js"></script>
     <script src="assents/js/resize_log.js"></script>
-    <script src="assents/js/start.js"></script>
-    <script src="assents/js/init.js"></script>
+    <script src="assents/js/send_command.js"></script>
+    <script src="assents/js/stop_server.js"></script>
+    <script src="assents/js/log_download.js"></script>
+    <script src="assents/js/info.js"></script>
 </div>
 </html>

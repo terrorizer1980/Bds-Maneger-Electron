@@ -16,7 +16,7 @@ function createWindow () {
   })
   win.loadFile('pages/index.html')
 }
-function createWindowerro () {
+function notfoundFolder() {
   // Cria uma janela de navegação de erro.
   const win = new BrowserWindow({
     titleBarStyle: 'hidden',
@@ -27,20 +27,32 @@ function createWindowerro () {
       sandbox: true
     }
   })
-  win.loadFile('pages/erro.html')
+  win.loadFile('pages_erro/notfoundFolder.html')
 }
-var spawn = require('child_process').spawn;
-var child = spawn('IF EXIST "C:/mcpe/" ( IF EXIST "c:/mcpe/bedrock_server.exe" ( exit 0 ) ELSE ( exit 1 ) ) ELSE ( exit 1 )', {
-  shell: true
-});
-child.on('exit', function (code) {
-  console.log (`code ${code}`);
-  if (code == 0){
+function archnotamd64() {
+  // Cria uma janela de navegação de erro.
+  const win = new BrowserWindow({
+    titleBarStyle: 'hidden',
+    width: 1200,
+    height: 600,
+    icon: path.join(__dirname, 'pages/assents/mcpe.png'),
+    webPreferences: {
+      sandbox: true
+    }
+  })
+  win.loadFile('pages_erro/notamd.html')
+}
+var ch1 = require('child_process'); var codet = ch1.execSync('IF EXIST "C:/mcpe/" ( IF EXIST "c:/mcpe/bedrock_server.exe" ( exit 0 ) ELSE ( exit 1 ) ) ELSE ( exit 1 )');
+var ch2 = require('child_process'); var archst = ch2.execSync('@echo off & if %PROCESSOR_ARCHITECTURE%==AMD64 ( exit 0 ) else ( exit 1 )');
+if (codet == 0){
+  if (archst == 0) {
     app.whenReady().then(createWindow);
   } else {
-    app.whenReady().then(createWindowerro);
-  }
-});
+    app.whenReady().then(archnotamd64);
+  }    
+} else {
+  app.whenReady().then(notfoundFolder);
+}
 
 // app.quit();
 //  app.whenReady().then(createWindow)
