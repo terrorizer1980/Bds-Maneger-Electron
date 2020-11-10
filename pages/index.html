@@ -6,10 +6,10 @@
     <title>BDS Maneger For Windows</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
-    <script src="assents/js/test_before_start.js" ></script>
-    <!-- <script>
-        var exitconfirm = confirm('you are to exit')
-    </script> -->
+    <script src="assents/js/bds_service.js" ></script>
+    <script src="assents/js/kill_old_BDS.js" ></script>
+    <!-- <script>window.onload = function exampleFunction() {var teco = confirm('Quer Iniciar o Servidor');if (teco){console.log(teco);startServer();}}</script> -->
+    <script>const appV = require('electron').remote.app.getVersion();</script>
 </head>
 <body>
 <nav class="navbar">
@@ -23,6 +23,14 @@
         </li>
         <a class="nav-link"></a>
         <!--  -->
+        <!-- Start Server -->
+        <li class="nav-item" onclick="startServer();">
+            <a href="#" class="nav-link">
+                <svg width="1%" viewBox="0 0 16 16" class="bi bi-play" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.804 8L5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/></svg>
+                <span class="link-text">Start Server</span>
+            </a>
+        </li>
+        <!--  -->
         <!-- Stop Server -->
         <li class="nav-item" onclick="stopserver()">
             <a href="#" class="nav-link">
@@ -31,13 +39,13 @@
             </a>
         </li>
         <!--  -->
-        <!-- Start Server -->
-        <li class="nav-item" onclick="stopserver();window.location.reload(true);">
+        <!-- Restart Server -->
+        <li class="nav-item" onclick="restartServer()">
             <a href="#" class="nav-link">
-                <svg width="1%" viewBox="0 0 16 16" class="bi bi-play" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.804 8L5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/></svg>
-                <span class="link-text">Start Server</span>
+                <svg width="1%" viewBox="0 0 16 16" class="bi bi-arrow-clockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/> <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
+                <span class="link-text">Restart Server</span>
             </a>
-            </li>
+        </li>
         <!--  -->
         <!-- Theme -->
         <li class="nav-item" id="themeButton">
@@ -50,10 +58,18 @@
         </li>
         <!--  -->
         <!-- Backup -->
-        <li class="nav-item" onclick="backupMAP();">
+        <li class="nav-item" onclick="worldbackup();">
             <a href="#" class="nav-link">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="1%" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
                 <span class="link-text">Backup</span>
+            </a>
+        </li>
+        <!--  -->
+        <!-- Download Log -->
+        <li class="nav-item" onclick="log_download();">
+            <a href="#" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="1%" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                <span class="link-text">Download Log Server</span>
             </a>
         </li>
         <!--  -->
@@ -86,9 +102,14 @@
               <img src="assents/mcpe.png" width="7%">
               <a>BDS MANEGER GUI &#9400;</a>
                 <div class="mantedor">
-                  <a>Lista de Mantedores</a>
+                  <a>Lista de Mantedores:</a>
                     <br>
                   <p><a>Matheus Sampaio Queiroga (Sirherobrine23)</a></p>
+                  <br>
+                  <div>
+                      <p>App local Version: <script>document.write(appV)</script></p>
+                      <p>Latest App Version in git repository: <script>document.write(localStorage.getItem('bds_gitv'))</script></p>
+                  </div>
                 </div>
                 <div class="copyright">
                   <!-- copyright -->
@@ -107,8 +128,8 @@
     <script src="assents/js/theme.js"></script>
     <script src="assents/js/resize_log.js"></script>
     <script src="assents/js/send_command.js"></script>
-    <script src="assents/js/stop_server.js"></script>
     <script src="assents/js/log_download.js"></script>
     <script src="assents/js/info.js"></script>
+    <script src="assents/js/check_version.js"></script>
 </div>
 </html>

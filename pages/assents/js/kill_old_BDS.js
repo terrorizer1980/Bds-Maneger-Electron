@@ -1,13 +1,6 @@
 var status = localStorage.getItem('bds_status')
 var blank = ''
 
-function stating() {
-    var scripts = document.createElement("script");
-    scripts.src = 'assents/js/start.js';
-    console.log(scripts)
-    document.getElementById("scr").appendChild(scripts);
-}
-
 if (status == blank){
     console.log('Init server')
     localStorage.setItem('bds_status', 'stoped')
@@ -28,7 +21,4 @@ if (status == 'started') {
                 window.location.reload(true);
             }
         });
-} else {
-    document.addEventListener("DOMContentLoaded", stating);
 }
-

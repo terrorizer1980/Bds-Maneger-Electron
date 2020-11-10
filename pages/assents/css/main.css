@@ -64,7 +64,7 @@ input{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 10px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -80,7 +80,7 @@ input{
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 85%;
   }
   
   /* The Close Button */
@@ -200,10 +200,10 @@ input{
       margin: 0 1.5rem;
     }
     
-    .fa-primary, .fa-secondary {
+    /* .fa-primary, .fa-secondary { */
       /* transition: var(--transition-speed); */
       /* color: var(--text-primary) */
-    }
+    /* } */
 
     .logo {
       text-transform: uppercase;
@@ -330,4 +330,7 @@ input{
   .mantedor{
     float: right;
     margin-left: 50%
+  }
+  .startframe{
+    display: none;
   }
