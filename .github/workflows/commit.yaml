@@ -27,7 +27,6 @@ jobs:
     - name: Gerando uma  Tag
       id: tag
       run: |
-      echo "%random%"
         echo "Build Pos commit, job id: ${{ github.job }}" >> release.txt
 
     - name: Upload firmware to release
