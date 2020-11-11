@@ -23,4 +23,4 @@ fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/
 );
 
 // https://minecraft.azureedge.net/bin-win/bedrock-server-1.16.40.02.zip
-// https://api.github.com/repos/tmate-io/tmate/releases
+// https://api.github.com/repos/Sirherobrine23/Bds_Maneger-for-Windows/releases
