@@ -1,6 +1,6 @@
 {
   "name": "bds-maneger-gui_for-windows",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Minimal maneger for Minecraf Bedrock Server for Windows",
   "main": "index.js",
   "scripts": {
