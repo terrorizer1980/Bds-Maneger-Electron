@@ -61,6 +61,7 @@ input{
   
   /* The Modal (background) */
   .modal {
+    transition: var(--transition-speed);
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -70,17 +71,6 @@ input{
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: var(--bg-primary); /* Fallback color */
-    background-color: var(--box-primary); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
-    background-color: var(--bg-primary);
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 85%;
   }
   
   /* The Close Button */
@@ -268,6 +258,11 @@ input{
         height: 100vh;
       }
     
+      .modal{        
+        background-color: var(--bg-primary); /* Fallback color */
+        background-color: var(--box-primary); /* Black w/ opacity */
+      }
+
       .navbar:hover {
         width: 16rem;
       }
@@ -284,6 +279,15 @@ input{
       .navbar:hover .logo-text
       {
         left: 0px;
+      }
+
+      /* Modal Content */
+      .modal-content {
+        background-color: var(--bg-primary);
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 85%;
       }
     }
     
@@ -323,14 +327,9 @@ input{
     padding: 0;
     outline: none;
   }
-  .copyright{
-    float: left;
-    margin-right: 50%;
-  }
-  .mantedor{
-    float: right;
-    margin-left: 50%
-  }
   .startframe{
     display: none;
+  }
+  .info_after{
+    margin-left: 5%;
   }

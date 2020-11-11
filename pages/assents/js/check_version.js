@@ -1,10 +1,8 @@
-var url_app = 'https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/package.json';
-fetch(url_app).then(response => response.text()).then(dataURLv => {
-    var obj1 = JSON.parse(dataURLv);
-    var latestV = obj1.version;
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/package.json').then(response => response.text()).then(dataURLv => {
+    const obj1 = JSON.parse(dataURLv);
+    const latestV = obj1.version;
     const localV = require('electron').remote.app.getVersion()
-    console.log('Ultima Versão Disponivel no repositorio: '+ latestV, 'Sua Versão local: '+localV)
-    var check_latest_version = latestV >= localV
+    const check_latest_version = latestV >= localV
         if (check_latest_version){
             console.log('Voçê está na ultima versão')
         } else {
@@ -15,9 +13,13 @@ fetch(url_app).then(response => response.text()).then(dataURLv => {
     }
 );
 
-var url_server = 'https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json';
-fetch(url_server).then(response => response.text()).then(serverVURLv => {
-    var obj1 = JSON.parse(serverVURLv);
-    var serverV = obj1.latest;
-    console.log(serverV)  
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(serverVURLv => {
+        const obj2 = JSON.parse(serverVURLv);
+        const serverV = obj2.latest;
+        const serverVurl = 'https://minecraft.azureedge.net/bin-win/bedrock-server-' + serverV + '.zip'
+        localStorage.setItem('bds_server_latestV', serverV)
+        localStorage.setItem('bds_server_url', serverVurl)
+    }
 );
+
+// https://minecraft.azureedge.net/bin-win/bedrock-server-1.16.40.02.zip

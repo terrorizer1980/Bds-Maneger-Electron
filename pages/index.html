@@ -27,7 +27,7 @@
         <li class="nav-item" onclick="startServer();">
             <a href="#" class="nav-link">
                 <svg width="1%" viewBox="0 0 16 16" class="bi bi-play" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.804 8L5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/></svg>
-                <span class="link-text">Start Server</span>
+                <span class="link-text">Start</span>
             </a>
         </li>
         <!--  -->
@@ -43,7 +43,7 @@
         <li class="nav-item" onclick="restartServer()">
             <a href="#" class="nav-link">
                 <svg width="1%" viewBox="0 0 16 16" class="bi bi-arrow-clockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/> <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
-                <span class="link-text">Restart Server</span>
+                <span class="link-text">Restart</span>
             </a>
         </li>
         <!--  -->
@@ -73,6 +73,14 @@
             </a>
         </li>
         <!--  -->
+        <!-- Seetings -->
+        <li class="nav-item" id="Config">
+            <a href="#" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="2%" viewBox="0 0 24 24"><g><path d="M0,0h24v24H0V0z" fill="none"/><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></g></svg>
+                <span class="link-text">Settings</span>
+            </a>
+        </li>
+        <!--  -->
         <!-- Informações do projeto -->
         <li class="nav-item" id="InfoB">
             <a href="#" class="nav-link">
@@ -98,26 +106,34 @@
         <div class="modal-content">
           <span class="infoclose">&times;</span>
           <div class="info">
+            <img src="assents/mcpe.png" width="7%">
+            <a>BDS MANEGER GUI &#9400;</a>
+            <div class="mantedor">
+                <a>Lista de Mantedores:</a>
+                <p>Matheus Sampaio Queiroga (Sirherobrine23)</p>
+
             <fieldset>
-              <img src="assents/mcpe.png" width="7%">
-              <a>BDS MANEGER GUI &#9400;</a>
-                <div class="mantedor">
-                  <a>Lista de Mantedores:</a>
-                    <br>
-                  <p><a>Matheus Sampaio Queiroga (Sirherobrine23)</a></p>
-                  <br>
-                  <div>
-                      <p>App local Version: <script>document.write(appV)</script></p>
-                      <p>Latest App Version in git repository: <script>document.write(localStorage.getItem('bds_gitv'))</script></p>
-                  </div>
+                <a>BDS MAneger Info:</a>
+                <div class="info_after">
+                    <p>App local Version: <script>document.write(appV)</script></p>
+                    <p>Latest App Version in git repository: <script>document.write(localStorage.getItem('bds_gitv'))</script></p>
                 </div>
+            </fieldset>
+            <fieldset>
+                <a>Minecraft Server Info:</a>
+                <div class="info_after">
+                    <p>Latest Server Version: <script>document.write(localStorage.getItem('bds_server_latestV'))</script></p>
+                    <p>Local  Server Version: <script>document.write('Not Working :(')</script></p>
+                </div>
+            </fieldset>
+
+            <fieldset>
                 <div class="copyright">
-                  <!-- copyright -->
-                  <p><a>Este programa se baseia no Electron, Tendo Suas restrições e condutas de uso como copyright.</a></p>
-                  <p><a>Tendo a implementações como NodeJS, e usados como seu submodulos com seus direitos autorais.</a></p>
-                  <p><a>O Windows é um Sistema Fetchado de propriedades da Microsoft.</a></p>
-                  <p><a>O Bds-Maneger For Windows é um grenciador para o servidor para Minecraft Bedrock Server For Windows na qual podemos personalizar com Uma Pagina HTML5.</a></p>
-                  <p>O Bds Maneger são de Direitos de Sirherobrine23, Seu Codigo aberto ajuda para manutenção e melhoria dos programas</p>
+                <a>copyright</a>
+                    <div class="info_after">
+                        <p>O Bds-Maneger For Windows é um grenciador para o servidor para Minecraft Bedrock Server For Windows na qual podemos personalizar com Uma Pagina HTML5.</p>
+                        <p>O Bds Maneger são de Direitos de Sirherobrine23, Seu Codigo aberto ajuda para manutenção e melhoria do gerenciador</p>
+                    </div>
                 </div>
             </fieldset>
           </div>
