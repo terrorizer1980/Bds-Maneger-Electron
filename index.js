@@ -49,9 +49,8 @@ function archnotamd64() {
   win.loadFile('pages_erro/notamd.html');
 }
 var ch1 = require('child_process'); var codet = ch1.execSync('IF EXIST "C:/mcpe/" ( IF EXIST "c:/mcpe/bedrock_server.exe" ( exit 0 ) ELSE ( exit 1 ) ) ELSE ( exit 1 )');
-var ch2 = require('child_process'); var archst = ch2.execSync('@echo off & if %PROCESSOR_ARCHITECTURE%==AMD64 ( exit 0 ) else ( exit 1 )');
 if (codet == 0){
-  if (archst == 0) {
+  if (require('os').arch() == 'x64') {
     app.whenReady().then(createWindow);
   } else {
     app.whenReady().then(archnotamd64);

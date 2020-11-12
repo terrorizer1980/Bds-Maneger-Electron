@@ -74,7 +74,7 @@ input{
   }
   
   /* The Close Button */
-  .close, .infoclose {
+  .close, .infoclose, .closeConfig {
     color: #aaaaaa;
     float: right;
     /* font-size: 28px; */
@@ -308,6 +308,15 @@ input{
       --box-primary: rgba(0,0,0,0.4);
       --border-color: rgba(0,0,0,0.5);
     }
+
+    .DarkColors{
+      --text-primary: #fff;
+      --text-secondary: #fff;
+      --bg-primary: #1d1d1d;
+      --bg-secondary: #3e3e3e;
+      --box-primary: rgba(0,0,0,0.4);
+      --border-color: rgba(0,0,0,0.5);
+    }
     
     .theme-icon {
       display: none;
@@ -317,6 +326,10 @@ input{
       display: block;
     }
     
+    .DarkColors #system {
+      display: block;
+    }
+
     .light #lightIcon {
       display: block;
     }
@@ -332,4 +345,20 @@ input{
   }
   .info_after{
     margin-left: 5%;
+  }
+  .logTEXT{
+    resize: none;
+  }
+  .commands{
+    resize: none;
+  }
+  .all_win{
+    height: 100%;
+    width: 100%;
+  }
+  .all_win_content {
+    background-color: var(--bg-primary);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
   }

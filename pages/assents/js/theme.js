@@ -1,9 +1,9 @@
 const themeMap = {
     dark: "light",
-    light: "dark"
+    light: "DarkColors",
+    DarkColors: "dark"
   };
   const theme = localStorage.getItem('theme')||(tmp = Object.keys(themeMap)[0], localStorage.setItem('theme', tmp), tmp);
-  console.log('Theme: ' + theme)
   const bodyClass = document.body.classList;
   bodyClass.add(theme);
   
@@ -13,6 +13,5 @@ const themeMap = {
   
     bodyClass.replace(current, next);
     localStorage.setItem('theme', next);
-    console.log('Next Theme: ' + next);
-  }
-  document.getElementById('themeButton').onclick = toggleTheme;
+}
+document.getElementById('themeButton').onclick = toggleTheme;

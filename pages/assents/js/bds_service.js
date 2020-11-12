@@ -1,15 +1,12 @@
 function startServer() {
-    var iframestart = document.createElement("iframe");
-    iframestart.id = 'serveinjectstart';
-    iframestart.classList.add('startframe')
-    // 
+    document.getElementById('startButtom').removeAttribute('onclick')
     var scripts = document.createElement("script");
     scripts.src = 'assents/js/start.js';
     scripts.id = 'ServerStarted';
-    document.body.appendChild(iframestart);
-    document.getElementById('serveinjectstart').appendChild(scripts);
+    document.getElementById('before_get_update').appendChild(scripts);
 }
 function stopserver(){
+    document.getElementById('startButtom').setAttribute('onclick','startServer();')
     serverstated.stdin.write('stop\n');
     localStorage.setItem('bds_status', 'stoped');
     document.getElementById("cmds").setAttribute('disabled','')
@@ -46,3 +43,26 @@ function worldbackup(){
 }
 
 // C:\Program Files\Google\Chrome\Application
+function initstatus(){
+    if (confirm('!Cuidado!, isso pode consumir muita memoria ram, e cpu, quer continua')){
+        setInterval(function(){
+            // tasklist /fi "imagename eq bedrock_server.exe" | find /i "bedrock_server.exe" > nul & if not errorlevel 1 (exit 0) else (exit 1)
+            var exec = require('child_process').exec;
+            var statuss = exec('tasklist /fi "imagename eq bedrock_server.exe" | find /i "bedrock_server.exe" > nul & if not errorlevel 1 (exit 0) else (exit 1)', {detached: false,shell: true});
+            statuss.on('exit', function (code) {
+                if (code == 0) {
+                    document.getElementById('statsID').style.fill = 'green';
+                    document.getElementById('statsIDout').innerHTML = 'You Serve is executing';
+                    statuss.stdin.end();
+                } else {
+                    document.getElementById('statsID').style.fill = 'red';
+                    document.getElementById('statsIDout').innerHTML = 'You Serve is stoped';
+                    statuss.stdin.end();
+                }
+            })
+        }, 500);
+    } else
+        return 'Cancelado'
+}
+
+    

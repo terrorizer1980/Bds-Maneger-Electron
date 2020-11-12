@@ -12,6 +12,7 @@ function sendcomand() {
         } else {
             document.getElementById('comsen').removeAttribute('disabled')
             document.getElementById('cmds').value = ''
+            document.getElementById("commandsends").value += 'Command Send: '+command+'\n'
             serverstated.stdin.write(command+'\n');
         }
     }

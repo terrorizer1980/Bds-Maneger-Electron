@@ -1,6 +1,6 @@
 {
   "name": "bds-maneger-gui_for-windows",
-  "version": "0.0.4a",
+  "version": "0.0.5",
   "description": "Minimal maneger for Minecraf Bedrock Server for Windows",
   "main": "index.js",
   "scripts": {
@@ -43,6 +43,7 @@
   },
   "homepage": "https://github.com/Sirherobrine23/bds-maneger-gui_for-windows#readme",
   "dependencies": {
+    "decompress-zip": "^0.2.2",
     "electron-is": "^3.0.0"
   },
   "devDependencies": {
