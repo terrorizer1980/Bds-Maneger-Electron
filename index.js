@@ -3,6 +3,7 @@ const electron = require('electron')
 var path = require('path')
 const { app, BrowserWindow } = require('electron')
 function createWindow () {
+  var http = require(`${__dirname}/http`)
   // Cria uma janela de navegação.
   const win = new BrowserWindow({
     titleBarStyle: 'hidden',
@@ -15,7 +16,7 @@ function createWindow () {
       sandbox: false
     }
   })
-  win.loadFile('pages/index.html');
+  win.loadURL('http://127.0.0.1:8385');
   win.on('close', function(e) {const choice = require('electron').dialog.showMessageBoxSync(this,{type: 'question', buttons: ['Yes', 'No'], title: 'Confirm', message: 'Did you stop the server?' });
     if (choice === 1) {
       e.preventDefault();
