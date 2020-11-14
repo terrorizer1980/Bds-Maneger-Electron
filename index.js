@@ -3,7 +3,7 @@ const electron = require('electron')
 var path = require('path')
 const { app, BrowserWindow } = require('electron')
 function createWindow () {
-  var http = require(`${__dirname}/http`)
+  // var http = require(`${__dirname}/http`)
   // Cria uma janela de navegação.
   const win = new BrowserWindow({
     titleBarStyle: 'hidden',
@@ -16,7 +16,7 @@ function createWindow () {
       sandbox: false
     }
   })
-  win.loadURL('http://127.0.0.1:8385');
+  win.loadFile(`${__dirname}/pages/index.html`)
   win.on('close', function(e) {const choice = require('electron').dialog.showMessageBoxSync(this,{type: 'question', buttons: ['Yes', 'No'], title: 'Confirm', message: 'Did you stop the server?' });
     if (choice === 1) {
       e.preventDefault();
@@ -62,11 +62,10 @@ if (codet == 0){
 
 // app.quit();
 //  app.whenReady().then(createWindow)
-// app.on('window-all-closed', () => {
-//   if (process.platform !== 'darwin') {
-//     app.quit()
-//   }
-// })
+app.on('window-all-closed', () => {
+  app.quit();
+  // process.exit();
+})
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {

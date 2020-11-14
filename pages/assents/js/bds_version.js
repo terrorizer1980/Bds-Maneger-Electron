@@ -1,4 +1,18 @@
-const { DownloadItem } = require("electron");
+// Download BDS Software
+// Id selecttion: bds-Server_download
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(langArray => {
+    var newSelect = document.getElementById('bds-Server_download')
+        for(index in JSON.parse(langArray).Versions){
+            var opt = document.createElement("option");
+            opt.value= index;
+            opt.innerHTML = JSON.parse(langArray).Versions[index];
+            // Taca tudo do select
+            newSelect.appendChild(opt);
+            index++;
+        }
+    }
+);
+// const { DownloadItem } = require("electron");
 
 function DownloadBDS(){
     var jsonNumber = document.getElementById('bds-Server_download').value
@@ -60,7 +74,7 @@ function DownloadBDS(){
                 
                 // Start extraction of the content
                 unzipper.extract({
-                    path: 'C:/mcpe'
+                    path: 'C:/mcpe_extract'
                 });
                                 
                 return false;
@@ -71,3 +85,4 @@ function DownloadBDS(){
 
     });
 }
+

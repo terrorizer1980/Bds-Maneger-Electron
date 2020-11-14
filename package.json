@@ -47,7 +47,6 @@
     "colors": "^1.4.0",
     "corser": "^2.0.1",
     "decompress-zip": "^0.2.2",
-    "ecstatic": "^3.3.2",
     "electron-is": "^3.0.0",
     "http-proxy": "^1.18.0",
     "minimist": "^1.2.5",
