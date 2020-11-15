@@ -17,7 +17,7 @@ jobs:
       env:
         CI: true
   Debian-test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js
