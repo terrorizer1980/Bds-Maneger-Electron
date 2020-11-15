@@ -34,7 +34,7 @@ jobs:
       with:
         tag_name: ${{ github.run_id }}
         name: Build Commit, Run_id ${{ github.run_id }}
-        body_path: release.md
+        body_path: release_dev.md
         prerelease: true
         files: |
           dist/*.appx
