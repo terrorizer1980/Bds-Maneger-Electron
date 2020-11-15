@@ -1,7 +1,7 @@
 name: Node.js CI
-on: 
+on:
   push:
-    branch:
+    branches:
       - stable
 jobs:
   build:
