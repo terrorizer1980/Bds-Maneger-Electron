@@ -41,7 +41,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
        name: archive-windows
-       path: dist
+       # path: dist
    - name: Upload artifact
       uses: actions/upload-artifact@main
       with:
