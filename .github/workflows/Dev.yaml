@@ -6,7 +6,6 @@ on:
 jobs:
   Windows-test:
     runs-on: windows-latest
-    id: Windows
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js
