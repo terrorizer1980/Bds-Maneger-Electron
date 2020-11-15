@@ -4,7 +4,7 @@ on:
     branches:
       - dev
 jobs:
-  Windows build test:
+  Windows-test:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -16,7 +16,7 @@ jobs:
     - run: npm run build-win
       env:
         CI: true
-  Debian build test:
+  Debian-test:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
