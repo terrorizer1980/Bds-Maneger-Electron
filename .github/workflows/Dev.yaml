@@ -16,7 +16,7 @@ jobs:
     - run: npm run build-win
       env:
         CI: true
-    - name: Upload bin directory
+    - name: Upload artifact
       uses: actions/upload-artifact@main
       with:
         name: archive-windows
@@ -42,3 +42,9 @@ jobs:
       with:
        name: archive-windows
        path: dist/
+   - name: Upload artifact
+      uses: actions/upload-artifact@main
+      with:
+        name: archive-pos-Debian-Build
+        retention-days: 1
+        path: dist/
