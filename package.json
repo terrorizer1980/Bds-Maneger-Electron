@@ -6,7 +6,7 @@
   "scripts": {
     "test": "electron .",
     "build-win": "electron-builder --win appx msi",
-    "build-deb": "node_module/.bin/electron-builder --linux deb"
+    "build-deb": "electron-builder --linux deb"
   },
   "build": {
     "appId": "com.Sirherobrine23.bds-maneger",
