@@ -23,43 +23,7 @@ function createWindow () {
     }
   });
 }
-function notfoundFolder() {
-  // Cria uma janela de navegação de erro.
-  const win = new BrowserWindow({
-    titleBarStyle: 'hidden',
-    width: 1200,
-    height: 600,
-    icon: path.join(__dirname, 'pages/assents/mcpe.png'),
-    webPreferences: {
-      sandbox: true
-    }
-  })
-  win.loadFile('pages_erro/notfoundFolder.html')
-}
-function archnotamd64() {
-  // Cria uma janela de navegação de erro.
-  const win = new BrowserWindow({
-    titleBarStyle: 'hidden',
-    width: 1200,
-    height: 600,
-    icon: path.join(__dirname, 'pages/assents/mcpe.png'),
-    webPreferences: {
-      sandbox: true
-    }
-  })
-  win.loadFile('pages_erro/notamd.html');
-}
-var ch1 = require('child_process'); var codet = ch1.execSync('IF EXIST "C:/mcpe/" ( IF EXIST "c:/mcpe/bedrock_server.exe" ( exit 0 ) ELSE ( exit 1 ) ) ELSE ( exit 1 )');
-if (codet == 0){
-  if (require('os').arch() == 'x64') {
-    app.whenReady().then(createWindow);
-  } else {
-    app.whenReady().then(archnotamd64);
-  }    
-} else {
-  app.whenReady().then(notfoundFolder);
-}
-
+app.whenReady().then(createWindow);
 // app.quit();
 //  app.whenReady().then(createWindow)
 app.on('window-all-closed', () => {

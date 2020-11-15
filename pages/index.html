@@ -6,12 +6,8 @@
     <title>BDS Maneger For Windows</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
-    <script src="assents/js/bds_service.js" ></script>
-    <script src="assents/js/kill_old_BDS.js" ></script>
-    <!-- <script>window.onload = function exampleFunction() {var teco = confirm('Quer Iniciar o Servidor');if (teco){console.log(teco);startServer();}}</script> -->
-    <script>const appV = require('electron').remote.app.getVersion();</script>
-    <script src="assents/js/bds_version.js"></script>
-    <script src="assents/js/check_version.js"></script>
+    <script src="assents/js/kill_old_BDS.js"></script>
+    <script>var appV = require('electron').remote.app.getVersion();</script>
 </head>
 <body>
 <nav class="navbar" id="navbarID">
@@ -34,8 +30,8 @@
         </li>
         <!--  -->
         <!-- Stop Server -->
-        <li class="nav-item" onclick="stopserver()">
-            <a href="#" class="nav-link">
+        <li class="nav-item" >
+            <a href="#" class="nav-link" id="StopButtom">
                 <svg width="1%" viewBox="0 0 16 16" class="bi bi-pause" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/></svg>
                 <span class="link-text">Stop</span>
             </a>
@@ -92,81 +88,58 @@
         </li>
     </ul>
 </nav>
-    <!-- End NAV -->
-    <div class="root">
-        <div>
-            <textarea disabled class="logTEXT" id="LOG"></textarea><br>
-            <input id="cmds" id="btn2" size="100%" placeholder="Command to send to server: /" onkeydown="sendco(this)" type="text">
-            <input type="submit" id='comsen' onclick="sendcomand();return false"><br>
-            <textarea disabled class="commands" id="commandsends"></textarea>
-            <div><fieldset><p><svg xmlns="http://www.w3.org/2000/svg" id="statsID" fill="black" aria-hidden="true" focusable="false" data-prefix="fad" viewBox="0 0 24 24" width="2%"><path d="M0 0h24v24H0z" fill="none"/><path d="M0 0h24v24H0z" fill="none"/><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm10 6c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z"/></svg><a id="statsIDout"></a></p></fieldset></div>
-        </div>
-        <!-- End ROOT Div -->
+<!-- End NAV -->
+<div class="root" id="root_container">
+    <!-- Main Home -->
+    <div>
+        <textarea disabled class="logTEXT" id="LOG"></textarea><br>
+        <input id="cmds" id="btn2" size="100%" placeholder="Command to send to server: /" onkeydown="sendco(this)" type="text">
+        <input type="submit" id='comsen' onclick="sendcomand();return false"><br><textarea disabled class="commands" id="commandsends"></textarea>
     </div>
-    <!-- The Modal Config Menu-->
-    <div id="configmodal" class="modal">
-        <div class="modal-content">
-            <span class="closeConfig">&times;</span>
-            <div class="config">
-                <label for="CConfig">Minecraft Server Configurations</label>
-                <fieldset id="CConfig">
-                    <div>
-                        <label for="bds-Server_download">Bedrock Server Download</label>
-                        <select id="bds-Server_download"></select>
-                        <button onclick="DownloadBDS();">Download</button>
-                    </div>
-                </fieldset>
-            </div>
-        </div>
-    </div>
-    <!-- The Modal Config Menu-->
-    <div id="TRAGZIP" class="modal">
-        <div class="all_win_content" id="DRAGAREA">
-            <div id="drag-zip" class="all_win">
-                <p>Drag <script>document.write(localStorage.getItem('NAMEDOWNLOAD'))</script></p>
-            </div>
-        </div>
-    </div>
-    <!-- Info -->
-    <!-- The Modal -->
+
+    <!-- The Modal Info -->
     <div id="Info" class="modal">
-        <!-- Modal content -->
         <div class="modal-content">
             <span class="infoclose">&times;</span>
             <div class="info">
                 <img src="assents/mcpe.png" width="7%">
                 <a>BDS MANEGER GUI &#9400;</a>
+
+                <!-- Mantedor -->
                 <div class="mantedor">
                     <a>Lista de Mantedores:</a>
                     <p>Matheus Sampaio Queiroga (Sirherobrine23)</p>
+                    <fieldset>
+                        <a>BDS MAneger Info:</a>
+                        <div class="info_after">
+                            <p>App local Version: <script>document.write(appV)</script></p>
+                            <p>Latest App Version in git repository: <script>document.write(localStorage.getItem('bds_gitv'))</script></p>
+                        </div>
+                    </fieldset>
 
-                <fieldset>
-                    <a>BDS MAneger Info:</a>
-                    <div class="info_after">
-                        <p>App local Version: <script>document.write(appV)</script></p>
-                        <p>Latest App Version in git repository: <script>document.write(localStorage.getItem('bds_gitv'))</script></p>
-                    </div>
-                </fieldset>
+                <!-- App Infos -->
                 <fieldset>
                     <a>Minecraft Server Info:</a>
                     <div class="info_after">
                         <p>Latest Server Version: <script>document.write(localStorage.getItem('bds_server_latestV'))</script></p>
-                        <p>Local  Server Version: <script>document.write('Not Working :(')</script></p>
+                        <p>Local  Server Version: <script>document.write(localStorage.getItem('bds_server_version'))</script></p>
                     </div>
                 </fieldset>
-                
+
+                <!-- Updates -->
                 <fieldset>
                     <div>
                         <a>Atualização:</a>
                         <div class="info_after">
                             <div id="before_get_update"></div>
                         </div>
-                        </div>
+                    </div>
                 </fieldset>
 
+                <!-- Copyright -->
                 <fieldset>
                     <div class="copyright">
-                    <a>copyright</a>
+                        <a>copyright</a>
                         <div class="info_after">
                             <p>O Bds-Maneger For Windows é um grenciador para o servidor para Minecraft Bedrock Server For Windows na qual podemos personalizar com Uma Pagina HTML5.</p>
                             <p>O Bds Maneger são de Direitos de Sirherobrine23, Seu Codigo aberto ajuda para manutenção e melhoria do gerenciador</p>
@@ -176,12 +149,36 @@
             </div>
         </div>
     </div>
+    <!--  -->
+</div>
+<!-- End ROOT Div -->
+<!-- End ROOT Div -->    
+</div>
+<!-- End ROOT Div -->
+<!-- End ROOT Div -->
+<!-- End ROOT Div -->
+
+<!-- The Modal Config Menu -->
+<div id="configmodal" class="modal">
+    <div class="modal-content">
+        <span class="closeConfig">&times;</span>
+        <div class="config">
+            <label for="CConfig">Minecraft Server Configurations</label>
+            <fieldset id="CConfig">
+                <label for="bds-Server_download">Bedrock Server Download</label>
+                <select id="bds-Server_download"></select>
+                <button onclick="DownloadBDS();">Download</button>
+                <textarea cols="50" row="60" id="BDSLOGDOWNLOAD" disabled style="display: none;"></textarea>
+            <fieldset>
+        <div>
+        <label for="autostart">Auto Start Server in Init App</label>
+        <input id="autostart" type="checkbox" onclick="checkedBox();">
+    </div>
+</div>
 </body>
 <div id="scr">
-    <script src="assents/js/theme.js"></script>
-    <script src="assents/js/resize_log.js"></script>
-    <script src="assents/js/send_command.js"></script>
-    <script src="assents/js/log_download.js"></script>
     <script src="assents/js/modal.js"></script>
+    <script>const themeMap = {dark: "light",light: "DarkColors",DarkColors: "dark"};const theme = localStorage.getItem('theme')||(tmp = Object.keys(themeMap)[0], localStorage.setItem('theme', tmp), tmp);const bodyClass = document.body.classList;bodyClass.add(theme);function toggleTheme() {const current = localStorage.getItem('theme');const next = themeMap[current];bodyClass.replace(current, next);localStorage.setItem('theme', next);};document.getElementById('themeButton').onclick = toggleTheme;</script>
+    <script src="bds.js"></script>
 </div>
 </html>
