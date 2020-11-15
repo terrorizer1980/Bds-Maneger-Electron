@@ -1,6 +1,6 @@
 {
   "name": "bds-maneger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimal maneger for Minecraf Bedrock Server",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "build": {
     "appId": "com.Sirherobrine23.bds-maneger",
-    "icon": "assents/mcpe.png",
+    "icon": "bds_pages/assents/mcpe.png",
     "asar": "false",
     "asarUnpack": "false",
     "win": {
@@ -23,7 +23,7 @@
       "menuCategory": "Sirherobrine23"
     },
     "appx": {
-      "displayName": "BDS Manger for Windows (APPX)",
+      "displayName": "BDS Manger (APPX)",
       "applicationId": "BDSM12",
       "identityName": "BDSMANEGER"
     },
@@ -54,7 +54,7 @@
     "Windows",
     "linux"
   ],
-  "author": "Matheus Sampaio Queirog (Sirherobrine23) <srherobrine20@gmail.com>",
+  "author": "Matheus Sampaio Queiroga (Sirherobrine23) <srherobrine20@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Sirherobrine23/Bds_Maneger/issues"
