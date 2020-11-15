@@ -52,6 +52,6 @@ jobs:
       with:
         tag_name: ${{ github.run_id }}
         name: Build dev, Run_id ${{ github.run_id }}
-        body_path: release_dev.txt
+        body_path: release_dev.md
         files: dist/*.*
         prerelease: true
