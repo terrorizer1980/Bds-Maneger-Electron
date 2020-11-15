@@ -18,7 +18,6 @@ jobs:
         CI: true
     - name: Upload bin directory
       uses: actions/upload-artifact@main
-      if: steps.compile.
       with:
         name: archive-windows
         retention-days: 1
