@@ -37,11 +37,14 @@ jobs:
     - run: npm run build-deb
       env:
         CI: true
+
     - name: Download Windows Files
       uses: actions/download-artifact@v2
       with:
        name: archive-windows
-   - name: Upload artifact
+       path: dist
+
+    - name: Upload artifact
       uses: actions/upload-artifact@main
       with:
         name: archive-pos-Debian-Build
