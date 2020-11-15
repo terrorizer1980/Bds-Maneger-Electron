@@ -16,7 +16,6 @@ jobs:
     - run: npm run build-win
       env:
         CI: true
-jobs:
   Debian build test:
     runs-on: windows-latest
     steps:
