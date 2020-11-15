@@ -29,18 +29,26 @@ function restartServer(){
     startServer();
 }
 function worldbackup(){
-    stopserver();
-    var status = localStorage.getItem('bds_status')
+    var status = localStorage.getItem('bds_status');
+    if (status == 'started'){
+        stopserver();
+    }
     if (status == 'stoped'){
+        var today = new Date();var dd = String(today.getDate()).padStart(2, '0');var mm = String(today.getMonth() + 1).padStart(2, '0');var yyyy = today.getFullYear();var hour = today.getHours();var minu = today.getMinutes()
+        today = `${yyyy}_${mm}-${dd}@@${minu}-${hour}`;
         var exec = require('child_process').exec;
-        var serverstated = exec(`cd ${__dirname}/../bds/worlds/ && tar.exe -czf %USERPROFILE%/Desktop/bds_backup.tar.gz *`, {detached: false,shell: true});
+        if (process.platform == 'win32'){
+            var serverstated = exec(`cd ${__dirname}/../bds/worlds/ && tar.exe -czf %USERPROFILE%/Desktop/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
+            var mensagemBackup = 'You backup is in desktop'
+        } else if (process.platform == 'linux'){
+            var serverstated = exec(`cd ${__dirname}/../bds/worlds/ && tar -czf ~/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
+            var mensagemBackup = 'You backup is in home dir'
+        }        
         serverstated.on('exit', function (code) {
             if (code == 0){
-                alert('You Backup in to Desktop');
-                window.location.reload(true);
+                alert(`${mensagemBackup}, with name: bds_backup_World_${today}.tar.gz`);
             } else {
                 alert('erro to create backup');
-                window.location.reload(true);
             }
         });
     } else {
@@ -49,8 +57,6 @@ function worldbackup(){
         }
     }
 };
-
-
 function checkedBox(){
     // var getAutostart = document.getElementById('autostart').checked
     if (document.getElementById('autostart').checked){
@@ -147,7 +153,7 @@ function sendco(ele) {
 // const { DownloadItem } = require('electron');
 // const { localStorage } = require('globalthis/implementation');
 
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/package.json').then(response => response.text()).then(dataURLv => {
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/stable/package.json').then(response => response.text()).then(dataURLv => {
     var JSONvv = JSON.parse(dataURLv);
     localStorage.setItem('bds_gitv', JSONvv.version);
     localStorage.setItem('bds_gitv', JSONvv.version);
@@ -165,7 +171,7 @@ fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/
     }
 );
 
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(serverVURLv => {
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(serverVURLv => {
         const obj2 = JSON.parse(serverVURLv);
         const serverV = obj2.latest;
         const serverVurl = 'https://minecraft.azureedge.net/bin-win/bedrock-server-' + serverV + '.zip'
@@ -186,7 +192,7 @@ fetch('https://api.github.com/repos/Sirherobrine23/Bds_Maneger-for-Windows/relea
     }
 );
 
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(serverVURLv => {
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(serverVURLv => {
         const obj2 = JSON.parse(serverVURLv);
         const serverV = obj2.latest;
         const serverVurl = 'https://minecraft.azureedge.net/bin-win/bedrock-server-' + serverV + '.zip'

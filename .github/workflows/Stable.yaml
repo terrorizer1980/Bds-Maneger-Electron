@@ -4,37 +4,53 @@ on:
     branches:
       - stable
 jobs:
-  build:
+  Windows:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 12.x
     - run: npm install
     - run: npm run build-win
       env:
         CI: true
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v2
+    - name: Upload artifact
+      uses: actions/upload-artifact@main
       with:
-        name: Push Dist Node ${{ matrix.node-version }}
+        name: archive-windows
+        retention-days: 1
         path: |
-          dist/*.appx
           dist/*.msi
+          dist/*.appx
 
-    - name: Upload firmware to release
+  Debians:
+    runs-on: ubuntu-latest
+    needs: Windows
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - run: npm install
+    - run: npm run build-deb
+      env:
+        CI: true
+
+    - name: Download Windows Files
+      uses: actions/download-artifact@v2
+      with:
+       name: archive-windows
+       path: dist
+
+    - name: Upload to release
       uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.run_id }}
-        name: Build Stable Version, Run_id ${{ github.run_id }}
+        name: Build, Run_id ${{ github.run_id }}
         body_path: release.md
-        files: |
-          dist/*.appx
-          dist/*.msi
+        files: dist/*.*

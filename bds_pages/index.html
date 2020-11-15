@@ -92,6 +92,7 @@
 <div class="root" id="root_container">
     <!-- Main Home -->
     <div>
+        <p id="SystemProcess"></p>
         <textarea disabled class="logTEXT" id="LOG"></textarea><br>
         <input id="cmds" id="btn2" size="100%" placeholder="Command to send to server: /" onkeydown="sendco(this)" type="text">
         <input type="submit" id='comsen' onclick="sendcomand();return false"><br><textarea disabled class="commands" id="commandsends"></textarea>
@@ -168,7 +169,7 @@
                 <label for="bds-Server_download">Bedrock Server Download</label>
                 <select id="bds-Server_download"></select>
                 <button onclick="DownloadBDS();">Download</button>
-                <textarea cols="50" row="60" id="BDSLOGDOWNLOAD" disabled style="display: none;"></textarea>
+                <div id="BDSLOGDOWNLOAD"></div>
             <fieldset>
         <div>
         <label for="autostart">Auto Start Server in Init App</label>

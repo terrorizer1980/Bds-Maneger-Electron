@@ -10,8 +10,9 @@
   },
   "build": {
     "appId": "com.Sirherobrine23.bds-maneger",
-    "icon": "pages/assents/mcpe.png",
+    "icon": "assents/mcpe.png",
     "asar": "false",
+    "asarUnpack": "false",
     "win": {
       "target": [
         "msi",
@@ -33,7 +34,7 @@
       "depends": [
         "gconf2",
         "gconf-service",
-        "libnotify4", 
+        "libnotify4",
         "libappindicator1",
         "libxtst6",
         "libnss3",
