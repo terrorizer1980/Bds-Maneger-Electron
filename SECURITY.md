@@ -1,21 +1,7 @@
-# Security Policy
+Updates are very important not only for new features, but also for improvements and bug fixes.
 
-## Supported Versions
+Currently we have as main support the latest versions of Minecraft Bedrock Server, new features will be implemented to keep up.
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Bds manger will also be compatible with all versions, but our updates are extremely important to keep the user updated. and be against third party apps and bugs.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
-
-## Reporting a Vulnerability
-
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+currently we only support versions above 1.0.0, the dev versions must always be the last one due to code instability.
