@@ -1,3 +1,4 @@
+// This script server to forcefully kill old servers without being stopped before closing the application or having reloaded the page, an alternative and safer way is being sought.var
 var status = localStorage.getItem('bds_status')
 var blank = ''
 

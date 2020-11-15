@@ -1,6 +1,7 @@
+// This script, manage the versions of Minecraft Bedrock Server, this file has not yet been included in core_service.js
 // Download BDS Software
 // Id selecttion: bds-Server_download
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(langArray => {
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(langArray => {
     var newSelect = document.getElementById('bds-Server_download')
         for(index in JSON.parse(langArray).Versions){
             var opt = document.createElement("option");
@@ -18,7 +19,7 @@ function DownloadBDS(){
     document.getElementById("BDSLOGDOWNLOAD").style.display = "block"
     document.getElementById("BDSLOGDOWNLOAD").value += "Iniciando o download\n";
     var jsonNumber = document.getElementById('bds-Server_download').value
-    fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(langArray => {
+    fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(langArray => {
         var Vdown = JSON.parse(langArray).Versions[jsonNumber]
         localStorage.setItem('bds_server_version', Vdown)
         var URLd = 'https://minecraft.azureedge.net/bin-win/bedrock-server-' + Vdown + '.zip'

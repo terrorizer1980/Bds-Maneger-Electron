@@ -24,19 +24,14 @@ function createWindow () {
   });
 }
 app.whenReady().then(createWindow);
-// app.quit();
-//  app.whenReady().then(createWindow)
 app.on('window-all-closed', () => {
   app.quit();
-  // process.exit();
-})
-
+});
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
-})
-// App close handler
+});
 app.on('before-quit', function() {
   var exec = require('child_process').exec;
   var child = exec('FOR /F "usebackq tokens=2" %i% IN (`tasklist ^| findstr /r /b "bedrock_server*[.]exe"`) DO taskkill /pid /F %i%', {
@@ -45,5 +40,12 @@ app.on('before-quit', function() {
   });
   child.stdout.on('data', function (data) {
       console.log('kill all bds servers')
+  });
+  child.on('exit', function (code) {
+      if (code == 0){
+        console.log('all bds maneger is kill');
+      } else {
+        console.log('There was one to kill the Minecraft Bedrock Servers')
+      }
   });
 });

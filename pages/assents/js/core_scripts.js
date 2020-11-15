@@ -1,4 +1,7 @@
-// Core
+// Core Script
+// This is the script that manages and sends commands to the server (This is the script that manages and sends commands to the server (a bridge as we can call).
+// it will serve to communicate to and start the server. and it is a mandatory item for bds_maneger to work.
+  
 function startServer() {
     document.getElementById('startButtom').removeAttribute('onclick');
     document.getElementById('StopButtom').setAttribute('onclick', 'stopserver();')

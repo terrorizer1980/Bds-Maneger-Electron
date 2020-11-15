@@ -1,4 +1,5 @@
 // start server (Inject in iframe)
+// Very important file to start the server in NodeJs and leave it in the background.
 document.getElementById('LOG').innerHTML = '';
 console.log('Iniciando');
 localStorage.setItem('bds_status', 'started');

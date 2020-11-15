@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "electron .",
-    "build-win": "electron-builder"
+    "build-win": "electron-builder --win appx msi",
+    "build-deb": "node_module/.bin/electron-builder --linux deb"
   },
   "build": {
-    "appId": "com.Sirherobrine23.BDS-Gui",
+    "appId": "com.Sirherobrine23.bds-maneger",
     "icon": "pages/assents/mcpe.png",
-    "asar": "true",
+    "asar": "false",
     "win": {
       "target": [
         "msi",
@@ -24,24 +25,40 @@
       "displayName": "BDS Manger for Windows (APPX)",
       "applicationId": "BDSM12",
       "identityName": "BDSMANEGER"
+    },
+    "linux": {
+      "category": "Sirherobrine23"
+    },
+    "deb": {
+      "depends": [
+        "gconf2",
+        "gconf-service",
+        "libnotify4", 
+        "libappindicator1",
+        "libxtst6",
+        "libnss3",
+        "curl"
+      ],
+      "packageCategory": "Sirherobrine23"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sirherobrine23/bds-maneger-gui_for-windows.git"
+    "url": "git+https://github.com/Sirherobrine23/Bds_Maneger.git"
   },
   "keywords": [
     "minecraft",
     "bds",
     "bds-server",
-    "Windows"
+    "Windows",
+    "linux"
   ],
   "author": "Matheus Sampaio Queiroga (Sirherobrine23)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sirherobrine23/bds-maneger-gui_for-windows/issues"
+    "url": "https://github.com/Sirherobrine23/Bds_Maneger/issues"
   },
-  "homepage": "https://github.com/Sirherobrine23/bds-maneger-gui_for-windows#readme",
+  "homepage": "https://github.com/Sirherobrine23/Bds_Maneger#readme",
   "dependencies": {
     "decompress-zip": "^0.2.2",
     "electron-is": "^3.0.0"

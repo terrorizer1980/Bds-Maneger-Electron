@@ -7,7 +7,7 @@ bdsFound.on('exit', function (code) {
         document.getElementById('scr').appendChild(coreS);
         // 
         var bds_version = document.createElement("script");
-        bds_version.src = 'assents/js/bds_version.js';
+        bds_version.src = '';
         document.getElementById('scr').appendChild(bds_version);
         // ---------------------------------------------------------------
     } else {

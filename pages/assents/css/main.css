@@ -1,3 +1,8 @@
+/* 
+a CSS already included in bds_maneger for managing standard bds_maneger themes.
+
+it's still basic CSS.
+*/
 @font-face {
     font-family: minecraft;
     src: url(Minecraft.ttf);
