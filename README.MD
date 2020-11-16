@@ -7,3 +7,9 @@ The Bds manger GUI is designed to help and keep the game safe while using the se
 one thing helps us is to make backups start and send commands in addition to power: stop, start and restart the server safely.
 
 with just one, next, next you have a manager that will help you keep a server with the latest versions available to play and control.
+
+# Release
+
+[Stable Version](https://github.com/Sirherobrine23/Bds_Maneger/releases/latest),
+
+[Dev Version](https://github.com/Sirherobrine23/Bds_Maneger/releases/)
