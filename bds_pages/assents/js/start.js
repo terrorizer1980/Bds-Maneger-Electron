@@ -9,7 +9,7 @@ if (process.platform == 'win32'){
     var bdsDIRpathexe = `${__dirname}/../bds/bedrock_server.exe`;
 } else if (process.platform == 'linux'){
     document.getElementById('SystemProcess').innerHTML = 'Linux Version';
-    var bdsDIRpathexe = `LD_LIBRARY_PATH=${__dirname}/../bds/.  ${__dirname}/../bds/bedrock_server`
+    var bdsDIRpathexe = `cd ${__dirname}/../bds/ && chmod 777 bedrock_server && LD_LIBRARY_PATH=${__dirname}/../bds/.  ${__dirname}/../bds/bedrock_server`
 }
 var serverstated = exec(bdsDIRpathexe, {detached: false,shell: true});
 serverstated.stdout.on('data', function (data) {document.getElementById('LOG').innerHTML += (data)});
