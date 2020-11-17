@@ -16,9 +16,9 @@ jobs:
     - run: |
        npm install
     - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          tag: 'dev'
+      with:
+        token: ${{ secrets.NPM_TOKEN }}
+        tag: 'dev'
     
     - name: Upload dev release github actions
       uses: softprops/action-gh-release@v1
