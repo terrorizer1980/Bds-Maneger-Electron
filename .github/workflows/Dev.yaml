@@ -13,10 +13,12 @@ jobs:
       uses: actions/setup-node@main
       with:
         node-version: 15.x
-
-    - run: npm publish --access public --tag beta
-      env:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - run: |
+       npm install
+    - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: 'dev'
     
     - name: Upload dev release github actions
       uses: softprops/action-gh-release@v1
