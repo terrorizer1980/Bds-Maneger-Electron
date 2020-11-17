@@ -1,1 +1,1 @@
-console.log('Agora está no core_script.js')
+console.log('O telegr bot agora está no core_script.js')

@@ -16,7 +16,6 @@ jobs:
     
     - name: Zip
       run: |
-        rm -rf *.git*
         echo "Hello, to use, run npm run start" > HELP_TO_RUN.txt
         echo "have already installed NodeJS, if you are using a linux distro check if npm has been installed" >> HELP_TO_RUN.txt
         zip dev_zip_Windows_and_Linux.zip -r ./

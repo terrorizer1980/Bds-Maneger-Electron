@@ -6,43 +6,7 @@
   "scripts": {
     "test": "electron .",
     "start": "npm install && electron .",
-    "build-win": "electron-builder --win appx msi",
-    "build-deb": "electron-builder --linux deb"
-  },
-  "build": {
-    "appId": "com.Sirherobrine23.bds-maneger",
-    "icon": "bds_pages/assents/mcpe.png",
-    "asar": "false",
-    "asarUnpack": "false",
-    "win": {
-      "target": [
-        "msi",
-        "appx"
-      ]
-    },
-    "msi": {
-      "menuCategory": "Sirherobrine23"
-    },
-    "appx": {
-      "displayName": "BDS Manger (APPX)",
-      "applicationId": "BDSM12",
-      "identityName": "BDSMANEGER"
-    },
-    "linux": {
-      "category": "Sirherobrine23"
-    },
-    "deb": {
-      "depends": [
-        "gconf2",
-        "gconf-service",
-        "libnotify4",
-        "libappindicator1",
-        "libxtst6",
-        "libnss3",
-        "curl"
-      ],
-      "packageCategory": "Sirherobrine23"
-    }
+    "start-root": "npm install && electron . --no-sandbox"
   },
   "repository": {
     "type": "git",

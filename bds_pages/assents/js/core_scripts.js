@@ -287,7 +287,7 @@ bot.onText(/\/command (.+)/, (msg, match) => {
                 // var after_get_command = 
                 bot.sendMessage(chatId, `wait ...`);
                 setTimeout(() => {
-                    var list_his = document.getElementById("LOG").innerHTML.replace(before_get_command, '<--: Log ')
+                    var list_his = document.getElementById("LOG").innerHTML.replace(before_get_command, '<--: Old log ')
                     bot.sendMessage(chatId, list_his);
                 }, 3600);
             }
@@ -303,14 +303,14 @@ bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   // var t2 = match[1];
   var mensagem1 = 'welcome to Bds Maneger'
-  var mensagem2 = 'Comandos Disponivel: '
-  var mensagem3 = '/bds (start, stop, restart, status and log),\n/command (Commands to server), \n/start (Essa Mensagem), \n Qualquer Outra coisa use o comando /help'
+  var mensagem2 = 'Commands Available: '
+  var mensagem3 = '/bds (start, stop, restart, status and log),\n/command (Commands to server), \n/start (That Message), \nnot Anything else use the command /help'
   bot.sendMessage(chatId, `${mensagem1}\n ${mensagem2}\n ${mensagem3}\n`);
 });
 
 bot.onText(/\/help/, (msg) => {
     const chatId = msg.chat.id;
-    var h1 = 'welcome to Bds Maneger \nUma coisa, as mensagem enviadas para o bot será redirecionado para o console do bds_maneger e do Minecraft. \n\n Temos os seguintes comandos por enquanto: \n\n/bds \n\n/command'
+    var h1 = 'welcome to Bds Maneger \n the one hand, messages sent to the bot will be redirected to the bds_maneger and Minecraft console. \n\n We have the following commands for now: \n \n /bds \n\n /command'
     bot.sendMessage(chatId, `${h1}`);
 });
 
@@ -336,16 +336,16 @@ bot.onText(/\/info (.+)/, (msg, match) => {
 bot.onText(/\/help (.+)/, (msg, match) => {
     const chatId = msg.chat.id;
     var helpMenu = match[1];
-    var h1 = 'welcome to Bds Maneger \nUma coisa, as mensagem enviadas para o bot será redirecionado para o console do bds_maneger e do Minecraft. \n\n Temos os seguintes comandos por enquanto: \n\n/bds \n\n/command'
+    var h1 = 'welcome to Bds Maneger \nOne thing, the messages sent to the bot will be redirected to the console of bds_maneger and Minecraft. \n\n We have the following commands for now: \n\n /bds \n\n/command'
     bot.sendMessage(chatId, `${h1}`);
     if (helpMenu == 'bds'){
-        var bds_ = 'O comandos são simples aqui: \n\n\n\n start: Iniciar o servidor caso não tenha iniciado, se ja foi iniciado ele será ignorado \n\n stop: Ele ira para o servidor e mostrarar um log \n\n restart: Reinicia o servidor e todos serão desconectar logo em seguida \n\n log: Mostra o log total do servidor '
+        var bds_ = 'The commands are simple here: \n\n\n\n start: Start the server if it has not started, if it has already started it will be ignored \n\n stop: It will go to the server and show a log \n\n restart: Restart the server and everyone will be disconnected shortly thereafter \n\n log: Shows the total log of the server'
     } else if (helpMenu == 'command'){
-        var bds_ = 'o /command ele se alto explica, ele server para mandar comandos para servidor direto sem ter ir no bds_maneger para mandar o comandos'
+        var bds_ = '/command it explains itself, it serves to send commands to a direct server without having to go to bds_maneger to send commands'
     } else if (helpMenu == 'info'){
-        var bds_ = 'o /info ele da as informações do ip do servidor remoto ou de onde o servidor esta rodando, além tambem sua localização via ip.'
+        var bds_ = '/info gives the ip information of the remote server or where the server is running from, as well as its location via ip.'
     } else {
-        var bds_ = "Comandos não existe ou foi escrito errado"
+        var bds_ = "Commands do not exist or misspelled"
     }
     bot.sendMessage(chatId, `${bds_}`);
 });
@@ -371,7 +371,7 @@ bot.onText(/\/info/, (msg) => {
 
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
-    var men1 = `${msg.from.username} send ${msg.text}`
+    var men1 = `the ${msg.from.username} sent a message on the telegram: ${msg.text}`
     // bot.sendMessage(chatId, `Uma Mensagem foi mandada para o console`);
     console.log(`Telegram bot say: ${men1}`)
     if (localStorage.getItem('bds_status') == 'started'){

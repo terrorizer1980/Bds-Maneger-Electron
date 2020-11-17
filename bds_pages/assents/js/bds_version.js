@@ -35,7 +35,11 @@ function DownloadBDS(){
         var NAMEd = 'bedrock-server-' + Vdown + '.zip'
         // 
         var exec = require('child_process').exec;
-        var downloadBDSchild = exec(`cd %TMP% && curl ${URLd} --output ${NAMEd}`);
+        if (process.platform == 'win32'){
+          var downloadBDSchild = exec(`cd %TMP% && curl ${URLd} --output ${NAMEd}`);
+        } else if (process.platform == 'linux'){
+          var downloadBDSchild = exec(`cd /tmp  && curl ${URLd} --output ${NAMEd}`);
+        }
         downloadBDSchild.stdout.on('data', function (data) {
             logD(data)
         });
@@ -45,7 +49,11 @@ function DownloadBDS(){
                 logD('init extract');
                 // Unzip
                 var DecompressZip = require('decompress-zip');
-                var ZIP_FILE_PATH = `${process.env.TMP}/${NAMEd}`;
+                if (process.platform == 'win32'){
+                  var ZIP_FILE_PATH = `${process.env.TMP}/${NAMEd}`;
+                } else if (process.platform = 'linux'){
+                  var ZIP_FILE_PATH = `/tmp/${NAMEd}`;
+                }
                 var unzipper = new DecompressZip(ZIP_FILE_PATH);
                 
                 // Add the error event listener
