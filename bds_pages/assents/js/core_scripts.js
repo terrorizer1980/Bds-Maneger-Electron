@@ -189,7 +189,7 @@ fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/
 
 fetch('https://api.github.com/repos/Sirherobrine23/Bds_Maneger-for-Windows/releases').then(response => response.text()).then(releaseMSI => {
     const obj3 = JSON.parse(releaseMSI);
-     const download_url = obj3[0].assets[1].browser_download_url
+     var download_url = obj3[0].assets[1].browser_download_url
      localStorage.setItem('url_update', download_url);
      localStorage.setItem('url_update', download_url);
      localStorage.setItem('url_update', download_url);
@@ -211,7 +211,7 @@ var blank = ''
 const TelegramBot = require('node-telegram-bot-api');
 // const token = require(`${__dirname}/token.txt`)
 var fs = require("fs");
-var token = fs.readFileSync(`${__dirname}/../token.txt`, "utf-8");
+var token = fs.readFileSync(`${__dirname}/../token.txt`, "utf-8").replace('\n', '');
 const bot = new TelegramBot(token, {polling: true});
 // Bds Service Control
 bot.onText(/\/bds (.+)/, (msg, match) => {
