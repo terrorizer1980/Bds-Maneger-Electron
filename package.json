@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "electron .",
+    "start": "npm install && electron .",
     "build-win": "electron-builder --win appx msi",
     "build-deb": "electron-builder --linux deb"
   },
@@ -62,7 +63,8 @@
   "homepage": "https://github.com/Sirherobrine23/Bds_Maneger#readme",
   "dependencies": {
     "decompress-zip": "^0.2.2",
-    "electron-is": "^3.0.0"
+    "electron-is": "^3.0.0",
+    "node-telegram-bot-api": "^0.50.0"
   },
   "devDependencies": {
     "electron": "^11.0.0-beta.22",

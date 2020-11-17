@@ -1,0 +1,1 @@
+console.log('Agora está no core_script.js')

@@ -138,21 +138,17 @@ function sendcomand() {
             document.getElementById('cmds').value = ''
             document.getElementById("commandsends").value += 'Command Send: '+command+'\n'
             serverstated.stdin.write(command+'\n');
-        }
-    }
-    
-}
-
+        };
+    };
+};
 function sendco(ele) {
     if(event.keyCode == 13) {
         document.getElementById("comsen").click();
     }
 }
 
-
-// const { DownloadItem } = require('electron');
-// const { localStorage } = require('globalthis/implementation');
-
+// ----------------------------
+// Check App Version
 fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/stable/package.json').then(response => response.text()).then(dataURLv => {
     var JSONvv = JSON.parse(dataURLv);
     localStorage.setItem('bds_gitv', JSONvv.version);
@@ -164,12 +160,20 @@ fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/
         if (check_latest_version){
             console.log('Voçê está na ultima versão')
         } else {
-            if (confirm('You not have latest Version, is open in new Windows Download Pages')){
-                window.open("https://github.com/Sirherobrine23/Bds_Maneger-for-Windows/releases", 'Github Release Download Pages');
-            }
+            var pTag = document.createElement("p");
+            pTag.id = 'update_app';
+            document.getElementById('before_get_update').appendChild(pTag);
+            // before_get_update
+            var app_update_stable = document.createElement("a");
+            app_update_stable.href = localStorage.getItem('url_update');
+            app_update_stable.innerHTML = 'Bds Maneger Update Version: '+JSONvv.version;
+            app_update_stable.id = 'update_app_download';
+            document.getElementById('update_app').appendChild(app_update_stable);
+            // console.log('as')
         }
     }
 );
+// ----------------------------
 
 fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(serverVURLv => {
         const obj2 = JSON.parse(serverVURLv);
@@ -200,3 +204,177 @@ fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/
         localStorage.setItem('bds_server_url', serverVurl)
     }
 );
+
+// -------------------------------------------------------------------------------------
+// Telegram Bot
+var blank = ''
+const TelegramBot = require('node-telegram-bot-api');
+// const token = require(`${__dirname}/token.txt`)
+var fs = require("fs");
+var token = fs.readFileSync(`${__dirname}/../token.txt`, "utf-8");
+const bot = new TelegramBot(token, {polling: true});
+// Bds Service Control
+bot.onText(/\/bds (.+)/, (msg, match) => {
+  const chatId = msg.chat.id;
+  var t1 = match[1];
+  
+  if (process.platform == 'linux'){
+      var more = 'Linux System'
+  } else if (process.platform == 'win32'){
+      var more = 'Windows System'
+  }
+
+  if (t1 == 'start'){
+      if (localStorage.getItem('bds_status') == 'started'){
+        bot.sendMessage(chatId, `Server Is reuning now`);
+      } else {
+        console.log('Stating')
+        localStorage.setItem('teste', 'start')
+        bot.sendMessage(chatId, `Stating server`);
+        bot.sendMessage(chatId, ` You server files is to ${__dirname}/../bds, Reuning in ${more}`);
+        startServer();
+      }      
+  } else if (t1 == 'stop'){
+    if (localStorage.getItem('bds_status') == 'started'){
+        localStorage.setItem('teste', 'stop')
+        console.log('stopping')
+        bot.sendMessage(chatId, `Stoping server`);
+        stopserver();
+        bot.sendMessage(chatId, `Log`);
+        bot.sendMessage(chatId, `${document.getElementById("LOG").innerHTML}`);
+    } else {
+        bot.sendMessage(chatId, `You Server Is Stoped`);
+    }
+  } else if (t1 == 'restart'){
+      console.log('Restating')
+      bot.sendMessage(chatId, `Restating server`);
+      restartServer();
+  } else if (t1 == 'status'){
+    console.log('Requiset status')
+    bot.sendMessage(chatId, `Server status is : ${localStorage.getItem('bds_status')}`);
+  } else if (t1 == 'log') {
+    bot.sendMessage(chatId, `Geting you log`);
+    bot.sendMessage(chatId, `Wait ...`);
+    bot.sendMessage(chatId, `${document.getElementById('LOG').innerHTML}`);
+  } else {
+    bot.sendMessage(chatId, `use: start, stop, restart, status and log; ${t1} is not command.`);
+  }
+});
+
+
+// Send Comand
+bot.onText(/\/command (.+)/, (msg, match) => {
+  const chatId = msg.chat.id;
+  var t2 = match[1];
+  if (localStorage.getItem('bds_status') == 'started'){
+    if (t2 == 'get'){
+        bot.sendMessage(chatId, `${document.getElementById('commandsends').value}`);
+      } else {
+        if (t2 == 'stop'){
+            bot.sendMessage(chatId, `User /bds stop`);
+        } else {
+            document.getElementById('comsen').setAttribute('disabled','')
+            var blank = '';
+            if (t2 == blank) {
+                document.getElementById('comsen').removeAttribute('disabled')
+                bot.sendMessage(chatId, `Commands is in blank`);
+            } else {
+                var before_get_command = document.getElementById("LOG").innerHTML
+                document.getElementById("commandsends").value += 'Command Send: '+t2+'\n'
+                document.getElementById('comsen').removeAttribute('disabled')
+                document.getElementById('cmds').value = ''
+                serverstated.stdin.write(t2+'\n');
+                // var after_get_command = 
+                bot.sendMessage(chatId, `wait ...`);
+                setTimeout(() => {
+                    var list_his = document.getElementById("LOG").innerHTML.replace(before_get_command, '<--: Log ')
+                    bot.sendMessage(chatId, list_his);
+                }, 3600);
+            }
+        }
+      }
+  // status bds
+  } else {
+    bot.sendMessage(chatId, `You Server is Stoped`);
+  }
+});
+// start
+bot.onText(/\/start/, (msg) => {
+  const chatId = msg.chat.id;
+  // var t2 = match[1];
+  var mensagem1 = 'welcome to Bds Maneger'
+  var mensagem2 = 'Comandos Disponivel: '
+  var mensagem3 = '/bds (start, stop, restart, status and log),\n/command (Commands to server), \n/start (Essa Mensagem), \n Qualquer Outra coisa use o comando /help'
+  bot.sendMessage(chatId, `${mensagem1}\n ${mensagem2}\n ${mensagem3}\n`);
+});
+
+bot.onText(/\/help/, (msg) => {
+    const chatId = msg.chat.id;
+    var h1 = 'welcome to Bds Maneger \nUma coisa, as mensagem enviadas para o bot será redirecionado para o console do bds_maneger e do Minecraft. \n\n Temos os seguintes comandos por enquanto: \n\n/bds \n\n/command'
+    bot.sendMessage(chatId, `${h1}`);
+});
+
+bot.onText(/\/info (.+)/, (msg, match) => {
+    const chatId = msg.chat.id;
+    const ipR = match[1];
+    fetch(`http://ip-api.com/json/${ipR}?fields=status,message,country,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting,query`).then(response => response.text()).then(serverVURLv => {
+        const obj2 = JSON.parse(serverVURLv);
+        const lat = obj2.lat;
+        const lon = obj2.lon;
+        const ippu = obj2.query;
+        const ipre = obj2.reverse;
+        const isp = obj2.isp;
+        const name = obj2.org;
+        const country = obj2.country;
+        const proxy = obj2.proxy;
+        bot.sendLocation(msg.chat.id, lat, lon);
+        bot.sendMessage(chatId, `Ip Publico: ${ippu}, Ip Reverso: ${ipre} \nProvedor: ${isp} \nNome do Provedor: ${name} \ncountry: ${country} \nProxy: ${proxy}`);
+        }
+    );
+});
+
+bot.onText(/\/help (.+)/, (msg, match) => {
+    const chatId = msg.chat.id;
+    var helpMenu = match[1];
+    var h1 = 'welcome to Bds Maneger \nUma coisa, as mensagem enviadas para o bot será redirecionado para o console do bds_maneger e do Minecraft. \n\n Temos os seguintes comandos por enquanto: \n\n/bds \n\n/command'
+    bot.sendMessage(chatId, `${h1}`);
+    if (helpMenu == 'bds'){
+        var bds_ = 'O comandos são simples aqui: \n\n\n\n start: Iniciar o servidor caso não tenha iniciado, se ja foi iniciado ele será ignorado \n\n stop: Ele ira para o servidor e mostrarar um log \n\n restart: Reinicia o servidor e todos serão desconectar logo em seguida \n\n log: Mostra o log total do servidor '
+    } else if (helpMenu == 'command'){
+        var bds_ = 'o /command ele se alto explica, ele server para mandar comandos para servidor direto sem ter ir no bds_maneger para mandar o comandos'
+    } else if (helpMenu == 'info'){
+        var bds_ = 'o /info ele da as informações do ip do servidor remoto ou de onde o servidor esta rodando, além tambem sua localização via ip.'
+    } else {
+        var bds_ = "Comandos não existe ou foi escrito errado"
+    }
+    bot.sendMessage(chatId, `${bds_}`);
+});
+
+bot.onText(/\/info/, (msg) => {
+    const chatId = msg.chat.id;
+    fetch(`http://ip-api.com/json/?fields=status,message,country,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting,query`).then(response => response.text()).then(serverVURLv => {
+        bot.sendMessage(chatId, `Device Ip`);
+        const obj2 = JSON.parse(serverVURLv);
+        const lat = obj2.lat;
+        const lon = obj2.lon;
+        const ippu = obj2.query;
+        const ipre = obj2.reverse;
+        const isp = obj2.isp;
+        const name = obj2.org;
+        const country = obj2.country;
+        const proxy = obj2.proxy;
+        bot.sendLocation(msg.chat.id, lat, lon);
+        bot.sendMessage(chatId, `Ip Publico: ${ippu}, Ip Reverso: ${ipre} \nProvedor: ${isp} \nNome do Provedor: ${name} \ncountry: ${country} \nProxy: ${proxy}`);}
+    );
+});
+
+
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
+    var men1 = `${msg.from.username} send ${msg.text}`
+    // bot.sendMessage(chatId, `Uma Mensagem foi mandada para o console`);
+    console.log(`Telegram bot say: ${men1}`)
+    if (localStorage.getItem('bds_status') == 'started'){
+        serverstated.stdin.write(`say ${men1}\n`);
+    }
+  });
