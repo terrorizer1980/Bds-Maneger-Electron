@@ -15,7 +15,7 @@ jobs:
         node-version: 15.x
     - run: |
        npm install
-    - uses: JS-DevTools/npm-publish@v1
+    - uses: JS-DevTools/npm-publish@master
       with:
         token: ${{ secrets.NPM_TOKEN }}
         tag: 'dev'
