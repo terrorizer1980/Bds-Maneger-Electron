@@ -1,1 +1,0 @@
-console.log('O telegr bot agora está no core_script.js')

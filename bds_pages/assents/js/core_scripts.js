@@ -1,7 +1,7 @@
 // Core Script
 // This is the script that manages and sends commands to the server (This is the script that manages and sends commands to the server (a bridge as we can call).
 // it will serve to communicate to and start the server. and it is a mandatory item for bds_maneger to work.
-  
+var blank = ''  
 function startServer() {
     document.getElementById('startButtom').removeAttribute('onclick');
     document.getElementById('StopButtom').setAttribute('onclick', 'stopserver();')
@@ -90,7 +90,7 @@ function log_download() {
     const filename = today +'-Log-gui.txt'
     var datavalue = document.getElementById('LOG').value;
     var commandssave = document.getElementById('commandsends').value;
-    var blank = ''
+
     if (datavalue == blank){
         alert('Blank Log')
     } else {
@@ -189,11 +189,11 @@ fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/
 
 fetch('https://api.github.com/repos/Sirherobrine23/Bds_Maneger-for-Windows/releases').then(response => response.text()).then(releaseMSI => {
     const obj3 = JSON.parse(releaseMSI);
-     var download_url = obj3[0].assets[1].browser_download_url
-     localStorage.setItem('url_update', download_url);
-     localStorage.setItem('url_update', download_url);
-     localStorage.setItem('url_update', download_url);
-    }
+    var download_url = obj3[0].assets[1]
+    localStorage.setItem('url_update', download_url);
+    localStorage.setItem('url_update', download_url);
+    localStorage.setItem('url_update', download_url);
+  }
 );
 
 fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(serverVURLv => {
@@ -205,176 +205,228 @@ fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/
     }
 );
 
+
 // -------------------------------------------------------------------------------------
 // Telegram Bot
-var blank = ''
-const TelegramBot = require('node-telegram-bot-api');
-// const token = require(`${__dirname}/token.txt`)
 var fs = require("fs");
 var token = fs.readFileSync(`${__dirname}/../token.txt`, "utf-8").replace('\n', '');
-const bot = new TelegramBot(token, {polling: true});
-// Bds Service Control
-bot.onText(/\/bds (.+)/, (msg, match) => {
-  const chatId = msg.chat.id;
-  var t1 = match[1];
-  
-  if (process.platform == 'linux'){
-      var more = 'Linux System'
-  } else if (process.platform == 'win32'){
-      var more = 'Windows System'
-  }
-
-  if (t1 == 'start'){
-      if (localStorage.getItem('bds_status') == 'started'){
-        bot.sendMessage(chatId, `Server Is reuning now`);
-      } else {
-        console.log('Stating')
-        localStorage.setItem('teste', 'start')
-        bot.sendMessage(chatId, `Stating server`);
-        bot.sendMessage(chatId, ` You server files is to ${__dirname}/../bds, Reuning in ${more}`);
-        startServer();
-      }      
-  } else if (t1 == 'stop'){
-    if (localStorage.getItem('bds_status') == 'started'){
-        localStorage.setItem('teste', 'stop')
-        console.log('stopping')
-        bot.sendMessage(chatId, `Stoping server`);
-        stopserver();
-        bot.sendMessage(chatId, `Log`);
-        bot.sendMessage(chatId, `${document.getElementById("LOG").innerHTML}`);
-    } else {
-        bot.sendMessage(chatId, `You Server Is Stoped`);
-    }
-  } else if (t1 == 'restart'){
-      console.log('Restating')
-      bot.sendMessage(chatId, `Restating server`);
-      restartServer();
-  } else if (t1 == 'status'){
-    console.log('Requiset status')
-    bot.sendMessage(chatId, `Server status is : ${localStorage.getItem('bds_status')}`);
-  } else if (t1 == 'log') {
-    bot.sendMessage(chatId, `Geting you log`);
-    bot.sendMessage(chatId, `Wait ...`);
-    bot.sendMessage(chatId, `${document.getElementById('LOG').innerHTML}`);
-  } else {
-    bot.sendMessage(chatId, `use: start, stop, restart, status and log; ${t1} is not command.`);
-  }
-});
-
-
-// Send Comand
-bot.onText(/\/command (.+)/, (msg, match) => {
-  const chatId = msg.chat.id;
-  var t2 = match[1];
-  if (localStorage.getItem('bds_status') == 'started'){
-    if (t2 == 'get'){
-        bot.sendMessage(chatId, `${document.getElementById('commandsends').value}`);
-      } else {
-        if (t2 == 'stop'){
-            bot.sendMessage(chatId, `User /bds stop`);
-        } else {
-            document.getElementById('comsen').setAttribute('disabled','')
-            var blank = '';
-            if (t2 == blank) {
-                document.getElementById('comsen').removeAttribute('disabled')
-                bot.sendMessage(chatId, `Commands is in blank`);
-            } else {
-                var before_get_command = document.getElementById("LOG").innerHTML
-                document.getElementById("commandsends").value += 'Command Send: '+t2+'\n'
-                document.getElementById('comsen').removeAttribute('disabled')
-                document.getElementById('cmds').value = ''
-                serverstated.stdin.write(t2+'\n');
-                // var after_get_command = 
-                bot.sendMessage(chatId, `wait ...`);
-                setTimeout(() => {
-                    var list_his = document.getElementById("LOG").innerHTML.replace(before_get_command, '<--: Old log ')
-                    bot.sendMessage(chatId, list_his);
-                }, 3600);
+if (token ==  blank){
+    console.log('Telegram bot disabled')
+} else {
+    const TelegramBot = require('node-telegram-bot-api');
+    const bot = new TelegramBot(token, {polling: true});
+    // Bds Service Control
+    bot.onText(/\/bds (.+)/, (msg, match) => {
+        const chatId = msg.chat.id;
+        var t1 = match[1];
+        
+        if (process.platform == 'linux'){
+            var more = 'Linux System'
+        } else if (process.platform == 'win32'){
+            var more = 'Windows System'
+        }
+        const fss = require('fs')
+        const admins = fss.readFileSync(`${__dirname}/../telegram_admin.json`, 'utf-8');
+        var user = msg.from.username
+        console.log(user)
+        // var user = msg.from.username
+        var adm = JSON.parse(admins)
+        for(index in adm){
+            // console.log(index)
+            if (user == index){
+                var adm2 = `adm.${index}.allow`
             }
+            index++;
         }
-      }
-  // status bds
-  } else {
-    bot.sendMessage(chatId, `You Server is Stoped`);
-  }
-});
-// start
-bot.onText(/\/start/, (msg) => {
-  const chatId = msg.chat.id;
-  // var t2 = match[1];
-  var mensagem1 = 'welcome to Bds Maneger'
-  var mensagem2 = 'Commands Available: '
-  var mensagem3 = '/bds (start, stop, restart, status and log),\n/command (Commands to server), \n/start (That Message), \nnot Anything else use the command /help'
-  bot.sendMessage(chatId, `${mensagem1}\n ${mensagem2}\n ${mensagem3}\n`);
-});
-
-bot.onText(/\/help/, (msg) => {
-    const chatId = msg.chat.id;
-    var h1 = 'welcome to Bds Maneger \n the one hand, messages sent to the bot will be redirected to the bds_maneger and Minecraft console. \n\n We have the following commands for now: \n \n /bds \n\n /command'
-    bot.sendMessage(chatId, `${h1}`);
-});
-
-bot.onText(/\/info (.+)/, (msg, match) => {
-    const chatId = msg.chat.id;
-    const ipR = match[1];
-    fetch(`http://ip-api.com/json/${ipR}?fields=status,message,country,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting,query`).then(response => response.text()).then(serverVURLv => {
-        const obj2 = JSON.parse(serverVURLv);
-        const lat = obj2.lat;
-        const lon = obj2.lon;
-        const ippu = obj2.query;
-        const ipre = obj2.reverse;
-        const isp = obj2.isp;
-        const name = obj2.org;
-        const country = obj2.country;
-        const proxy = obj2.proxy;
-        bot.sendLocation(msg.chat.id, lat, lon);
-        bot.sendMessage(chatId, `Ip Publico: ${ippu}, Ip Reverso: ${ipre} \nProvedor: ${isp} \nNome do Provedor: ${name} \ncountry: ${country} \nProxy: ${proxy}`);
+        // var adm2 = adm.sirherobrine23.allow
+        if (eval(adm2) == true){
+            if (t1 == 'start'){
+                if (localStorage.getItem('bds_status') == 'started'){
+                    bot.sendMessage(chatId, `Server Is reuning now`);
+                } else {
+                    console.log('Stating')
+                    localStorage.setItem('teste', 'start')
+                    bot.sendMessage(chatId, `Stating server`);
+                    bot.sendMessage(chatId, ` You server files is to ${__dirname}/../bds, Reuning in ${more}`);
+                    startServer();
+                }      
+            } else if (t1 == 'stop'){
+                if (localStorage.getItem('bds_status') == 'started'){
+                    localStorage.setItem('teste', 'stop')
+                    console.log('stopping')
+                    bot.sendMessage(chatId, `Stoping server`);
+                    stopserver();
+                    bot.sendMessage(chatId, `Log`);
+                    bot.sendMessage(chatId, `${document.getElementById("LOG").innerHTML}`);
+                } else {
+                    bot.sendMessage(chatId, `You Server Is Stoped`);
+                }
+            } else if (t1 == 'restart'){
+                console.log('Restating')
+                bot.sendMessage(chatId, `Restating server`);
+                restartServer();
+            } else if (t1 == 'status'){
+                console.log('Requiset status')
+                bot.sendMessage(chatId, `Server status is : ${localStorage.getItem('bds_status')}`);
+            } else if (t1 == 'log') {
+                bot.sendMessage(chatId, `Geting you log`);
+                bot.sendMessage(chatId, `Wait ...`);
+                bot.sendMessage(chatId, `${document.getElementById('LOG').innerHTML}`);
+            } else {
+                bot.sendMessage(chatId, `use: start, stop, restart, status and log; ${t1} is not command.`);
+            }
+        } else {
+            console.log('not allowed, for admins')
+            bot.sendMessage(chatId, `Allowed to admins, ${user} not admin`);
         }
-    );
-});
+    });
 
-bot.onText(/\/help (.+)/, (msg, match) => {
+
+    // Send Comand
+    bot.onText(/\/command (.+)/, (msg, match) => {
     const chatId = msg.chat.id;
-    var helpMenu = match[1];
-    var h1 = 'welcome to Bds Maneger \nOne thing, the messages sent to the bot will be redirected to the console of bds_maneger and Minecraft. \n\n We have the following commands for now: \n\n /bds \n\n/command'
-    bot.sendMessage(chatId, `${h1}`);
-    if (helpMenu == 'bds'){
-        var bds_ = 'The commands are simple here: \n\n\n\n start: Start the server if it has not started, if it has already started it will be ignored \n\n stop: It will go to the server and show a log \n\n restart: Restart the server and everyone will be disconnected shortly thereafter \n\n log: Shows the total log of the server'
-    } else if (helpMenu == 'command'){
-        var bds_ = '/command it explains itself, it serves to send commands to a direct server without having to go to bds_maneger to send commands'
-    } else if (helpMenu == 'info'){
-        var bds_ = '/info gives the ip information of the remote server or where the server is running from, as well as its location via ip.'
-    } else {
-        var bds_ = "Commands do not exist or misspelled"
-    }
-    bot.sendMessage(chatId, `${bds_}`);
-});
-
-bot.onText(/\/info/, (msg) => {
-    const chatId = msg.chat.id;
-    fetch(`http://ip-api.com/json/?fields=status,message,country,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting,query`).then(response => response.text()).then(serverVURLv => {
-        bot.sendMessage(chatId, `Device Ip`);
-        const obj2 = JSON.parse(serverVURLv);
-        const lat = obj2.lat;
-        const lon = obj2.lon;
-        const ippu = obj2.query;
-        const ipre = obj2.reverse;
-        const isp = obj2.isp;
-        const name = obj2.org;
-        const country = obj2.country;
-        const proxy = obj2.proxy;
-        bot.sendLocation(msg.chat.id, lat, lon);
-        bot.sendMessage(chatId, `Ip Publico: ${ippu}, Ip Reverso: ${ipre} \nProvedor: ${isp} \nNome do Provedor: ${name} \ncountry: ${country} \nProxy: ${proxy}`);}
-    );
-});
-
-
-bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-    var men1 = `the ${msg.from.username} sent a message on the telegram: ${msg.text}`
-    // bot.sendMessage(chatId, `Uma Mensagem foi mandada para o console`);
-    console.log(`Telegram bot say: ${men1}`)
+    var t2 = match[1];
     if (localStorage.getItem('bds_status') == 'started'){
-        serverstated.stdin.write(`say ${men1}\n`);
+        // Commands
+        const fss = require('fs')
+        const admins = fss.readFileSync(`${__dirname}/../telegram_admin.json`, 'utf-8');
+        var user = msg.from.username
+        console.log(user)
+        // var user = msg.from.username
+        var adm = JSON.parse(admins)
+        for(index in adm){
+            // console.log(index)
+            if (user == index){
+                var adm2 = `adm.${index}.allow`
+            }
+            index++;
+        }
+        // var adm2 = adm.sirherobrine23.allow
+        if (eval(adm2) == true){
+            // Command allowed
+            if (t2 == 'get'){
+                bot.sendMessage(chatId, `${document.getElementById('commandsends').value}`);
+            } else {
+                if (t2 == 'stop'){
+                    bot.sendMessage(chatId, `User /bds stop`);
+                } else {
+                    document.getElementById('comsen').setAttribute('disabled','');
+                    var blank = '';
+                    if (t2 == blank) {
+                        document.getElementById('comsen').removeAttribute('disabled');
+                        bot.sendMessage(chatId, `Commands is in blank`);
+                    } else {
+                        var before_get_command = document.getElementById("LOG").innerHTML;
+                        document.getElementById("commandsends").value += 'Command Send: '+t2+'\n';
+                        document.getElementById('comsen').removeAttribute('disabled');
+                        document.getElementById('cmds').value = '';
+                        serverstated.stdin.write(t2+'\n');
+                        bot.sendMessage(chatId, `wait ...`);
+                        setTimeout(() => {
+                            var list_his = document.getElementById("LOG").innerHTML.replace(before_get_command, '');
+                            bot.sendMessage(chatId, list_his);
+                        }, 3600);
+                        // time out end
+                    };
+                };
+            };
+            // Command allowed
+        } else {
+            // Command denied
+            console.log(`this user telegram ${user} atempt to send command`)
+            bot.sendMessage(chatId, `Allowed to admins, ${user} not admin`);
+            // Command denied
+        };
+    // end
+    // status bds
+    } else {
+        bot.sendMessage(chatId, `You Server is Stoped`);
     }
-  });
+    });
+    // start
+    bot.onText(/\/start/, (msg) => {
+    const chatId = msg.chat.id;
+    // var t2 = match[1];
+    var mensagem1 = 'welcome to Bds Maneger'
+    var mensagem2 = 'Commands Available: '
+    var mensagem3 = '/bds (start, stop, restart, status and log),\n/command (Commands to server), \n/start (That Message), \nnot Anything else use the command /help'
+    bot.sendMessage(chatId, `${mensagem1}\n ${mensagem2}\n ${mensagem3}\n`);
+    });
+
+    bot.onText(/\/help (.+)/, (msg, match) => {
+        const chatId = msg.chat.id;
+        var helpMenu = match[1];
+        var h1 = 'welcome to Bds Maneger \nOne thing, the messages sent to the bot will be redirected to the console of bds_maneger and Minecraft. \n\n We have the following commands for now: \n\n /bds \n\n/command'
+        bot.sendMessage(chatId, `${h1}`);
+        if (helpMenu == 'bds'){
+            var bds_ = 'The commands are simple here: \n\n\n\n start: Start the server if it has not started, if it has already started it will be ignored \n\n stop: It will go to the server and show a log \n\n restart: Restart the server and everyone will be disconnected shortly thereafter \n\n log: Shows the total log of the server'
+        } else if (helpMenu == 'command'){
+            var bds_ = '/command it explains itself, it serves to send commands to a direct server without having to go to bds_maneger to send commands'
+        } else if (helpMenu == 'info'){
+            var bds_ = '/info gives the ip information of the remote server or where the server is running from, as well as its location via ip.'
+        } else {
+            var bds_ = "Commands do not exist or misspelled"
+        }
+        bot.sendMessage(chatId, `${bds_}`);
+    });
+
+    bot.onText(/\/info/, (msg) => {
+        const chatId = msg.chat.id;
+        fetch(`http://ip-api.com/json/?fields=status,message,country,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting,query`).then(response => response.text()).then(serverVURLv => {
+            bot.sendMessage(chatId, `Device Ip`);
+            const obj2 = JSON.parse(serverVURLv);
+            const lat = obj2.lat;
+            const lon = obj2.lon;
+            const ippu = obj2.query;
+            const ipre = obj2.reverse;
+            const isp = obj2.isp;
+            const name = obj2.org;
+            const country = obj2.country;
+            const proxy = obj2.proxy;
+            bot.sendLocation(msg.chat.id, lat, lon);
+            bot.sendMessage(chatId, `Ip Publico: ${ippu}, Ip Reverso: ${ipre} \nProvedor: ${isp} \nNome do Provedor: ${name} \ncountry: ${country} \nProxy: ${proxy}`);}
+        );
+    });
+
+    // All messages
+    bot.on('message', (msg) => {
+        const chatId = msg.chat.id;
+        var men1 = `the ${msg.from.username} sent a message on the telegram: ${msg.text}`
+        // bot.sendMessage(chatId, `Uma Mensagem foi mandada para o console`);
+        console.log(`Telegram bot say: ${men1}`)
+        if (localStorage.getItem('bds_status') == 'started'){
+            serverstated.stdin.write(`say ${men1}\n`);
+        }
+    });
+// End Bot
+
+// Admins Members
+// ----------------
+// const fss = require('fs')
+// const admins = fss.readFileSync(`${__dirname}/../telegram_admin.json`, 'utf-8');
+// var user = msg.from.username
+// // var user = msg.from.username
+// var adm = JSON.parse(admins)
+// for(index in adm){
+//     // console.log(index)
+//     if (user == index){
+//         console.log(index, 'true')
+//         var adm2 = `adm.${index}.allow`
+//     }
+//     index++;
+// }
+// // var adm2 = adm.sirherobrine23.allow
+// console.log(eval(adm2))
+// if (eval(adm2) == true){
+//     // Command allowed
+
+//     // Command allowed
+// } else {
+//     // Command denied
+//     console.log(`this user telegram ${user} atempt to send command`)
+//     bot.sendMessage(chatId, `Allowed to admins, ${user} not admin`);
+//     // Command denied
+// }
+
+
+}

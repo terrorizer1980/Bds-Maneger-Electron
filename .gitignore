@@ -120,3 +120,6 @@ bds/
 
 # Archive Token Telegram Bot
 token.txt
+
+# Telegram Admin Members
+telegram_admin.json
