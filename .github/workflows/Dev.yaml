@@ -13,6 +13,13 @@ jobs:
           node-version: 15.x
           registry-url: https://registry.npmjs.org/
 
+      - name: Edit Version
+        run: |
+          id_run=${{ github.run_id }}
+          old="$(cat package.json |grep 'version'|head -1)"
+          sed "s|$old|\"version\": \"$id_run\",|g"
+          cat package.json |grep 'version'|head -1
+
       - run: npm install
       - run: npm publish --tag dev
         env:
