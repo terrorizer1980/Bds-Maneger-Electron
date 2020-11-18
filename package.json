@@ -4,6 +4,9 @@
   "description": "Minimal maneger for Minecraf Bedrock Server",
   "main": "index.js",
   "private": false,
+  "bin": {
+    "bds-manege": "./index.js"
+  },
   "scripts": {
     "test": "electron .",
     "start": "npm install && electron .",
