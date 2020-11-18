@@ -1,0 +1,1 @@
+agora para mais controle do telegram deve se ter permissoes para mandar mensagems e controlar o servidor, as mensagem ainda serão enviadas para o servidor como bate-papo

@@ -115,4 +115,11 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-bds*/
+# Minecraft Bedrock Server
+bds/
+
+# Archive Token Telegram Bot
+token.txt
+
+# Telegram Admin Members
+telegram_admin.json

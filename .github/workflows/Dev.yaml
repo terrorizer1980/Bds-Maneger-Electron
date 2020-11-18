@@ -1,49 +1,29 @@
-name: Node.js CI
+name: Publish Dev in npm
 on:
   push:
     branches:
       - dev
 jobs:
-  build:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
+  npm-dev:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run build-win
-      env:
-        CI: true
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: Push Dist Node ${{ matrix.node-version }}
-        path: |
-          dist/*.appx
-          dist/*.msi
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+          registry-url: https://registry.npmjs.org/
 
-    - name: Upload firmware to release
-      uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.run_id }}
-        name: Build Commit, Run_id ${{ github.run_id }}
-        body_path: release.md
-        prerelease: true
-        files: |
-          dist/*.appx
-          dist/*.msi
+      - run: npm install
+      - run: npm publish --tag dev
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    # - name: Remove old Releases
-    #   uses: dev-drprasad/delete-older-releases@v0.1.0
-    #   with:
-    #     keep_latest: 4
-    #     delete_tags: true
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload dev release github actions
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_id }}
+          name: Dev, Run_id ${{ github.run_id }}
+          body_path: release_dev.md
+          prerelease: true

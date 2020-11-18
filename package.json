@@ -1,50 +1,37 @@
 {
-  "name": "bds-maneger-gui_for-windows",
-  "version": "1.0.0",
-  "description": "Minimal maneger for Minecraf Bedrock Server for Windows",
+  "name": "bds-manege",
+  "version": "1.0.3",
+  "description": "Minimal maneger for Minecraf Bedrock Server",
   "main": "index.js",
+  "private": false,
   "scripts": {
     "test": "electron .",
-    "build-win": "electron-builder"
-  },
-  "build": {
-    "appId": "com.Sirherobrine23.BDS-Gui",
-    "icon": "pages/assents/mcpe.png",
-    "asar": "true",
-    "win": {
-      "target": [
-        "msi",
-        "appx"
-      ]
-    },
-    "msi": {
-      "menuCategory": "Sirherobrine23"
-    },
-    "appx": {
-      "displayName": "BDS Manger for Windows (APPX)",
-      "applicationId": "BDSM12",
-      "identityName": "BDSMANEGER"
-    }
+    "start": "npm install && electron .",
+    "start-root": "npm install && electron . --no-sandbox",
+    "javascript": "npx standard"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sirherobrine23/bds-maneger-gui_for-windows.git"
+    "url": "git+https://github.com/Sirherobrine23/Bds_Maneger.git"
   },
   "keywords": [
     "minecraft",
     "bds",
     "bds-server",
-    "Windows"
+    "Windows",
+    "linux"
   ],
-  "author": "Matheus Sampaio Queiroga (Sirherobrine23)",
+  "author": "Matheus Sampaio Queiroga (Sirherobrine23) <srherobrine20@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sirherobrine23/bds-maneger-gui_for-windows/issues"
+    "url": "https://github.com/Sirherobrine23/Bds_Maneger/issues"
   },
-  "homepage": "https://github.com/Sirherobrine23/bds-maneger-gui_for-windows#readme",
+  "homepage": "https://github.com/Sirherobrine23/Bds_Maneger#readme",
   "dependencies": {
     "decompress-zip": "^0.2.2",
-    "electron-is": "^3.0.0"
+    "electron-is": "^3.0.0",
+    "node-cron": "^2.0.3",
+    "node-telegram-bot-api": "^0.50.0"
   },
   "devDependencies": {
     "electron": "^11.0.0-beta.22",

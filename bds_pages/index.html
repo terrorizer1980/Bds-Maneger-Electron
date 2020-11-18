@@ -92,6 +92,7 @@
 <div class="root" id="root_container">
     <!-- Main Home -->
     <div>
+        <p id="SystemProcess"></p>
         <textarea disabled class="logTEXT" id="LOG"></textarea><br>
         <input id="cmds" id="btn2" size="100%" placeholder="Command to send to server: /" onkeydown="sendco(this)" type="text">
         <input type="submit" id='comsen' onclick="sendcomand();return false"><br><textarea disabled class="commands" id="commandsends"></textarea>
@@ -168,8 +169,18 @@
                 <label for="bds-Server_download">Bedrock Server Download</label>
                 <select id="bds-Server_download"></select>
                 <button onclick="DownloadBDS();">Download</button>
-                <textarea cols="50" row="60" id="BDSLOGDOWNLOAD" disabled style="display: none;"></textarea>
+                <div id="BDSLOGDOWNLOAD"></div>
+            </fieldset>
+            <br>
             <fieldset>
+                <button id="backupCh" onclick="alert('not working:(')">Auto Backup</button>
+                <br><br>
+                <!-- Times -->
+                <label>Seconds</label><input value="0" max="59" min="0" id="se"><!-- Seconds --><br>
+                <label>Minuts</label><input value="0" max="59" min="0" id="mi"><!-- Minuts --><br>
+                <label>Hours</label><input value="1" max="23" min='0' id="ho"><!-- Hours --><br>
+                <input type="button" value="Set time to backup" onclick="setTimas()">
+            </fieldset>
         <div>
         <label for="autostart">Auto Start Server in Init App</label>
         <input id="autostart" type="checkbox" onclick="checkedBox();">
@@ -180,5 +191,7 @@
     <script src="assents/js/modal.js"></script>
     <script>const themeMap = {dark: "light",light: "DarkColors",DarkColors: "dark"};const theme = localStorage.getItem('theme')||(tmp = Object.keys(themeMap)[0], localStorage.setItem('theme', tmp), tmp);const bodyClass = document.body.classList;bodyClass.add(theme);function toggleTheme() {const current = localStorage.getItem('theme');const next = themeMap[current];bodyClass.replace(current, next);localStorage.setItem('theme', next);};document.getElementById('themeButton').onclick = toggleTheme;</script>
     <script src="bds.js"></script>
+    <script src="assents/js/bds_version.js"></script>
+    <script src="assents/js/telegram-bot.js"></script>
 </div>
 </html>
