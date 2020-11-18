@@ -17,7 +17,7 @@ jobs:
         run: |
           id_run=${{ github.run_id }}
           old="$(cat package.json |grep 'version'|head -1)"
-          sed "s|$old|\"version\": \"$id_run\",|g" package.json > package2.json
+          sed "s|$old|\"version\": \"0.$id_run\",|g" package.json > package2.json
           cat package2.json > package.json
           rm -rfv package2.json
 
