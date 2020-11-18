@@ -170,7 +170,17 @@
                 <select id="bds-Server_download"></select>
                 <button onclick="DownloadBDS();">Download</button>
                 <div id="BDSLOGDOWNLOAD"></div>
+            </fieldset>
+            <br>
             <fieldset>
+                <button id="backupCh" onclick="alert('not working:(')">Auto Backup</button>
+                <br><br>
+                <!-- Times -->
+                <label>Seconds</label><input value="0" max="59" min="0" id="se"><!-- Seconds --><br>
+                <label>Minuts</label><input value="0" max="59" min="0" id="mi"><!-- Minuts --><br>
+                <label>Hours</label><input value="1" max="23" min='0' id="ho"><!-- Hours --><br>
+                <input type="button" value="Set time to backup" onclick="setTimas()">
+            </fieldset>
         <div>
         <label for="autostart">Auto Start Server in Init App</label>
         <input id="autostart" type="checkbox" onclick="checkedBox();">

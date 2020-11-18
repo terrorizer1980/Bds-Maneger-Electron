@@ -20,6 +20,6 @@ see the wiki for more information: https://github.com/Sirherobrine23/Bds_Maneger
 
 # Release Npm
 
-Stable: `npm install bds-manege@stable`
+Stable: `npm install bds-manege`
 
 Dev: `npm install bds-manege@dev`

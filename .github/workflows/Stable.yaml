@@ -1,56 +1,29 @@
-name: Node.js CI
+name: Npm and release Publish stable
 on:
   push:
     branches:
       - stable
 jobs:
-  Windows:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-    - run: npm install
-    - run: npm run build-win
-      env:
-        CI: true
-    - name: Upload artifact
-      uses: actions/upload-artifact@main
-      with:
-        name: archive-windows
-        retention-days: 1
-        path: |
-          dist/*.msi
-          dist/*.appx
-
-  Debians:
+  npm-dev:
     runs-on: ubuntu-latest
-    needs: Windows
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-    - run: npm install
-    - run: npm run build-deb
-      env:
-        CI: true
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+          registry-url: https://registry.npmjs.org/
 
-    - name: Download Windows Files
-      uses: actions/download-artifact@v2
-      with:
-       name: archive-windows
-       path: dist
+      - run: npm install
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    - name: Upload to release
-      uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.run_id }}
-        name: Build, Run_id ${{ github.run_id }}
-        body_path: release.md
-        files: dist/*.*
+      - name: Upload dev release github actions
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_id }}
+          name: Dev, Run_id ${{ github.run_id }}
+          body_path: release_dev.md
+          prerelease: true
