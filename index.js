@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+console.log(process.cwd())
 // const { autoUpdater } = require('electron-updater');
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 const electron = require('electron')
@@ -8,14 +11,15 @@ function createWindow () {
     titleBarStyle: 'hidden',
     width: 1200,
     height: 620,
-    icon: path.join(`${__dirname}/bds_pages/assents/mcpe.png`),
+    icon: path.join(`${process.cwd()}/bds_pages/assents/mcpe.png`),
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
       enableRemoteModule: true,
       sandbox: false
     }
   })
-  win.loadFile(`${__dirname}/bds_pages/index.html`)
+  win.loadFile(`${process.cwd()}/bds_pages/index.html`)
   win.on('close', function (e) {
     const choice = require('electron').dialog.showMessageBoxSync(this, { type: 'question', buttons: ['Yes', 'No'], title: 'Confirm', message: 'Did you stop the server?' })
     if (choice === 1) {

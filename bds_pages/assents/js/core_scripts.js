@@ -17,7 +17,53 @@ function startServer() {
 function stopserver(){
     document.getElementById('startButtom').setAttribute('onclick','startServer();');
     document.getElementById('StopButtom').removeAttribute('onclick');
-    serverstated.stdin.write('stop\n');
+    setTimeout(() => {
+        serverstated.stdin.write('say Server is stop in 10s\n');
+        console.log('Server is stop in 10s');
+        setTimeout(() => {
+            serverstated.stdin.write('say Server is stop in 9s\n');
+            console.log('Server is stop in 9s');
+            setTimeout(() => {
+                serverstated.stdin.write('say Server is stop in 8s\n');
+                console.log('Server is stop in 8s');
+                setTimeout(() => {
+                    serverstated.stdin.write('say Server is stop in 7s\n');
+                    console.log('Server is stop in 7s');
+                    setTimeout(() => {
+                        serverstated.stdin.write('say Server is stop in 6s\n');
+                        console.log('Server is stop in 6s');
+                        setTimeout(() => {
+                            serverstated.stdin.write('say Server is stop in 5s\n');
+                            console.log('Server is stop in 5s');
+                            setTimeout(() => {
+                                serverstated.stdin.write('say Server is stop in 4s\n');
+                                console.log('Server is stop in 4s');
+                                setTimeout(() => {
+                                    serverstated.stdin.write('say Server is stop in 3s\n');
+                                    console.log('Server is stop in 3s');
+                                    setTimeout(() => {
+                                        serverstated.stdin.write('say Server is stop in 2s\n');
+                                        console.log('Server is stop in 2s');
+                                        setTimeout(() => {
+                                            serverstated.stdin.write('say Server is stop in 1s\n');
+                                            console.log('Server is stop in 1s');
+                                            setTimeout(() => {
+                                                serverstated.stdin.write('say Server is stop\n');
+                                                console.log('Server is stop');
+                                                setTimeout(() => {
+                                                    serverstated.stdin.write('stop\n');
+                                                }, 1000);
+                                            }, 1000);
+                                        }, 1000);
+                                    }, 1000);
+                                }, 1000);
+                            }, 1000);
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
+    }, 1000);
     localStorage.setItem('bds_status', 'stoped');
     document.getElementById("cmds").setAttribute('disabled','')
     document.getElementById("comsen").setAttribute('disabled','')
@@ -38,10 +84,10 @@ function worldbackup(){
         today = `${yyyy}_${mm}-${dd}@@${minu}-${hour}`;
         var exec = require('child_process').exec;
         if (process.platform == 'win32'){
-            var serverstated = exec(`cd ${__dirname}/../bds/worlds/ && tar.exe -czf %USERPROFILE%/Desktop/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
+            var serverstated = exec(`cd ${process.cwd()}/bds/worlds/ && tar.exe -czf %USERPROFILE%/Desktop/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
             var mensagemBackup = 'You backup is in desktop'
         } else if (process.platform == 'linux'){
-            var serverstated = exec(`cd ${__dirname}/../bds/worlds/ && tar -czf ~/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
+            var serverstated = exec(`cd ${process.cwd()}/bds/worlds/ && tar -czf ~/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
             var mensagemBackup = 'You backup is in home dir'
         }        
         serverstated.on('exit', function (code) {
@@ -208,12 +254,22 @@ fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/
 
 // -------------------------------------------------------------------------------------
 // Telegram Bot
-var fs = require("fs");
-    if (fs.existsSync(`${__dirname}/../token.txt`)) {
-        var token = fs.readFileSync(`${__dirname}/../token.txt`, "utf-8").replace('\n', '');
-    } else {
-        var token = "nulu";
-    }
+ var fs = require("fs");
+var fss = require("fs");
+if (fs.existsSync(`${process.cwd()}/token.txt`)) {
+    var token = fs.readFileSync(`${process.cwd()}/token.txt`, "utf-8").replace('\n', '');
+} else {
+    var token = "nulu";
+}
+// admins
+if (fs.existsSync(`${process.cwd()}/telegram_admin.json`)) {
+    var admins = fss.readFileSync(`${process.cwd()}/telegram_admin.json`, 'utf-8');
+} else {
+    fs.appendFile(`${process.cwd()}/telegram_admin.json`, '{"sh23_bot_not_config": {"allow": true}}', function (err) {if (err) throw err;console.log('allow all users');});
+    setTimeout(() => {console.log('');}, 5);
+    var admins = fss.readFileSync(`${process.cwd()}/telegram_admin.json`, 'utf-8');
+    
+}
 
 if (token == 'nulu'){
     console.log('Telegram bot disabled token.txt not exist')
@@ -233,21 +289,13 @@ if (token == 'nulu'){
                 var more = 'Linux System'
             } else if (process.platform == 'win32'){
                 var more = 'Windows System'
-            }
-            const fss = require('fs')
-            const admins = fss.readFileSync(`${__dirname}/../telegram_admin.json`, 'utf-8');
+            }            
             var user = msg.from.username
             console.log(user)
-            // var user = msg.from.username
+            
             var adm = JSON.parse(admins)
-            for(index in adm){
-                // console.log(index)
-                if (user == index){
-                    var adm2 = `adm.${index}.allow`
-                }
-                index++;
-            }
-            // var adm2 = adm.sirherobrine23.allow
+            for(index in adm){if (user == index){var adm2 = `adm.${index}.allow`} else if (index == 'sh23_bot_not_config'){var adm2 = `adm.${index}.allow`};index++;}
+            
             if (eval(adm2) == true){
                 if (t1 == 'start'){
                     if (localStorage.getItem('bds_status') == 'started'){
@@ -256,7 +304,7 @@ if (token == 'nulu'){
                         console.log('Stating')
                         localStorage.setItem('teste', 'start')
                         bot.sendMessage(chatId, `Stating server`);
-                        bot.sendMessage(chatId, ` You server files is to ${__dirname}/../bds, Reuning in ${more}`);
+                        bot.sendMessage(chatId, ` You server files is to ${process.cwd()}/bds, Reuning in ${more}`);
                         startServer();
                     }      
                 } else if (t1 == 'stop'){
@@ -267,8 +315,9 @@ if (token == 'nulu'){
                         stopserver();
                         bot.sendMessage(chatId, `Log`);
                         bot.sendMessage(chatId, `${document.getElementById("LOG").innerHTML}`);
+                        bot.sendMessage(chatId, `Your server will be stopped in 10s`);
                     } else {
-                        bot.sendMessage(chatId, `You Server Is Stoped`);
+                        bot.sendMessage(chatId, `Your server is stopped`);
                     }
                 } else if (t1 == 'restart'){
                     console.log('Restating')
@@ -298,19 +347,13 @@ if (token == 'nulu'){
         if (localStorage.getItem('bds_status') == 'started'){
             // Commands
             const fss = require('fs')
-            const admins = fss.readFileSync(`${__dirname}/../telegram_admin.json`, 'utf-8');
+            
             var user = msg.from.username
             console.log(user)
-            // var user = msg.from.username
+            
             var adm = JSON.parse(admins)
-            for(index in adm){
-                // console.log(index)
-                if (user == index){
-                    var adm2 = `adm.${index}.allow`
-                }
-                index++;
-            }
-            // var adm2 = adm.sirherobrine23.allow
+            for(index in adm){if (user == index){var adm2 = `adm.${index}.allow`} else if (index == 'sh23_bot_not_config'){var adm2 = `adm.${index}.allow`};index++;}
+            
             if (eval(adm2) == true){
                 // Command allowed
                 if (t2 == 'get'){
@@ -355,18 +398,16 @@ if (token == 'nulu'){
         // start
         bot.onText(/\/start/, (msg) => {
         const chatId = msg.chat.id;
-        // var t2 = match[1];
         var mensagem1 = 'welcome to Bds Maneger'
         var mensagem2 = 'Commands Available: '
         var mensagem3 = '/bds (start, stop, restart, status and log),\n/command (Commands to server), \n/start (That Message), \nnot Anything else use the command /help'
         bot.sendMessage(chatId, `${mensagem1}\n ${mensagem2}\n ${mensagem3}\n`);
         });
     
-        bot.onText(/\/help (.+)/, (msg, match) => {
+        bot.onText(/\/help/, (msg, match) => {
             const chatId = msg.chat.id;
             var helpMenu = match[1];
-            var h1 = 'welcome to Bds Maneger \nOne thing, the messages sent to the bot will be redirected to the console of bds_maneger and Minecraft. \n\n We have the following commands for now: \n\n /bds \n\n/command'
-            bot.sendMessage(chatId, `${h1}`);
+            
             if (helpMenu == 'bds'){
                 var bds_ = 'The commands are simple here: \n\n\n\n start: Start the server if it has not started, if it has already started it will be ignored \n\n stop: It will go to the server and show a log \n\n restart: Restart the server and everyone will be disconnected shortly thereafter \n\n log: Shows the total log of the server'
             } else if (helpMenu == 'command'){
@@ -374,7 +415,8 @@ if (token == 'nulu'){
             } else if (helpMenu == 'info'){
                 var bds_ = '/info gives the ip information of the remote server or where the server is running from, as well as its location via ip.'
             } else {
-                var bds_ = "Commands do not exist or misspelled"
+                var h1 = 'welcome to Bds Maneger \nOne thing, the messages sent to the bot will be redirected to the console of bds_maneger and Minecraft. \n\n We have the following commands for now: \n\n /bds \n\n/command'
+                var bds_ = `${h1} \n\n\n Commands do not exist or misspelled, use \"/help bds\", \"/help command\", \"/help info\"`
             }
             bot.sendMessage(chatId, `${bds_}`);
         });
@@ -400,43 +442,45 @@ if (token == 'nulu'){
         // All messages
         bot.on('message', (msg) => {
             const chatId = msg.chat.id;
-            var men1 = `the ${msg.from.username} sent a message on the telegram: ${msg.text}`
-            // bot.sendMessage(chatId, `Uma Mensagem foi mandada para o console`);
-            console.log(`Telegram bot say: ${men1}`)
-            if (localStorage.getItem('bds_status') == 'started'){
-                serverstated.stdin.write(`say ${men1}\n`);
-            }
+             if (msg.text.includes('/start')){
+                return false
+             } else if (msg.text.includes('/bds')){
+                 return false
+             } else if (msg.text.includes('/command')){
+                return false
+             } else if (msg.text.includes('/info')){
+                return false
+             } else if (msg.text.includes('/help')){
+                return false
+             } else {
+                var men1 = `the ${msg.from.username} sent a message on the telegram: ${msg.text}`;
+                console.log(`Telegram bot say: ${men1}`);
+                if (localStorage.getItem('bds_status') == 'started'){
+                    serverstated.stdin.write(`say Telegram Bot ${men1}\n`);
+                }
+             }
         });
         // End Bot
     }
 }
 
 
-// Admins Members
+/*
+// Admins Members check
 // ----------------
-// const fss = require('fs')
-// const admins = fss.readFileSync(`${__dirname}/../telegram_admin.json`, 'utf-8');
-// var user = msg.from.username
-// // var user = msg.from.username
-// var adm = JSON.parse(admins)
-// for(index in adm){
-//     // console.log(index)
-//     if (user == index){
-//         console.log(index, 'true')
-//         var adm2 = `adm.${index}.allow`
-//     }
-//     index++;
-// }
-// // var adm2 = adm.sirherobrine23.allow
-// console.log(eval(adm2))
-// if (eval(adm2) == true){
-//     // Command allowed
 
-//     // Command allowed
-// } else {
-//     // Command denied
-//     console.log(`this user telegram ${user} atempt to send command`)
-//     bot.sendMessage(chatId, `Allowed to admins, ${user} not admin`);
-//     // Command denied
-// }
+var user = msg.from.username
+var adm = JSON.parse(admins)
+for(index in adm){if (user == index){var adm2 = `adm.${index}.allow`;} else if (index == 'sh23_bot_not_config'){var adm2 = `adm.${index}.allow`;};index++;}
+console.log(eval(adm2))
+if (eval(adm2) == true){
+    // Command allowed
 
+    // Command allowed
+} else {
+    // Command denied
+    console.log(`this user telegram ${user} atempt to send command`)
+    bot.sendMessage(chatId, `Allowed to admins, ${user} not admin`);
+    // Command denied
+}
+*/

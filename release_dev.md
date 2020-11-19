@@ -1,1 +1,1 @@
-agora para mais controle do telegram deve se ter permissoes para mandar mensagems e controlar o servidor, as mensagem ainda serão enviadas para o servidor como bate-papo
+1. As conversas do telegram agora estão sendo mostrada corretamente, e comandos não são mais mostrados no console e na lista de bate-papo do servidor
