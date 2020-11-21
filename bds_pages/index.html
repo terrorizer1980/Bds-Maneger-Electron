@@ -71,6 +71,14 @@
             </a>
         </li>
         <!--  -->
+        <!-- Give Item -->
+        <li class="nav-item" id="giveMENU">
+            <a href="#" class="nav-link">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="2%" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+              <span class="link-text">Give Item</span>
+            </a>
+        </li>
+        <!--  -->
         <!-- Seetings -->
         <li class="nav-item" id="configbuttom">
             <a href="#" class="nav-link">
@@ -97,6 +105,26 @@
         <input id="cmds" id="btn2" size="100%" placeholder="Command to send to server: /" onkeydown="sendco(this)" type="text">
         <input type="submit" id='comsen' onclick="sendcomand();return false"><br><textarea disabled class="commands" id="commandsends"></textarea>
     </div>
+
+    <!-- The Modal -->
+    <div id="GIVEM" class="modal">
+        <!-- Modal content -->
+         <div class="modal-content">
+            <span class="closeG">&times; <label for="give-C">Give Item</label></span>
+            <!-- Give Itens -->
+            <h3>!Alguns Items não pode funcionar pois está sendo usado a lista de items do java!</h3>
+            <div class="give">
+              <fieldset id="give-C">
+                <select id="giveI"></select>
+                <input type="text" id="userI">
+                <input type="number" id="tant">
+                <input type="submit" onclick="getI();">
+                <!-- <select id="userI"></select> -->
+              </fieldset>
+            </div>
+         </div>
+       </div>
+
 
     <!-- The Modal Info -->
     <div id="Info" class="modal">
@@ -187,5 +215,6 @@
     <script src="bds.js"></script>
     <script src="assents/js/bds_version.js"></script>
     <script src="assents/js/telegram-bot.js"></script>
+    <script src="assents/js/give.js"></script>
 </div>
 </html>
