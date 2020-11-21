@@ -1,5 +1,4 @@
 var exec = require('child_process').exec;
-
 if (process.platform == 'win32'){
     var systemDir = exec(`echo %cd%`);
     systemDir.stdout.on('data', function (data){
