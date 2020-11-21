@@ -20,17 +20,26 @@ if (token == 'nulo'){
     if (admins == 'disabled'){
         return false
     } else {
-        bot.onText(/\/info/, (msg) => {
+        bot.onText(/\/bds/, (msg,match) => {
             const chatId = msg.chat.id;
-            fetch(`http://ip-api.com/json/?fields=status,message,country,lat,lon,isp,org,as,asname,reverse,mobile,proxy,hosting,query`).then(response => response.text()).then(serverVURLv => {
-                /*bot.sendMessage(chatId, `Device Ip`);*/
-                const obj2 = JSON.parse(serverVURLv);const lat = obj2.lat;const lon = obj2.lon;const ippu = obj2.query;const ipre = obj2.reverse;const isp = obj2.isp;const name = obj2.org;const country = obj2.country;const proxy = obj2.proxy;
-                bot.sendLocation(msg.chat.id, lat, lon);
-                bot.sendMessage(chatId, `Ip Publico: ${ippu}, Ip Reverso: ${ipre} \nProvedor: ${isp} \nNome do Provedor: ${name} \ncountry: ${country} \nProxy: ${proxy}`);}
-            );
+            const bds = mathch[1]
+            if (bds == "stop"){
+              startServer();
+            } else if (bds == "stop"){
+              stopserver();
+            } else if (bds == "restart") {
+              restartServer();
+            } else if (bds == "info"){
+              /*getserverinfo();*/
+              bot.sendMessage(chatId, `creating the function still!`);
+            } else {
+              bot.sendMessage(chatId, `Send Select Option`);
+              console.log(`Telegram bds command.`)
+            }
+            
         });
-    }; /*End 2*/
-}; /*End 1*/
+    }; /*End Admin if*/
+}; /*End exist token file*/
 
 /*
 var fs = require("fs");

@@ -6,10 +6,8 @@
   "private": false,
   "bin": "./node_modules/.bin/electron ./index.js",
   "scripts": {
-    "test": "electron .",
-    "start": "npm install && electron .",
-    "start-root": "npm install && electron . --no-sandbox",
-    "javascript": "npx standard"
+    "start": "electron .",
+    "start-root": "electron . --no-sandbox"
   },
   "repository": {
     "type": "git",
