@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<div id="scripts"></div>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Bds Simples Pages</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='../add_script.js'></script>
+</head>
+<body>
+    <div id="root" class="root">
+        <div id="buttons" class="buttons">
+            <button onclick="startServer();">Start Server</button> <button onclick="stopserver();">Stop Server</button> <button onclick="restartServer();">restart Server</button>
+        </div>
+        <div>
+            <!-- We can have a textarea or a div some other formats cannot work -->
+            <div id="LOG"></div>
+            <!-- <textarea id="LOG"></textarea> -->
+        </div>
+        <div>
+            <input id="cmds" class="commands" type="text" onkeydown="sendco(this)"><input onclick="sendcomand();" id="comsen" type="submit">
+        </div>
+    </div> <!-- End Root DIV -->
+</body>
+</html>

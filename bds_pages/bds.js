@@ -16,9 +16,12 @@ if (process.platform == 'win32'){
 bdsFound.on('exit', function (code) {
     if (code == 0){
         var coreS = document.createElement("script");
-        coreS.src = 'assents/js/core_scripts.js';
+        coreS.src = `${process.cwd()}/bds_pages/assents/js/core_scripts.js`;
         document.getElementById('scr').appendChild(coreS);
         // ---------------------------------------------------------------
+        var coreS2 = document.createElement("script");
+        coreS2.src = `${process.cwd()}/bds_pages/assents/js/default_js/core_script.js`;
+        document.getElementById('scr').appendChild(coreS2);
     } else {
         document.getElementById('root_container').remove();
         // 

@@ -30,7 +30,7 @@
         </li>
         <!--  -->
         <!-- Stop Server -->
-        <li class="nav-item" >
+        <li class="nav-item" onclick="stopserver();">
             <a href="#" class="nav-link" id="StopButtom">
                 <svg width="1%" viewBox="0 0 16 16" class="bi bi-pause" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/></svg>
                 <span class="link-text">Stop</span>
@@ -103,7 +103,7 @@
         <p id="SystemProcess"></p>
         <textarea disabled class="logTEXT" id="LOG"></textarea><br>
         <input id="cmds" id="btn2" size="100%" placeholder="Command to send to server: /" onkeydown="sendco(this)" type="text">
-        <input type="submit" id='comsen' onclick="sendcomand();return false"><br><textarea disabled class="commands" id="commandsends"></textarea>
+        <input type="submit" id='comsen' onclick="sendcomand();return false">
     </div>
 
     <!-- The Modal -->

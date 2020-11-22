@@ -50,7 +50,12 @@ if (token == 'nulo'){
                         bot.sendMessage(chatId, `Your server will be stopped in 10s`);
                         bot.sendMessage(chatId, `Stoping server`);
                         stopserver();
-                        bot.sendMessage(chatId, `${document.getElementById("LOG").innerHTML}`);
+                        var GetDivorTextarea = document.getElementById('LOG').tagName
+                        if (GetDivorTextarea == "TEXTAREA"){
+                            bot.sendMessage(chatId, `${document.getElementById("LOG").value}`);
+                        } else {
+                            bot.sendMessage(chatId, `${document.getElementById("LOG").innerHTML}`);
+                        };
                     } else {
                         bot.sendMessage(chatId, `Your server is stopped`);
                     } /* Stop Server */
@@ -89,13 +94,20 @@ if (token == 'nulo'){
                     } else if (t2.includes('say')){
                         bot.sendMessage(chatId, `User chat to send mensage`);
                     } else {
-                        var before_get_command = document.getElementById("LOG").innerHTML;
-                        document.getElementById("commandsends").value += 'Command Send: '+t2+'\n';
-                        document.getElementById('cmds').value = '';
+                        var GetDivorTextarea = document.getElementById('LOG').tagName
+                        if (GetDivorTextarea == "TEXTAREA"){
+                            var before_get_command = document.getElementById('LOG').value
+                        } else {
+                            var before_get_command = document.getElementById('LOG').innerHTML
+                        }
                         serverstated.stdin.write(t2+'\n');
                         bot.sendMessage(chatId, `wait ...`);
                         setTimeout(() => {
-                            var list_his = document.getElementById("LOG").innerHTML.replace(before_get_command, '');
+                            if (GetDivorTextarea == "TEXTAREA"){
+                                var list_his = document.getElementById("LOG").value.replace(before_get_command, '');
+                            } else {
+                                var list_his = document.getElementById("LOG").innerHTML.replace(before_get_command, '');
+                            };
                             bot.sendMessage(chatId, list_his);
                         }, 1000);
                     };

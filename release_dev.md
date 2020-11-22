@@ -1,1 +1,7 @@
-1. As conversas do telegram agora estão sendo mostrada corretamente, e comandos não são mais mostrados no console e na lista de bate-papo do servidor
+# Modifications
+
+1. some files of the telegram bot have been modified and organized
+
+2. Starting bds_custom_pages implementations
+
+3. Some Integrations for custom pages are already ready for use, some errors can appear on the standard page of bds_maneger, please consult this one in the last version, if you have create an issue with the console error.
