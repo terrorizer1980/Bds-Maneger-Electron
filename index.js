@@ -27,7 +27,7 @@ function createWindow () {
       enableRemoteModule: true,
       sandbox: false
     }
-  })
+  });
   console.log('Dir: '+process.cwd())
   console.log(`Pages Load: ${process.cwd()}/${load_pages}`)
   win.loadFile(`${process.cwd()}/${load_pages}`)

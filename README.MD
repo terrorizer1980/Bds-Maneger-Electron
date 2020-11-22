@@ -29,3 +29,4 @@ Dev: `npm install bds-manege@dev`
 Stable: `npx bds-manege`
 
 Dev: `npx bds-maneger@dev`
+
