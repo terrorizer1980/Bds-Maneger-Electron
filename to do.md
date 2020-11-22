@@ -7,3 +7,8 @@
 
 
 (November 14, 2020, 11:54 PM, Brasilia time)
+
+1. redo the telegram bot scripts.
+2. import some themes for testing.
+
+(November 20, 2020, 00:22 PM, Brasília time)

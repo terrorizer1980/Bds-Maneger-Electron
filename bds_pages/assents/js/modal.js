@@ -23,4 +23,15 @@ document.getElementById("configbuttom").onclick = function() {
       document.getElementById("configmodal").style.display = "none";
     }
 }
-
+// Give Item
+document.getElementById("giveMENU").onclick = function() {
+  document.getElementById("GIVEM").style.display = "block";
+}
+document.getElementsByClassName("closeG")[0].onclick = function() {
+  document.getElementById("GIVEM").style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == document.getElementById("GIVEM")) {
+    document.getElementById("GIVEM").style.display = "none";
+  }
+}

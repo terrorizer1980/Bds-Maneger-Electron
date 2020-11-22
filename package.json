@@ -1,14 +1,13 @@
 {
   "name": "bds-manege",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Minimal maneger for Minecraf Bedrock Server",
   "main": "index.js",
   "private": false,
+  "bin": "./node_modules/.bin/electron ./index.js",
   "scripts": {
-    "test": "electron .",
-    "start": "npm install && electron .",
-    "start-root": "npm install && electron . --no-sandbox",
-    "javascript": "npx standard"
+    "start": "electron .",
+    "start-root": "electron . --no-sandbox"
   },
   "repository": {
     "type": "git",
@@ -34,7 +33,7 @@
     "node-telegram-bot-api": "^0.50.0"
   },
   "devDependencies": {
-    "electron": "^11.0.0-beta.22",
+    "electron": "^11.0.2",
     "electron-builder": "^22.9.1"
   }
 }

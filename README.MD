@@ -18,8 +18,15 @@ see the wiki for more information: https://github.com/Sirherobrine23/Bds_Maneger
 
 [Dev Version](https://github.com/Sirherobrine23/Bds_Maneger/releases/)
 
-# Release Npm
+# Npm package
 
 Stable: `npm install bds-manege`
 
 Dev: `npm install bds-manege@dev`
+
+# Npx package
+
+Stable: `npx bds-manege`
+
+Dev: `npx bds-maneger@dev`
+
