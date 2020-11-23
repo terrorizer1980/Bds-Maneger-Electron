@@ -1,6 +1,6 @@
 {
   "name": "bds-manege",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Minimal maneger for Minecraf Bedrock Server",
   "main": "index.js",
   "private": false,

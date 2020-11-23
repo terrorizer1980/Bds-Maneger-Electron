@@ -4,7 +4,7 @@ if (process.platform == 'win32'){
     systemDir.stdout.on('data', function (data){
         if (data == 'C:\\Windows\\System32'){
             alert('Exit to app');
-            require('electron').app.quit;
+            require('electron').remote.app.quit();
         };
     });
 };
@@ -20,7 +20,7 @@ bdsFound.on('exit', function (code) {
         document.getElementById('scr').appendChild(coreS);
         // ---------------------------------------------------------------
         var coreS2 = document.createElement("script");
-        coreS2.src = `${process.cwd()}/bds_pages/assents/js/default_js/core_script.js`;
+        coreS2.src = `assents/js/core_script.js`;
         document.getElementById('scr').appendChild(coreS2);
     } else {
         document.getElementById('root_container').remove();

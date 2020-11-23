@@ -6,7 +6,7 @@
     <title>BDS Maneger For Windows</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
-    <script src="assents/js/kill_old_BDS.js"></script>
+    <script src="../assents/js/kill_old_BDS.js"></script>
     <script>var appV = require('electron').remote.app.getVersion();</script>
 </head>
 <body>
@@ -131,7 +131,7 @@
         <div class="modal-content">
             <span class="infoclose">&times;</span>
             <div class="info">
-                <img src="assents/mcpe.png" width="7%">
+                <img src="../assents/mcpe.png" width="7%">
                 <a>BDS MANEGER GUI &#9400;</a>
 
                 <!-- Mantedor -->
@@ -213,8 +213,8 @@
     <script src="assents/js/modal.js"></script>
     <script>const themeMap = {dark: "light",light: "DarkColors",DarkColors: "dark"};const theme = localStorage.getItem('theme')||(tmp = Object.keys(themeMap)[0], localStorage.setItem('theme', tmp), tmp);const bodyClass = document.body.classList;bodyClass.add(theme);function toggleTheme() {const current = localStorage.getItem('theme');const next = themeMap[current];bodyClass.replace(current, next);localStorage.setItem('theme', next);};document.getElementById('themeButton').onclick = toggleTheme;</script>
     <script src="bds.js"></script>
-    <script src="assents/js/bds_version.js"></script>
-    <script src="assents/js/telegram-bot.js"></script>
+    <script src="../assents/js/bds_version.js"></script>
+    <script src="../assents/js/telegram-bot.js"></script>
     <script src="assents/js/give.js"></script>
 </div>
 </html>
