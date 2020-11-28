@@ -1,19 +1,6 @@
 // This script, manage the versions of Minecraft Bedrock Server, this file has not yet been included in core_service.js
 // Download BDS Software
 // Id selecttion: bds-Server_download
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(langArray => {
-    var newSelect = document.getElementById('bds-Server_download')
-        for(index in JSON.parse(langArray).Versions){
-            var opt = document.createElement("option");
-            opt.value= index;
-            opt.innerHTML = JSON.parse(langArray).Versions[index];
-            // Taca tudo do select
-            newSelect.appendChild(opt);
-            index++;
-        }
-    }
-);
-
 function logD(vales){
     var logDownload = document.createElement("p");
     logDownload.innerHTML = vales;
@@ -67,3 +54,15 @@ function DownloadBDS(){
         });
     });
 };
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(langArray => {
+    var newSelect = document.getElementById('bds-Server_download')
+        for(index in JSON.parse(langArray).Versions){
+            var opt = document.createElement("option");
+            opt.value= index;
+            opt.innerHTML = JSON.parse(langArray).Versions[index];
+            // Taca tudo do select
+            newSelect.appendChild(opt);
+            index++;
+        }
+    }
+);
