@@ -9,7 +9,7 @@ if (process.platform == 'linux'){
 }
 /* ------------------------------------------------- */
 if (fs.existsSync(`${process.cwd()}/token.txt`)) {
-    var token = fs.readFileSync(`${process.cwd()}/token.txt`, "utf-8").replace('\n', '');
+    var token = fs.readFileSync(`${process.cwd()}/token.txt`, "utf-8").replaceAll('\n', '');
 } else {
     var token = "nulo";
 }

@@ -130,3 +130,6 @@ bds_pages/custom_pages/*
 # Exlude
 !bds_pages/custom_pages/simples/
 !bds_pages/custom_pages/add_script.js
+
+# Configuration file
+config.json

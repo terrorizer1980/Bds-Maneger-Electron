@@ -1,6 +1,6 @@
 {
   "name": "bds-manege",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Minimal maneger for Minecraf Bedrock Server",
   "main": "index.js",
   "private": false,
@@ -27,10 +27,11 @@
   },
   "homepage": "https://github.com/Sirherobrine23/Bds_Maneger#readme",
   "dependencies": {
-    "decompress-zip": "^0.2.2",
+    "adm-zip": "^0.5.1",
     "electron-is": "^3.0.0",
     "node-cron": "^2.0.3",
-    "node-telegram-bot-api": "^0.50.0"
+    "node-telegram-bot-api": "^0.50.0",
+    "properties-to-json": "^0.1.7"
   },
   "devDependencies": {
     "electron": "^11.0.2",

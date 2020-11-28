@@ -3,10 +3,10 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>BDS Maneger For Windows</title>
+    <title>BDS Maneger</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
-    <script src="assents/js/kill_old_BDS.js"></script>
+    <script src="../assents/js/kill_old_BDS.js"></script>
     <script>var appV = require('electron').remote.app.getVersion();</script>
 </head>
 <body>
@@ -131,7 +131,7 @@
         <div class="modal-content">
             <span class="infoclose">&times;</span>
             <div class="info">
-                <img src="assents/mcpe.png" width="7%">
+                <img src="../assents/mcpe.png" width="7%">
                 <a>BDS MANEGER GUI &#9400;</a>
 
                 <!-- Mantedor -->
@@ -203,6 +203,41 @@
             <fieldset>
                 <label>Auto Backup</label>: <input type="checkbox" id="backupCh" onclick="startBackup();">
             </fieldset>
+            <fieldset>
+                <label for="name">Short Discription: </label><input placeholder="Description" type="text" id="name">
+                <p><label for="level_name">World name: </label><input type="text" placeholder="Word Name (Default Bedrock level)" id="level_name"></p>
+                <p>
+                    <label for="gameMode">Gamemode: </label><select id="gameMode">
+                        <option value="survival">Survival</option>
+                        <option value="creative">Creative</option>
+                        <option value="aventure">Aventure</option>
+                    </select>
+                    <label for="difficulty">Difficulty: </label><select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="normal">Normal</option>
+                        <option value="hard">hard</option>
+                    </select>
+                    <label for="permissions">Player default Permissions: </label><select id="permissions">
+                        <option value="visitor">Visitor</option>
+                        <option value="member">Member</option>
+                        <option value="operator">Operator</option>
+                    </select>
+                </p>
+                <p>Allow Cheats: <input type="checkbox" id="cheats"></p>
+                <p>Numero maximo de jogadores: <input type="number" placeholder="Default 10" min="1" id="max_pla"></p>
+                <p><label for="xbox">Enable xbox Login: </label><input type="checkbox" id="xbox"></p>
+                <p><label for="whitelist">Enable whitelist: </label><input type="checkbox" id="whitelist"></p>
+                <p>
+                    <label for="view_dis">Max View Players</label><input type="number" placeholder="Max Distance View (Max: 64, Min: 4)" max="64" min="4" id="view_dis">
+                    <br>
+                    <label for="tick_dis">Chunk load allow for all players</label><input type="number" placeholder="Chunk loads" min="4" max="12" id="tick_dis">
+                </p>
+                <p>
+                    <label for="timeout_server">Time out Players not moved: </label><input type="number" placeholder="Default 30 Minutes" id="timeout_server">
+                </p>
+                </select>
+                <button onclick="setCONFIG();">Submit</button>
+            </fieldset>
         <div>
         <label for="autostart">Auto Start Server in Init App</label>
         <input id="autostart" type="checkbox" onclick="checkedBox();">
@@ -213,8 +248,9 @@
     <script src="assents/js/modal.js"></script>
     <script>const themeMap = {dark: "light",light: "DarkColors",DarkColors: "dark"};const theme = localStorage.getItem('theme')||(tmp = Object.keys(themeMap)[0], localStorage.setItem('theme', tmp), tmp);const bodyClass = document.body.classList;bodyClass.add(theme);function toggleTheme() {const current = localStorage.getItem('theme');const next = themeMap[current];bodyClass.replace(current, next);localStorage.setItem('theme', next);};document.getElementById('themeButton').onclick = toggleTheme;</script>
     <script src="bds.js"></script>
-    <script src="assents/js/bds_version.js"></script>
-    <script src="assents/js/telegram-bot.js"></script>
+    <script src="../assents/js/bds_version.js"></script>
+    <script src="../assents/js/telegram-bot.js"></script>
     <script src="assents/js/give.js"></script>
+    <script src="assents/js/setting_server.js"></script>
 </div>
 </html>

@@ -21,6 +21,7 @@ jobs:
           cat package2.json > package.json
           rm -rfv package2.json
 
+      - run: npm update
       - run: npm install
       - run: npm publish --tag dev
         env:
