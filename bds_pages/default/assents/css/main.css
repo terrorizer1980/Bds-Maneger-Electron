@@ -21,6 +21,9 @@ it's still basic CSS.
 input[type="text"] {
   width: 97%;
 }
+input[type="number"]{
+  width: 35%;
+}
 input[type="submit"] {
   margin: none;
   background-color: transparent;
@@ -366,4 +369,8 @@ input{
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
+  }
+  .logTEXT{
+    border: 2px var(--bg-primary);
+    background-color: var(--bg-secondary);
   }
