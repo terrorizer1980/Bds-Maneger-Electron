@@ -30,6 +30,7 @@ function stopserver(){
                 if (index == '11'){
                     serverstated.stdin.write('stop\n');
                     localStorage.setItem('bds_status', 'stoped');
+                    log_save();
                 } else {
                     serverstated.stdin.write(`say Server is stop in ${index}s\n`);
                     console.log(`Server is stop in ${index}s`);
@@ -47,36 +48,39 @@ function restartServer(){
         startServer();
     };    
 }
-function worldbackup(){
-    var status = localStorage.getItem('bds_status');
-    if (status == 'started'){
+function worldbackup(){backupS1();};
+function backupS1(){
+    var bds_status_backup  = localStorage.getItem('bds_status');
+    if (bds_status_backup == 'started'){
+        console.log('Stoping server');
         stopserver();
-    }
-    if (status == 'stoped'){
-        var today = new Date();var dd = String(today.getDate()).padStart(2, '0');var mm = String(today.getMonth() + 1).padStart(2, '0');var yyyy = today.getFullYear();var hour = today.getHours();var minu = today.getMinutes()
-        today = `${yyyy}_${mm}-${dd}@@${minu}-${hour}`;
-        var exec = require('child_process').exec;
-        if (process.platform == 'win32'){
-            var serverstated = exec(`cd ${process.env.HOME}/bds_Server/worlds/ && tar.exe -czf %USERPROFILE%/Desktop/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
-            var mensagemBackup = 'You backup is in desktop'
+        console.log('Stop sucess, Continuing backup')
+        console.log('Back up backup')
+    };
+    if (bds_status_backup == 'stoped'){
+        
+        if (process.platform == "win32"){
+            var today = new Date();var dd = String(today.getDate()).padStart(2, '0');var mm = String(today.getMonth() + 1).padStart(2, '0');var yyyy = today.getFullYear();var hour = today.getHours();var minu = today.getMinutes();today = `Date_${yyyy}-${mm}-${dd}(Hour_${hour}-Minutes_${minu})`;
+            var name = `${process.env.USERPROFILE}/Desktop/bds_backup_World_${today}.zip`
+            var dir_zip = `${process.env.USERPROFILE}/bds_Server/worlds/`
         } else if (process.platform == 'linux'){
-            var serverstated = exec(`cd ${process.env.HOME}/bds_Server/worlds/ && tar -czf ~/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
-            var mensagemBackup = 'You backup is in home dir'
-        }        
-        serverstated.on('exit', function (code) {
-            if (code == 0){
-                alert(`${mensagemBackup}, with name: bds_backup_World_${today}.tar.gz`);
-            } else {
-                alert('erro to create backup');
-            }
-        });
-    } else {
-        if (confirm('Voçê quer tentar de novo')){
-            worldbackup();
-        }
-    }
+            var today = new Date();var dd = String(today.getDate()).padStart(2, '0');var mm = String(today.getMonth() + 1).padStart(2, '0');var yyyy = today.getFullYear();var hour = today.getHours();var minu = today.getMinutes();today = `Date_${yyyy}-${mm}-${dd} Hour_${hour}-Minutes_${minu}`;
+            var name = `${process.env.HOME}/bds_backup_World_${today}.zip`
+            var dir_zip = `${process.env.HOME}/bds_Server/worlds/`
+        }; /* End Files name */
+        /* Compress the folders */
+        var AdmZip = require('adm-zip');
+        var zip = new AdmZip();
+        zip.addLocalFolder(dir_zip);/* var willSendthis = zip.toBuffer(); */
+        zip.addZipComment(`Backup zip file in ${today}. \nBackup made to ${process.platform}, Free and open content for all\n\nSirherobrine23© By Bds Maneger.`)
+        var zipEntries = zip.getEntries();
+                zipEntries.forEach(function(zipEntry) {
+                    console.log(zipEntry.entryName.toString());
+                });
+        zip.writeZip(name); /* Zip file destination */
+        /* Compress the folders */
+    };
 };
-
 
 
 
@@ -102,4 +106,30 @@ function sendco(ele) {
     if(event.keyCode == 13) {
         document.getElementById("comsen").click();
     }
+};
+
+function log_save() {
+    const log_save_fs = require('fs')
+    if (process.platform == 'win32'){
+        var output_dir = `${process.env.USERPROFILE}`
+    } else if (process.platform == 'linux'){
+        var output_dir = `${process.env.HOME}`
+    };
+    if (GetDivorTextarea == "TEXTAREA"){
+        var Log_value = document.getElementById('LOG').value;
+        var Log = Log_value.replaceAll('<p>').replaceAll('</p>')
+    } else {
+        var Log = document.getElementById('LOG').innerHTML.replaceAll('</p>', '\n').replaceAll('<p>', '\n');
+    };
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = `${mm}-${dd}-${yyyy}`;
+    const filename = `${output_dir}/${today}_Bds-log_by_Bds-Maneger.txt`
+    var GetDivorTextarea = document.getElementById('LOG').tagName
+    log_save_fs.writeFile(filename, `---- Start ----\n\n ${Log}\n\n---- End ----`, function (err) {
+        if (err) throw err;
+            console.log('Log Save in home dir')
+    });
 };
