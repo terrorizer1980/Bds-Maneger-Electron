@@ -28,6 +28,7 @@
   "homepage": "https://github.com/Sirherobrine23/Bds_Maneger#readme",
   "dependencies": {
     "adm-zip": "^0.5.1",
+    "bds_maneger_api": "^23.9646.0-beta",
     "command-exists": "^1.2.9",
     "electron-is": "^3.0.0",
     "node-cron": "^2.0.3",

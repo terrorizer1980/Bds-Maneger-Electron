@@ -50,36 +50,7 @@ function restartServer(){
 }
 function worldbackup(){backupS1();};
 function backupS1(){
-    var bds_status_backup  = localStorage.getItem('bds_status');
-    if (bds_status_backup == 'started'){
-        console.log('Stoping server');
-        stopserver();
-        console.log('Stop sucess, Continuing backup')
-        console.log('Back up backup')
-    };
-    if (bds_status_backup == 'stoped'){
-        
-        if (process.platform == "win32"){
-            var today = new Date();var dd = String(today.getDate()).padStart(2, '0');var mm = String(today.getMonth() + 1).padStart(2, '0');var yyyy = today.getFullYear();var hour = today.getHours();var minu = today.getMinutes();today = `Date_${yyyy}-${mm}-${dd}(Hour_${hour}-Minutes_${minu})`;
-            var name = `${process.env.USERPROFILE}/Desktop/bds_backup_World_${today}.zip`
-            var dir_zip = `${process.env.USERPROFILE}/bds_Server/worlds/`
-        } else if (process.platform == 'linux'){
-            var today = new Date();var dd = String(today.getDate()).padStart(2, '0');var mm = String(today.getMonth() + 1).padStart(2, '0');var yyyy = today.getFullYear();var hour = today.getHours();var minu = today.getMinutes();today = `Date_${yyyy}-${mm}-${dd} Hour_${hour}-Minutes_${minu}`;
-            var name = `${process.env.HOME}/bds_backup_World_${today}.zip`
-            var dir_zip = `${process.env.HOME}/bds_Server/worlds/`
-        }; /* End Files name */
-        /* Compress the folders */
-        var AdmZip = require('adm-zip');
-        var zip = new AdmZip();
-        zip.addLocalFolder(dir_zip);/* var willSendthis = zip.toBuffer(); */
-        zip.addZipComment(`Backup zip file in ${today}. \nBackup made to ${process.platform}, Free and open content for all\n\nSirherobrine23© By Bds Maneger.`)
-        var zipEntries = zip.getEntries();
-                zipEntries.forEach(function(zipEntry) {
-                    console.log(zipEntry.entryName.toString());
-                });
-        zip.writeZip(name); /* Zip file destination */
-        /* Compress the folders */
-    };
+    require('bds_maneger_api').backup()
 };
 
 
