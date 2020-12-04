@@ -1,0 +1,14 @@
+name: Npm and release Publish stable
+on: [pull_request]
+jobs:
+  npm-stable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+
+      - run: npm update
+      - run: npm install
+      - run: npx parcel-bundler

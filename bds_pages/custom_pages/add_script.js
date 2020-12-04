@@ -5,7 +5,6 @@ var commandExists = require('command-exists');
 if (process.platform == 'win32'){
     if (os_detect.arch() == 'x64'){
         console.log(`Platform supported by Minecraft Bedrock Server`)
-        console.log(`continue`)
     } else if (os_detect.arch() == 'arm64'){
         alert('Beware that Minecraft Bedrock will be emulated and it will not be the fault of Bds Maneger')
     }
