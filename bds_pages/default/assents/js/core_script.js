@@ -63,7 +63,7 @@ function checkedBox(){
 }
 
 
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(serverVURLv => {
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(serverVURLv => {
         const obj2 = JSON.parse(serverVURLv);
         const serverV = obj2.latest;
         const serverVurl = 'https://minecraft.azureedge.net/bin-win/bedrock-server-' + serverV + '.zip'
@@ -84,7 +84,7 @@ fetch('https://api.github.com/repos/Sirherobrine23/Bds_Maneger-for-Windows/relea
   }
 );
 
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(serverVURLv => {
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(serverVURLv => {
         const obj2 = JSON.parse(serverVURLv);
         const serverV = obj2.latest;
         const serverVurl = 'https://minecraft.azureedge.net/bin-win/bedrock-server-' + serverV + '.zip'
