@@ -42,7 +42,7 @@ document.getElementById('difficulty').value = CONFIGS.difficulty
 // document.getElementById('view_dis').value = CONFIGS.view_distance
 // document.getElementById('tick_dis').value = CONFIGS.tick_distance
 document.getElementById('timeout_server').value = CONFIGS.player_idle_timeout
-document.getElementById('level_name').value = CONFIGS.server_name
+document.getElementById('level_name').value = CONFIGS.level_name
 document.getElementById('permissions').value = CONFIGS.default_player_permission_level
 document.getElementById('max_pla').value = CONFIGS.max_players
 // 3 Chekeds
