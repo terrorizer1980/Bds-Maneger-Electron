@@ -35,10 +35,11 @@
     "command-exists": "^1.2.9",
     "electron-is": "^3.0.0",
     "node-telegram-bot-api": "^0.50.0",
-    "properties-to-json": "^0.1.7"
+    "properties-to-json": "^0.1.7",
+    "xterm": "^4.9.0"
   },
   "devDependencies": {
-    "bds_maneger_api": "^23.39948.0-beta",
+    "bds_maneger_api": "^23.40139.0-beta",
     "electron": "^11.0.2"
   }
 }

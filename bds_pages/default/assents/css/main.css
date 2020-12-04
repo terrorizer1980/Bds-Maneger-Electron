@@ -18,18 +18,18 @@ it's still basic CSS.
 *{
   font-family: "minecraft", "minecraft-bold", "minecraft-regular";
 }
-input[type="text"] {
+/*input[type="text"] {
   width: 97%;
-}
+}*/
 input[type="number"]{
   width: 35%;
 }
-input[type="submit"] {
+/*input[type="submit"] {
   margin: none;
   background-color: transparent;
   border-color: transparent;
   margin-left: -60px;
-}
+}*/
 /* Font END */
 input{
     color: var(--text-primary);
@@ -357,9 +357,6 @@ input{
   .logTEXT{
     resize: none;
   }
-  .commands{
-    resize: none;
-  }
   .all_win{
     height: 100%;
     width: 100%;
@@ -373,4 +370,11 @@ input{
   .logTEXT{
     border: 2px var(--bg-primary);
     background-color: var(--bg-secondary);
+  }
+  textarea{
+    border:1px solid #999999;
+    width: 97%;
+    height: 300px;
+    margin:5px 0;
+    padding:3px;
   }

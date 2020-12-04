@@ -6,8 +6,8 @@ function LogOut(dados){
     if (GetDivorTextarea == "TEXTAREA"){
         document.getElementById('LOG').value += `${dados}`
     } else {
-        var scripts = document.createElement("p");
-        scripts.innerHTML = dados;
+        var scripts = document.createElement("a");
+        scripts.innerHTML = dados.replaceAll('\n', '<br>').replaceAll('\r', '')
         document.getElementById('LOG').appendChild(scripts);
     };
 };
