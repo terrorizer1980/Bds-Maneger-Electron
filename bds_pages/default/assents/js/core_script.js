@@ -23,7 +23,7 @@ if (localStorage.getItem('autostartBds') == 1){
 
 // ----------------------------
 // Check App Version
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/stable/package.json').then(response => response.text()).then(dataURLv => {
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/package.json').then(response => response.text()).then(dataURLv => {
     var JSONvv = JSON.parse(dataURLv);
     localStorage.setItem('bds_gitv', JSONvv.version);
     localStorage.setItem('bds_gitv', JSONvv.version);
