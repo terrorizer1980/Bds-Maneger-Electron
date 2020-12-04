@@ -24,20 +24,11 @@ if (process.platform == 'win32'){
     require('electron').app.exit();
 };
 // --------------------------------------------------------------------------------------------------------------------
-var exec = require('child_process').exec;
+var exec = require('child_process').exec;   
 if (process.platform == 'win32'){
-    var systemDir = exec(`echo %cd%`);
-    systemDir.stdout.on('data', function (data){
-        if (data == 'C:\\Windows\\System32'){
-            alert('Exit to app');
-            require('electron').remote.app.quit();
-        };
-    });
-};
-if (process.platform == 'win32'){
-    var bdsFound = exec(`IF EXIST ${process.env.USERPROFILE}/bds_Server/ ( IF EXIST bds/bedrock_server.exe ( echo sucess & exit 0 ) ELSE ( echo erro not found executable & exit 1 ) ) ELSE ( echo erro no fould & exit 1 )`, {detached: false,shell: true});
+    var bdsFound = exec(`IF EXIST ${require('bds_maneger_api').server_dir}/ ( IF EXIST ${require('bds_maneger_api').server_dir}/bedrock_server.exe ( echo sucess & exit 0 ) ELSE ( echo erro not found executable & exit 1 ) ) ELSE ( echo erro no fould & exit 1 )`, {detached: false,shell: true});
 } else if (process.platform == 'linux') {
-    var bdsFound = exec(`if [ -d ${process.env.HOME}/bds_Server/ ];then if [ -e ${process.env.HOME}/bds_Server/bedrock_server ];then echo 'exist';exit 0;else echo 'not exist software'; exit 1;fi; else echo 'not exist foud'; exit 1; fi`, {detached: false,shell: true});
+    var bdsFound = exec(`if [ -d ${require('bds_maneger_api').server_dir}/ ];then if [ -e ${require('bds_maneger_api').server_dir}/bedrock_server ];then echo 'exist';exit 0;else echo 'not exist software'; exit 1;fi; else echo 'not exist foud'; exit 1; fi`, {detached: false,shell: true});
 }
 bdsFound.on('exit', function (code) {
     if (code == 0){
@@ -57,8 +48,10 @@ bdsFound.on('exit', function (code) {
         document.body.appendChild(sbody);
         // 
         var roots = document.createElement("p");
-        roots.innerHTML = '<<---| Install Minecraft Bedrock Server in settings menu';
+        roots.innerHTML = 'Install Minecraft Bedrock Server in settings menu';
         document.getElementById('root').appendChild(roots);
         // document.getElementById('configbuttom').click
+        document.getElementById("configmodal").style.display = "block";
+        alert('Install Minecraft Bedrock Server')
     }
 });

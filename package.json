@@ -4,10 +4,13 @@
   "description": "Minimal maneger for Minecraf Bedrock Server",
   "main": "index.js",
   "private": false,
-  "bin": "./node_modules/.bin/electron ./index.js",
+  "bin": {
+    "bds-manege": "git clone https:/github.com/Sirherobrine23/Bds_Maneger.git && cd Bds_Maneger && npm install && echo Cloned && echo %cd% $PWD"
+  },
   "scripts": {
     "start": "electron .",
-    "start-root": "electron . --no-sandbox"
+    "start-root": "electron . --no-sandbox",
+    "packages": "npm install"
   },
   "repository": {
     "type": "git",
@@ -28,14 +31,13 @@
   "homepage": "https://github.com/Sirherobrine23/Bds_Maneger#readme",
   "dependencies": {
     "adm-zip": "^0.5.1",
-    "bds_maneger_api": "^23.9646.0-beta",
     "command-exists": "^1.2.9",
     "electron-is": "^3.0.0",
-    "node-cron": "^2.0.3",
     "node-telegram-bot-api": "^0.50.0",
     "properties-to-json": "^0.1.7"
   },
   "devDependencies": {
+    "bds_maneger_api": "^23.39948.0-beta",
     "electron": "^11.0.2"
   }
 }
