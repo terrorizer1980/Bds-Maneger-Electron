@@ -39,8 +39,8 @@ var CONFIGS = propertiesToJSON(fs.readFileSync(bdsCONFIG, "utf-8").replaceAll('-
 document.getElementById('name').value = CONFIGS.server_name
 document.getElementById('gameMode').value = CONFIGS.gamemode
 document.getElementById('difficulty').value = CONFIGS.difficulty
-document.getElementById('view_dis').value = CONFIGS.view_distance
-document.getElementById('tick_dis').value = CONFIGS.tick_distance
+// document.getElementById('view_dis').value = CONFIGS.view_distance
+// document.getElementById('tick_dis').value = CONFIGS.tick_distance
 document.getElementById('timeout_server').value = CONFIGS.player_idle_timeout
 document.getElementById('level_name').value = CONFIGS.server_name
 document.getElementById('permissions').value = CONFIGS.default_player_permission_level
@@ -81,8 +81,8 @@ function setCONFIG(){
     max_players = `max-players=${document.getElementById('max_pla').value}`,
     online_mode = `online-mode=${document.getElementById('xbox').checked}`,
     white_list = `white-list=${document.getElementById('whitelist').checked}`,
-    view_distance = `view-distance=${document.getElementById('view_dis').value}`,
-    tick_distance = `tick-distance=${document.getElementById('tick_dis').value}`,
+    view_distance = `view-distance=32`,
+    tick_distance = `tick-distance=6`,
     player_idle_timeout = `player-idle-timeout=${document.getElementById('timeout_server').value}`,
     max_threads = `max-threads=${cpuCount}`,
     level_name = `level-name=${document.getElementById('level_name').value}`,

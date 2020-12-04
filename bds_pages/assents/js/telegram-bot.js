@@ -71,6 +71,8 @@ if (token == 'nulo'){
                     bot.sendMessage(chatId, `Geting you log`);
                     bot.sendMessage(chatId, `${document.getElementById('LOG').innerHTML}`);
                     /* you Log */
+                } else if (t2 == 'info') {
+                    docu
                 } else {
                     bot.sendMessage(chatId, `use: start, stop, restart, status and log; ${t1} is not command.`);
                 } /* End /bds command */

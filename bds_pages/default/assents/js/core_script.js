@@ -63,7 +63,7 @@ function checkedBox(){
 }
 
 
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(serverVURLv => {
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(serverVURLv => {
         const obj2 = JSON.parse(serverVURLv);
         const serverV = obj2.latest;
         const serverVurl = 'https://minecraft.azureedge.net/bin-win/bedrock-server-' + serverV + '.zip'
@@ -84,7 +84,7 @@ fetch('https://api.github.com/repos/Sirherobrine23/Bds_Maneger-for-Windows/relea
   }
 );
 
-fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/dev/Server.json').then(response => response.text()).then(serverVURLv => {
+fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/main/Server.json').then(response => response.text()).then(serverVURLv => {
         const obj2 = JSON.parse(serverVURLv);
         const serverV = obj2.latest;
         const serverVurl = 'https://minecraft.azureedge.net/bin-win/bedrock-server-' + serverV + '.zip'
@@ -94,27 +94,3 @@ fetch('https://raw.githubusercontent.com/Sirherobrine23/Bds_Maneger-for-Windows/
 );
 
 
-function log_download() {
-    var type = 'text/plain'
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    today = mm + '/' + dd + '/' + yyyy;
-    const filename = today +'-Log-gui.txt'
-    var datavalue = document.getElementById('LOG').value;
-    var commandssave = document.getElementById('commandsends').value;
-
-    if (datavalue == blank){
-        alert('Blank Log')
-    } else {
-        var file = new Blob([datavalue, '\n', '--------- commands ---------\n', '\n', commandssave], {type: type});
-        var a = document.createElement("a"),
-        url = URL.createObjectURL(file);
-        a.href = url;
-        a.download = filename;
-        document.getElementById("scr").appendChild(a);
-        console.log(url)
-        a.click();
-    }
-};

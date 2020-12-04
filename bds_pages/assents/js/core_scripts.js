@@ -30,6 +30,7 @@ function stopserver(){
                 if (index == '11'){
                     serverstated.stdin.write('stop\n');
                     localStorage.setItem('bds_status', 'stoped');
+                    log_save();
                 } else {
                     serverstated.stdin.write(`say Server is stop in ${index}s\n`);
                     console.log(`Server is stop in ${index}s`);
@@ -47,36 +48,10 @@ function restartServer(){
         startServer();
     };    
 }
-function worldbackup(){
-    var status = localStorage.getItem('bds_status');
-    if (status == 'started'){
-        stopserver();
-    }
-    if (status == 'stoped'){
-        var today = new Date();var dd = String(today.getDate()).padStart(2, '0');var mm = String(today.getMonth() + 1).padStart(2, '0');var yyyy = today.getFullYear();var hour = today.getHours();var minu = today.getMinutes()
-        today = `${yyyy}_${mm}-${dd}@@${minu}-${hour}`;
-        var exec = require('child_process').exec;
-        if (process.platform == 'win32'){
-            var serverstated = exec(`cd ${process.env.HOME}/bds_Server/worlds/ && tar.exe -czf %USERPROFILE%/Desktop/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
-            var mensagemBackup = 'You backup is in desktop'
-        } else if (process.platform == 'linux'){
-            var serverstated = exec(`cd ${process.env.HOME}/bds_Server/worlds/ && tar -czf ~/bds_backup_World_${today}.tar.gz *`, {detached: false,shell: true});
-            var mensagemBackup = 'You backup is in home dir'
-        }        
-        serverstated.on('exit', function (code) {
-            if (code == 0){
-                alert(`${mensagemBackup}, with name: bds_backup_World_${today}.tar.gz`);
-            } else {
-                alert('erro to create backup');
-            }
-        });
-    } else {
-        if (confirm('Voçê quer tentar de novo')){
-            worldbackup();
-        }
-    }
+function worldbackup(){backupS1();};
+function backupS1(){
+    require('bds_maneger_api').backup()
 };
-
 
 
 
@@ -102,4 +77,30 @@ function sendco(ele) {
     if(event.keyCode == 13) {
         document.getElementById("comsen").click();
     }
+};
+
+function log_save() {
+    const log_save_fs = require('fs')
+    if (process.platform == 'win32'){
+        var output_dir = `${process.env.USERPROFILE}`
+    } else if (process.platform == 'linux'){
+        var output_dir = `${process.env.HOME}`
+    };
+    if (GetDivorTextarea == "TEXTAREA"){
+        var Log_value = document.getElementById('LOG').value;
+        var Log = Log_value.replaceAll('<p>').replaceAll('</p>')
+    } else {
+        var Log = document.getElementById('LOG').innerHTML.replaceAll('</p>', '\n').replaceAll('<p>', '\n');
+    };
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = `${mm}-${dd}-${yyyy}`;
+    const filename = `${output_dir}/${today}_Bds-log_by_Bds-Maneger.txt`
+    var GetDivorTextarea = document.getElementById('LOG').tagName
+    log_save_fs.writeFile(filename, `---- Start ----\n\n ${Log}\n\n---- End ----`, function (err) {
+        if (err) throw err;
+            console.log('Log Save in home dir')
+    });
 };
