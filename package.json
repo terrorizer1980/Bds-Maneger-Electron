@@ -10,7 +10,8 @@
   "scripts": {
     "start": "electron .",
     "start-root": "electron . --no-sandbox",
-    "packages": "npm install"
+    "packages": "npm install",
+    "local": "npm install bds_maneger_api"
   },
   "repository": {
     "type": "git",
