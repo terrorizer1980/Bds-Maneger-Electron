@@ -21,7 +21,7 @@ jobs:
       - name: Update
         run: npm update
 
-      - bame: Install
+      - name: Install
         run: npm install
 
       - name: Publish
