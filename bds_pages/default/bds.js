@@ -16,6 +16,8 @@ if (process.platform == 'win32'){
             alert(`please install \"qemu-user-static\" and \"binfmt-support\" for emulation and continue`);
             require('electron').app.exit();
         });
+    } else if (process.arch == 'x64'){
+       console.log('Amd64')
     } else {
         alert(`Use an AMD64 (X64) platform or an arm64 that supports AMD64 (x64) emulation`)
     }
