@@ -22,22 +22,11 @@ function startServer() {
 };
 function stopserver(){
     if (localStorage.getItem('bds_status') == 'stoped'){
-        LogOut('Your server is already stopped');
+        LogOut('\n-----------------------\n\n Your server is already stopped\n-----------------------\n');
     } else {
-        serverstated.stdin.write(`say voce\n`);
-        for (let index = 1; index < 12; index++) {
-            setTimeout(function timer() {
-                if (index == '11'){
-                    serverstated.stdin.write('stop\n');
-                    localStorage.setItem('bds_status', 'stoped');
-                    log_save();
-                } else {
-                    serverstated.stdin.write(`say Server is stop in ${index}s\n`);
-                    console.log(`Server is stop in ${index}s`);
-                    LogOut(`Server is stop in ${index}s\n`);
-                };
-            }, index * 1000);
-        };
+        serverstated.stdin.write('stop\n');
+        localStorage.setItem('bds_status', 'stoped');
+        log_save();
     };
 };
 function restartServer(){
