@@ -39,7 +39,7 @@
     "xterm": "^4.9.0"
   },
   "devDependencies": {
-    "bds_maneger_api": "^23.40139.0-beta",
+    "bds_maneger_api": "^23.41677.0-beta",
     "electron": "^11.0.2"
   }
 }
