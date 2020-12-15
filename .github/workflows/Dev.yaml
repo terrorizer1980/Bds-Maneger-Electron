@@ -2,7 +2,7 @@ name: Publish Dev in npm
 on: [push]
 jobs:
   npm-test:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
@@ -31,9 +31,9 @@ jobs:
           Xvfb &
           sleep 5
           npm run test
-  npm:
-    needs: npm-test
+  npm-Publish:
     runs-on: ubuntu-latest
+    needs: npm-test
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v1
