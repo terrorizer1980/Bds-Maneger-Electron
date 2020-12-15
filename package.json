@@ -8,7 +8,8 @@
     "bds-manege": "git clone https:/github.com/Sirherobrine23/Bds_Maneger.git && cd Bds_Maneger && npm install && echo Cloned && echo %cd% $PWD"
   },
   "scripts": {
-    "start": "electron .",
+    "test": "mocha __tests__/AppTest.js",
+    "start": "npm run start-root",
     "start-root": "electron . --no-sandbox",
     "packages": "npm install",
     "local": "npm install bds_maneger_api"
@@ -34,12 +35,13 @@
     "adm-zip": "^0.5.1",
     "command-exists": "^1.2.9",
     "electron-is": "^3.0.0",
+    "mocha": "^8.2.1",
     "node-telegram-bot-api": "^0.50.0",
-    "properties-to-json": "^0.1.7",
-    "xterm": "^4.9.0"
+    "properties-to-json": "^0.1.7"
   },
   "devDependencies": {
-    "bds_maneger_api": "^23.41677.0-beta",
-    "electron": "^11.0.2"
+    "bds_maneger_api": "^23.41921.0-beta",
+    "electron": "^11.1.0",
+    "spectron": "^13.0.0"
   }
 }

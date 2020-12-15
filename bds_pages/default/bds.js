@@ -17,7 +17,7 @@ if (process.platform == 'win32'){
             require('electron').app.exit();
         });
     } else if (process.arch == 'x64'){
-       console.log('Amd64')
+       let NULL = null
     } else {
         alert(`Use an AMD64 (X64) platform or an arm64 that supports AMD64 (x64) emulation`)
     }

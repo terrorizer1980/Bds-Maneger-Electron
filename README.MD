@@ -1,3 +1,8 @@
+# o Electron
+
+Apoós algumas alterações no electron as versões betas estão sendo quase impossivel de inportar alguns modulos, e isso é pessimo 
+
+
 # A manager for Minecraft Bedrock Server
 
 those who do not want to let write commands and stuff on a black screen we have a GUI that can help with that.
