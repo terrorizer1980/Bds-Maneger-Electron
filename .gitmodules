@@ -1,0 +1,4 @@
+[submodule "bds_pages\\default"]
+	path = bds_pages\\default
+	url = https://github.com/Bds-Maneger/Bds_Maneger_Default.git
+	branch = main
