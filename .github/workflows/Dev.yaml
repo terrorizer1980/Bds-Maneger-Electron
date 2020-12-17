@@ -2,7 +2,7 @@ name: Publish Dev in npm
 on: [push]
 jobs:
   npm-test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -12,7 +12,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 15.x
-          registry-url: https://registry.npmjs.org/
 
       # - name: Edit Version
       #   run: |
@@ -28,13 +27,8 @@ jobs:
       - name: Install
         run: npm install
 
-      - name: Teste
-        run: |
-          sudo apt install -y xvfb
-          export DISPLAY=$(ps -u $(id -u) -o pid=  | xargs -I PID -r cat /proc/PID/environ 2> /dev/null | tr '\0' '\n' | grep ^DISPLAY=: | sort -u|sed 's|DISPLAY=||g')
-          Xvfb &
-          sleep 7
-          npm run test
+      - name: Test
+        run: npm run test
   # npm-Publish:
   #   runs-on: ubuntu-latest
   #   needs: npm-test
