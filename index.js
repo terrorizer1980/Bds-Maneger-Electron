@@ -6,18 +6,17 @@ const { app, BrowserWindow } = require('electron')
 if (fs.existsSync('./config.json')) {
   var config_load = JSON.parse(fs.readFileSync('./config.json', "utf-8")).default_pages;
 } else {
-  fs.writeFile('./config.json', `{\n    \"default_pages\": \"default\",\n    \"config\": {\n        \"Still setting up the settings\": false\n    }\n}`, function (err) {
-    if (err) throw err;
-    console.log('Create config File')
-    app.quit();
-  });
+  let createConfig = async function(){fs.writeFileSync('./config.json', `{\n    \"default_pages\": \"default\",\n    \"config\": {\n        \"Still setting up the settings\": false\n    }\n}`);}
+  createConfig();
+  var config_load = JSON.parse(fs.readFileSync('./config.json', "utf-8")).default_pages;
 };
 if (config_load == 'default'){
-  var load_pages = 'bds_pages/default/index.html'
+  let JSONC = fs.readFileSync(`bds_pages/default/config.json`)
+  var load_pages = `bds_pages/default/` + JSON.parse(JSONC).index
 } else {
-  var load_pages = `bds_pages/custom_pages/${config_load}/index.html`
+  let JSONC = fs.readFileSync(`bds_pages/custom_pages/${config_load}/config.json`)
+  var load_pages = `bds_pages/custom_pages/${config_load}/` + JSON.parse(JSONC).index
 }
-// const { autoUpdater } = require('electron-updater');
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 function createWindow () {
   const win = new BrowserWindow({
@@ -28,12 +27,6 @@ function createWindow () {
   });
   win.loadFile(`${process.cwd()}/${load_pages}`);
   win.maximize();
-  /*win.on('close', function (e) {
-    const choice = require('electron').dialog.showMessageBoxSync(this, { type: 'question', buttons: ['Yes', 'No'], title: 'Confirm', message: 'Did you stop the server?' })
-    if (choice === 1) {
-      e.preventDefault()
-    }
-  })*/
 }
 if (process.platform == 'darwin'){
   console.log('Mac OS system Not supported, consulter https://github.com/Sirherobrine23/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users')
