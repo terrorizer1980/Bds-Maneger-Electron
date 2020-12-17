@@ -4,19 +4,23 @@ jobs:
   npm-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@master
+        with: 
+          submodules: true
+      - name: Setup Node JS
+        uses: actions/setup-node@v1
         with:
           node-version: 15.x
           registry-url: https://registry.npmjs.org/
 
-      - name: Edit Version
-        run: |
-          id_run=$(echo ${{ github.run_id }} |cut -b 2-5)
-          old="$(cat package.json |grep 'version'|head -1)"
-          sed "s|$old|\"version\": \"23.$id_run.0beta\",|g" package.json > package2.json
-          cat package2.json > package.json
-          rm -rfv package2.json
+      # - name: Edit Version
+      #   run: |
+      #     id_run=$(echo ${{ github.run_id }} |cut -b 2-5)
+      #     old="$(cat package.json |grep 'version'|head -1)"
+      #     sed "s|$old|\"version\": \"23.$id_run.0beta\",|g" package.json > package2.json
+      #     cat package2.json > package.json
+      #     rm -rfv package2.json
 
       - name: Update
         run: npm update
@@ -29,33 +33,33 @@ jobs:
           sudo apt install -y xvfb
           export DISPLAY=$(ps -u $(id -u) -o pid=  | xargs -I PID -r cat /proc/PID/environ 2> /dev/null | tr '\0' '\n' | grep ^DISPLAY=: | sort -u|sed 's|DISPLAY=||g')
           Xvfb &
-          sleep 5
+          sleep 7
           npm run test
-  npm-Publish:
-    runs-on: ubuntu-latest
-    needs: npm-test
-    steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 15.x
-          registry-url: https://registry.npmjs.org/
+  # npm-Publish:
+  #   runs-on: ubuntu-latest
+  #   needs: npm-test
+  #   steps:
+  #     - uses: actions/checkout@master
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 15.x
+  #         registry-url: https://registry.npmjs.org/
 
-      - name: Edit Version
-        run: |
-          id_run=$(echo ${{ github.run_id }} |cut -b 2-5)
-          old="$(cat package.json |grep 'version'|head -1)"
-          sed "s|$old|\"version\": \"23.$id_run.0beta\",|g" package.json > package2.json
-          cat package2.json > package.json
-          rm -rfv package2.json
+  #     - name: Edit Version
+  #       run: |
+  #         id_run=$(echo ${{ github.run_id }} |cut -b 2-5)
+  #         old="$(cat package.json |grep 'version'|head -1)"
+  #         sed "s|$old|\"version\": \"23.$id_run.0beta\",|g" package.json > package2.json
+  #         cat package2.json > package.json
+  #         rm -rfv package2.json
 
-      - name: Update
-        run: npm update
+  #     - name: Update
+  #       run: npm update
 
-      - name: Install
-        run: npm install
+  #     - name: Install
+  #       run: npm install
 
-      - name: Publish
-        run: npm publish --tag dev
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #     - name: Publish
+  #       run: npm publish --tag dev
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
