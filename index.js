@@ -6,9 +6,9 @@ const { app, BrowserWindow } = require('electron')
 if (fs.existsSync('./config.json')) {
   var config_load = JSON.parse(fs.readFileSync('./config.json', "utf-8")).default_pages;
 } else {
-  let createConfig = async function(){fs.writeFileSync('./config.json', `{\n    \"default_pages\": \"default\",\n    \"config\": {\n        \"Still setting up the settings\": false\n    }\n}`);}
-  createConfig();
-  var config_load = JSON.parse(fs.readFileSync('./config.json', "utf-8")).default_pages;
+var default_config = `{\n    \"default_pages\": \"default\",\n    \"config\": {\n        \"Still setting up the settings\": false\n    }\n}`
+  fs.writeFileSync('./config.json', default_config);
+  var config_load = JSON.parse(default_config).default_pages;
 };
 if (config_load == 'default'){
   let JSONC = fs.readFileSync(`bds_pages/default/config.json`)
@@ -22,14 +22,22 @@ function createWindow () {
   const win = new BrowserWindow({
     minWidth: 640,
     minHeight: 640,
-    icon: path.join(`${process.cwd()}/bds_pages/assents/mcpe.png`),
-    webPreferences: {nodeIntegration: true, contextIsolation: false, enableRemoteModule: true, sandbox: false}
+    icon: path.join(process.cwd(), "bds_pages", a"ssents", "mcpe.png"),
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+      sandbox: false,
+      experimentalFeatures: true,
+      preload: path.join(process.cwd(), 'preload.js')
+    }
   });
   win.loadFile(`${process.cwd()}/${load_pages}`);
   win.maximize();
 }
 if (process.platform == 'darwin'){
   console.log('Mac OS system Not supported, consulter https://github.com/Sirherobrine23/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users')
+  require('electron').shell.openExternal("https://github.com/Sirherobrine23/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users")
   app.quit()
 }
 app.whenReady().then(createWindow)

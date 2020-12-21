@@ -39,5 +39,5 @@ coreS.setAttribute('defer','');
 var TelegramBOT = document.createElement("script");
 TelegramBOT.src = `${process.cwd()}/bds_pages/assents/js/telegram-bot.js`;
 TelegramBOT.setAttribute('defer','');
-adds.appendChild(coreS);
+// adds.appendChild(coreS);
 adds.appendChild(TelegramBOT);
