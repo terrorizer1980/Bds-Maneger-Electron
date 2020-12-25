@@ -39,7 +39,7 @@
     "properties-to-json": "^0.1.7"
   },
   "devDependencies": {
-    "bds_maneger_api": "^23.43463.0-beta",
+    "bds_maneger_api": "0.1.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "electron": "^11.1.0",

@@ -5,6 +5,7 @@ const fs = require('fs')
 var appV = JSON.parse(fs.readFileSync(`./package.json`)).version
 process.once('loaded', () => {
   global.bds_control = bds;
+  global.bds_maneger_api = bds;
   global.bds_stop = bds.stop;
   global.bds_start = bds.start;
   global.bds_command = bds.command;
