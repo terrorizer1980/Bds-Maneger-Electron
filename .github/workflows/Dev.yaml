@@ -1,4 +1,4 @@
-name: Publish Dev in npm
+name: Electron Test
 on: [push]
 jobs:
   npm-test:
