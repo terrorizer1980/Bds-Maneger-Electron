@@ -1,16 +1,13 @@
 {
   "name": "bds-manege",
-  "version": "1.0.6",
+  "version": "1.0.2",
   "description": "Minimal maneger for Minecraf Bedrock Server",
   "main": "index.js",
   "private": false,
-  "bin": {
-    "bds-manege": "git clone https:/github.com/Sirherobrine23/Bds_Maneger.git && cd Bds_Maneger && npm install && echo Cloned && echo %cd% $PWD"
-  },
+  "bin": "git clone https:/github.com/Sirherobrine23/Bds_Maneger.git && cd Bds_Maneger && npm install && echo Cloned && echo %cd% $PWD",
   "scripts": {
     "test": "node ./node_modules/mocha/bin/_mocha --require esm --timeout 20000",
-    "start": "npm run start-root",
-    "start-root": "electron . --no-sandbox",
+    "start": "electron . --no-sandbox",
     "packages": "npm install",
     "local": "npm install bds_maneger_api"
   },
@@ -39,7 +36,7 @@
     "properties-to-json": "^0.1.7"
   },
   "devDependencies": {
-    "bds_maneger_api": "^1.0.1",
+    "bds_maneger_api": "^23.44970.0-beta",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "electron": "^11.1.0",

@@ -15,4 +15,5 @@ process.once('loaded', () => {
   global.bds_settings = bds.set_config;
   global.bds_get_settings = bds.get_config;
   global.bds_settings_example = bds.config_example;
+  global.bds_download = bds.version_Download;
 });
