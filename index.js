@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 var fs = require("fs");
-const electron = require('electron')
 const path = require('path')
-const { app, BrowserWindow } = require('electron')
+const {electron, app, BrowserWindow } = require('electron');
 if (fs.existsSync('./config.json')) {
   var config_load = JSON.parse(fs.readFileSync('./config.json', "utf-8")).default_pages;
 } else {
@@ -40,7 +39,12 @@ if (process.platform == 'darwin'){
   require('electron').shell.openExternal("https://github.com/Sirherobrine23/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users")
   app.quit()
 }
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  createWindow()
+  app.on('activate', function () {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+})
 app.on('window-all-closed', () => {
   console.log(`Deteting bds Server is reuning`)
   var detect = require('bds_maneger_api').detect()
