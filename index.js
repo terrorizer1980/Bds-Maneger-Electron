@@ -5,7 +5,12 @@ const {electron, app, BrowserWindow } = require('electron');
 if (fs.existsSync('./config.json')) {
   var config_load = JSON.parse(fs.readFileSync('./config.json', "utf-8")).default_pages;
 } else {
-var default_config = `{\n    \"default_pages\": \"default\",\n    \"config\": {\n        \"Still setting up the settings\": false\n    }\n}`
+var default_config = `{
+  \"default_pages\": \"default\",
+  \"config\": {
+    \"Still setting up the settings\": false
+  }
+}`
   fs.writeFileSync('./config.json', default_config);
   var config_load = JSON.parse(default_config).default_pages;
 };

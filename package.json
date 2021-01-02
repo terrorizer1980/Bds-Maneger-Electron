@@ -39,7 +39,7 @@
     "bds_maneger_api": "^23.45288.0-beta",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "electron": "^12.0.0-beta.12",
+    "electron-nightly": "^13.0.0-nightly.20201223",
     "esm": "^3.2.25",
     "mocha": "^8.2.1",
     "spectron": "^13.0.0"
