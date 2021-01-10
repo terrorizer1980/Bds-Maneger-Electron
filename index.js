@@ -1,7 +1,7 @@
 #!/usr/bin/env node
+const {app, BrowserWindow } = require('electron');
 var fs = require("fs");
 const path = require('path')
-const {electron, app, BrowserWindow } = require('electron');
 if (fs.existsSync('./config.json')) {
   var config_load = JSON.parse(fs.readFileSync('./config.json', "utf-8")).default_pages;
 } else {
@@ -40,8 +40,8 @@ function createWindow () {
   win.maximize();
 }
 if (process.platform == 'darwin'){
-  console.log('Mac OS system Not supported, consulter https://github.com/Sirherobrine23/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users')
-  require('electron').shell.openExternal("https://github.com/Sirherobrine23/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users")
+  console.log('Mac OS system Not supported, consulter https://Bds-Maneger/Bds_Maneger/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users')
+  require('electron').shell.openExternal("https://Bds-Maneger/Bds_Maneger/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users")
   app.quit()
 }
 app.whenReady().then(() => {

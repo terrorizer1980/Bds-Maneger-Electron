@@ -1,50 +1,100 @@
 {
-  "name": "bds-manege",
-  "version": "1.0.2",
-  "description": "Minimal maneger for Minecraf Bedrock Server",
-  "main": "index.js",
-  "private": false,
-  "bin": "git clone https:/github.com/Sirherobrine23/Bds_Maneger.git && cd Bds_Maneger && npm install && echo Cloned && echo %cd% $PWD",
-  "scripts": {
-    "test": "node ./node_modules/mocha/bin/_mocha --require esm --timeout 20000",
-    "start": "electron . --no-sandbox",
-    "packages": "npm install",
-    "local": "npm install bds_maneger_api"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sirherobrine23/Bds_Maneger.git"
-  },
-  "keywords": [
-    "minecraft",
-    "bds",
-    "bds-server",
-    "Windows",
-    "linux"
-  ],
-  "author": "Matheus Sampaio Queiroga (Sirherobrine23) <srherobrine20@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Sirherobrine23/Bds_Maneger/issues"
-  },
-  "homepage": "https://github.com/Sirherobrine23/Bds_Maneger#readme",
-  "dependencies": {
-    "adm-zip": "^0.5.1",
-    "command-exists": "^1.2.9",
-    "electron-is": "^3.0.0",
-    "node-telegram-bot-api": "^0.50.0",
-    "properties-to-json": "^0.1.7"
-  },
-  "devDependencies": {
-    "bds_maneger_api": "^23.45288.0-beta",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "electron-nightly": "^13.0.0-nightly.20201223",
-    "esm": "^3.2.25",
-    "mocha": "^8.2.1",
-    "spectron": "^13.0.0"
-  },
-  "engines": {
-    "node": "^15.4.0"
-  }
+    "name": "bds-manege",
+    "version": "1.0.2",
+    "description": "Minimal maneger for Minecraf Bedrock Server",
+    "main": "index.js",
+    "private": false,
+    "bin": "git clone https:/Bds-Maneger/Bds_Maneger/Bds_Maneger.git && cd Bds_Maneger && npm install && echo Cloned && echo %cd% $PWD",
+    "scripts": {
+        "test": "node ./node_modules/mocha/bin/_mocha --require esm --timeout 20000",
+        "start": "electron . --no-sandbox",
+        "packages": "npm install",
+        "local": "npm install bds_maneger_api",
+        "dist": "electron-builder",
+        "pack": "electron-builder --dir",
+        "postinstall": "electron-builder install-app-deps"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://Bds-Maneger/Bds_Maneger/Bds_Maneger.git"
+    },
+    "keywords": [
+        "minecraft",
+        "bds",
+        "bds-server",
+        "Windows",
+        "linux"
+    ],
+    "build": {
+        "appId": "com.sirherobrine23.bds_maneger",
+        "files": [
+            "bds_pages/**/*",
+            "node_modules/**/*",
+            "package.json",
+            "index.js",
+            "preload.js"
+        ],
+        "directories": {
+            "buildResources": "app/res/misc/*"
+        },
+        "publish": null,
+        "win": {
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                }
+            ],
+            "icon": "./bds_pages/assents/mcpe.ico"
+        },
+        "nsis": {
+            "oneClick": "false",
+            "artifactName": "${productName}-Setup-${version}.${ext}",
+            "allowToChangeInstallationDirectory": "true",
+            "installerIcon": "./bds_pages/assents/mcpe.ico"
+        },
+        "linux": {
+            "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
+            "category": "Productivity",
+            "target": [
+                "AppImage",
+                "snap"
+            ],
+            "icon": "./bds_pages/assents/mcpe.png"
+        },
+        "snap": {
+            "confinement": "strict",
+            "grade": "stable",
+            "plugs": [
+                "default",
+                "audio-record"
+            ]
+        }
+    },
+    "author": "Matheus Sampaio Queiroga (Sirherobrine23) <srherobrine20@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://Bds-Maneger/Bds_Maneger/Bds_Maneger/issues"
+    },
+    "homepage": "https://Bds-Maneger/Bds_Maneger/Bds_Maneger#readme",
+    "dependencies": {
+        "command-exists": "^1.2.9",
+        "electron-is": "^3.0.0"
+    },
+    "devDependencies": {
+        "bds_maneger_api": "^1.2.1",
+        "chai": "^4.2.0",
+        "chai-as-promised": "^7.1.1",
+        "electron": "^11.1.1",
+        "electron-builder": "^22.9.1",
+        "esm": "^3.2.25",
+        "mocha": "^8.2.1",
+        "spectron": "^13.0.0"
+    },
+    "engines": {
+        "node": "^15.4.0"
+    }
 }

@@ -17,4 +17,8 @@ process.once('loaded', () => {
   global.bds_download = bds.version_Download;
   global.bds_backup = bds.backup
   global.bds_drive_backup = bds.drive_backup
+  const theme_url = 'https://raw.githubusercontent.com/Bds-Maneger/Raw_files/main/themes.json'
+  fetch(theme_url).then(response => response.json()).then(data => {
+    global.themes_list = data;
+  }).catch(function(error) {console.log(`Could not get themes config, Error: \"${error.message}\"`);});
 });
