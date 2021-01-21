@@ -1,9 +1,11 @@
 #!/usr/bin/env node
+const bds = require('bds')
 const {app, BrowserWindow } = require('electron');
 var fs = require("fs");
 const path = require('path')
-if (fs.existsSync('./config.json')) {
-  var config_load = JSON.parse(fs.readFileSync('./config.json', "utf-8")).default_pages;
+const bds_maneger_config = path.join(bds.bds_dir, "bds_maneger-config.json")
+if (fs.existsSync(bds_maneger_config)) {
+  var config_load = JSON.parse(fs.readFileSync(bds_maneger_config, "utf-8")).default_pages;
 } else {
 var default_config = `{
   \"default_pages\": \"default\",
@@ -11,7 +13,7 @@ var default_config = `{
     \"Still setting up the settings\": false
   }
 }`
-  fs.writeFileSync('./config.json', default_config);
+  fs.writeFileSync(bds_maneger_config, default_config);
   var config_load = JSON.parse(default_config).default_pages;
 };
 if (config_load == 'default'){
