@@ -9,7 +9,7 @@
     <script>
         var kill_status = bds_kill();
         if (kill_status){
-            bds_control.Storage().setItem('bds_status', false);
+            localStorage.setItem('bds_status', false);
             location.reload()   
         };
     </script>

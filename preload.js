@@ -3,6 +3,8 @@
 const bds = require("bds_maneger_api");
 const fs = require('fs')
 process.once('loaded', () => {
+  process.env.BDS_MONI = true
+  process.env.ENABLE_BDS_API = true
   global.bds_control = bds;
   global.bds_maneger_api = bds;
   global.bds_stop = bds.stop;

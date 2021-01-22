@@ -132,5 +132,5 @@ bds_pages/custom_pages/*
 !bds_pages/custom_pages/add_script.js
 
 # Configuration file
-config.json
+# config.json
 .dccache

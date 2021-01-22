@@ -15,7 +15,7 @@ function restartServer(){
 function DownloadBDS(){
     bds_download(document.getElementById('bds-Server_download').value)
 };
-document.getElementById('bds-Server_download').innerHTML = bds_control.get_version();
+document.getElementById('bds-Server_download').innerHTML = bds_control.version_select;
 function sendcomand() {
     document.getElementById('comsen').setAttribute('disabled','')
     var blank = '';
@@ -48,7 +48,7 @@ bds_control.telegram.launch();
 
 setInterval(() => {
     var str = document.getElementById('title');
-    var bds_status = bds_control.Storage().getItem('bds_status');
+    var bds_status = localStorage.getItem('bds_status');
     if (bds_status === 'true'){
         var Sonic = `Sonic is running, we hope Tails can keep up`
     } else {
@@ -59,10 +59,10 @@ setInterval(() => {
 
 function setID(){
     const gd_id = document.getElementById('drive_id').value
-    bds_control.Storage().setItem('GDID', gd_id);
+    localStorage.setItem('GDID', gd_id);
     alert('Sucess')
 }
-document.getElementById('drive_id').value = bds_control.Storage().getItem('GDID')
+document.getElementById('drive_id').value = localStorage.getItem('GDID')
 
 for (let index in themes_list) {
     const element = themes_list[index].name;
