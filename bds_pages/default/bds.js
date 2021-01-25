@@ -2,6 +2,7 @@ function startServer(){
     global.serverstated = bds_start();
     serverstated.stdout.on('data', function (data) {
         document.getElementById('LOG').innerHTML += data;
+        document.getElementById('LOG').scrollTo(0, 9999)
     });
 };
 
