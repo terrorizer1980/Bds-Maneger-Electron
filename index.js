@@ -42,8 +42,8 @@ function createWindow () {
   win.maximize();
 }
 if (process.platform == 'darwin'){
-  console.log('Mac OS system Not supported, consulter https://Bds-Maneger/Bds_Maneger/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users')
-  require('electron').shell.openExternal("https://Bds-Maneger/Bds_Maneger/Bds_Maneger/wiki/systems-support#a-message-for-mac-os-users")
+  console.log('Mac OS system Not supported, consulter https://Bds-Maneger/Bds-Maneger/wiki/systems-support#a-message-for-mac-os-users')
+  require('electron').shell.openExternal("https://Bds-Maneger/Bds-Maneger/wiki/systems-support#a-message-for-mac-os-users")
   app.quit()
 }
 app.whenReady().then(() => {

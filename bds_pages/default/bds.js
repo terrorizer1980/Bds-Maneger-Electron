@@ -35,11 +35,6 @@ function sendcomand() {
         };
     };
 };
-function sendco(ele) {
-    if(event.keyCode == 13) {
-        document.getElementById("comsen").click();
-    }
-};
 
 function log_save(){
     alert(`Your log file is being automatically saved to the Server directory`)

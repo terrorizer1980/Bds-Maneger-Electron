@@ -1,5 +1,8 @@
 {
     "index": "index.html",
     "name": "Default BDS Manager theme",
-    "language": "en-US"
+    "language": [
+        "en-US",
+        "pt-BR"
+    ]
 }
