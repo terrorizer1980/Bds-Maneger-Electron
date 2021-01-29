@@ -1,4 +1,8 @@
 function startServer(){
+    var bds_EXIT = document.getElementById('LOG').innerHTML
+    if (bds_EXIT.includes("Quit correctly")){
+        document.getElementById('LOG').innerHTML = ""
+    }
     global.serverstated = bds_start();
     serverstated.stdout.on('data', function (data) {
         document.getElementById('LOG').innerHTML += data;
@@ -46,11 +50,11 @@ setInterval(() => {
     var str = document.getElementById('title');
     var bds_status = localStorage.getItem('bds_status');
     if (bds_status === 'true'){
-        var Sonic = `Sonic is running, we hope Tails can keep up`
+        var msg = `The server is running`
     } else {
-        var Sonic = `Tails is looking for Sonic, on Green Hill`
+        var msg = `The server is stopped`
     }
-    str.innerHTML = `Bds Maneger: ${Sonic}`
+    str.innerHTML = `Bds Maneger \\-/ ${msg}`
 }, 1000);
 
 function setID(){
@@ -59,13 +63,3 @@ function setID(){
     alert('Sucess')
 }
 document.getElementById('drive_id').value = localStorage.getItem('GDID')
-
-for (let index in themes_list) {
-    const element = themes_list[index].name;
-    const url = themes_list[index].zip_url;
-    const doc = document.createElement('option')
-    doc.setAttribute('value', url)
-    doc.innerHTML = element
-    document.getElementById('themes_no_by_sirherobrine23').appendChild(doc);
-    index++
-}

@@ -9,6 +9,6 @@ document.getElementById("configbuttom").onclick = function() {document.getElemen
   window.onclick = function(event) {if (event.target == document.getElementById("configmodal")) {document.getElementById("configmodal").style.display = "none"}
 }
 // Give Item
-document.getElementById("giveMENU").onclick = function() {document.getElementById("GIVEM").style.display = "block"}
-document.getElementsByClassName("closeG")[0].onclick = function() {document.getElementById("GIVEM").style.display = "none"}
-window.onclick = function(event) {if (event.target == document.getElementById("GIVEM")) {document.getElementById("GIVEM").style.display = "none"}}
+// document.getElementById("giveMENU").onclick = function() {document.getElementById("GIVEM").style.display = "block"}
+// document.getElementsByClassName("closeG")[0].onclick = function() {document.getElementById("GIVEM").style.display = "none"}
+// window.onclick = function(event) {if (event.target == document.getElementById("GIVEM")) {document.getElementById("GIVEM").style.display = "none"}}

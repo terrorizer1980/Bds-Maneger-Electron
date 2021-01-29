@@ -1,0 +1,92 @@
+{
+    "pt-BR": {
+        "message": {
+            "buttom": {
+                "start": "Iniciar o servidor",
+                "stop": "Parar o servidor",
+                "restart": "Reiniciar o servidor",
+                "themes": "Proximo tema",
+                "backup": "Backup do mundo",
+                "settings": "Configurações do servidor e do App",
+                "about": "Sobre o Projeto"
+            },
+            "root": {
+                "log": {
+                    "command_input": "Qual é o comando?",
+                    "send_command": "Enviar comando!"
+                },
+                "settings": {
+                    "theme": "Lista de temas",
+                    "gd_id": "Qual é o ID da pasta no Google Drive© ?",
+                    "bds_version": "Versões Servidores (Especificados no bds_config.json com a string \"bds_platform\")",
+                    "app_server_start": "Iniciar o servidor ao abrir o Aplicativo:"
+                },
+                "server_settings": {
+                    "world_name": "Nome do Mundo",
+                    "description": "Descrição do servidor",
+                    "gamemode": {
+                        "survival": "Sobrevivência",
+                        "creative": "Criativo",
+                        "adventure": "Aventura"
+                    },
+                    "difficulty": {
+                        "normal": "Normal",
+                        "easy": "Facíl",
+                        "hard": "Dificil"
+                    },
+                    "permission": {
+                        "visitor": "Visitante",
+                        "member": "Membro",
+                        "operator": "Operardor"
+                    }
+                }
+            }
+        },
+        "alert": {}
+    },
+    "en-US":{
+        "message": {
+            "buttom": {
+                "start": "Start the server",
+                "stop": "Stop the server",
+                "restart": "Reboot or server",
+                "themes": "Next theme",
+                "backup": "Backup the world",
+                "settings": "Server and App Settings",
+                "about": "About the project"
+            },
+            "root": {
+                "log": {
+                    "command_input": "What is the command?",
+                    "send_command": "Send command!"
+                },
+                "settings": {
+                    "theme": "List of themes",
+                    "gd_id": "What is the folder ID in Google Drive ©?",
+                    "bds_version": "Server Versions (Specified in bds_config.json with the string \"bds_platform\")",
+                    "app_server_start": "Start the server when opening the Application:"
+                },
+                "server_settings": {
+                    "world_name": "Name of the World",
+                    "description": "Server description",
+                    "gamemode": {
+                        "survival": "Survival",
+                        "creative": "Creative",
+                        "adventure": "Adventure"
+                    },
+                    "difficulty": {
+                        "normal": "Normal",
+                        "easy": "Easy",
+                        "hard": "Difficult"
+                    },
+                    "permission": {
+                        "visitor": "Visitor",
+                        "member": "Member",
+                        "operator": "Operator"
+                    }
+                }
+            }
+        },
+        "alert": {}
+    }
+}

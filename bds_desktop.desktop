@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+[Desktop Entry]
+Encoding=UTF-8
+Name=The BDS Maneger
+Comment=Admin your server with Javascript and NodeJS
+Type=Application
+Terminal=false
+Icon=./bds_pages/assents/mcpe.ico
+Exec=bash -c 'cd "$(dirname "$1")";bash ./start_linux.sh &> bds_start.log' dummy %k
+StartupWMClass=BDS_Maneger
+Categories=
