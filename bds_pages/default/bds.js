@@ -1,13 +1,17 @@
 function startServer(){
-    var bds_EXIT = document.getElementById('LOG').innerHTML
-    if (bds_EXIT.includes("Quit correctly")){
-        document.getElementById('LOG').innerHTML = ""
+    if (!(bds_detect())){
+        var bds_EXIT = document.getElementById('LOG').innerHTML
+        if (bds_EXIT.includes("Quit correctly")){
+            document.getElementById('LOG').innerHTML = ""
+        }
+        global.serverstated = bds_start();
+        serverstated.stdout.on('data', function (data) {
+            document.getElementById('LOG').innerHTML += data;
+            document.getElementById('LOG').scrollTo(0, 9999)
+        });
+    } else {
+        alert(`Your server is running`)
     }
-    global.serverstated = bds_start();
-    serverstated.stdout.on('data', function (data) {
-        document.getElementById('LOG').innerHTML += data;
-        document.getElementById('LOG').scrollTo(0, 9999)
-    });
 };
 
 function restartServer(){
