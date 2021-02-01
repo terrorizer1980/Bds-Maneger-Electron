@@ -44,7 +44,7 @@
         },
         "alert": {}
     },
-    "en-US":{
+    "en_US":{
         "message": {
             "buttom": {
                 "start": "Start the server",
