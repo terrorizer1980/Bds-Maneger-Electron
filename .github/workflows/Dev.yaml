@@ -23,6 +23,8 @@ jobs:
 
       - name: Test
         run: npm run test
+        env:
+          ELECTRON_TEST: true
 
   Release-Linux:
     runs-on: ubuntu-latest

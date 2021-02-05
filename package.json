@@ -7,7 +7,7 @@
     "bin": "git clone https:/Bds-Maneger/Bds-Maneger.git && cd Bds-Maneger && npm install && echo Cloned && echo %cd% $PWD",
     "scripts": {
         "start": "electron . --no-sandbox",
-        "test": "npm i electron@latest && export ELECTRON_TEST=true && node ./electron_test.js",
+        "test": "npm i electron@latest && node ./electron_test.js",
         "pack": "electron-builder --dir && electron-builder --x64 --arm64",
         "dist": "npm run pack",
         "postinstall": "electron-builder install-app-deps"
