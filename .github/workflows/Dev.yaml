@@ -1,7 +1,7 @@
 name: Electron Dev Branch Test and Publish Release
 on: 
   push:
-    branches: [dev]
+    branches: [dev, main]
 jobs:
   npm-test:
     runs-on: windows-latest
@@ -23,6 +23,8 @@ jobs:
 
       - name: Test
         run: npm run test
+        env:
+          ELECTRON_TEST: true
 
   Release-Linux:
     runs-on: ubuntu-latest
@@ -46,19 +48,19 @@ jobs:
       - name: Build Packs
         run: npm run pack
 
-      - uses: actions/upload-artifact@v2
+      - name: Get The Bds Maneger Version
+        run: |
+          sudo apt install -y jq
+          echo "BDS_VER=$(cat package.json| jq .version)" >> dist/release_config.txt
+          echo "ELECTRON_VER=$(cat package.json| jq .devDependencies.electron|sed 's|\^||g')" >> dist/release_config.txt
+          echo "BDS_API_VER=$(cat package.json| jq .devDependencies.bds_maneger_api|sed 's|\^||g')" >> dist/release_config.txt
+          echo "COMMIT_ME=$(git show -s --format=%s -1)" >> dist/release_config.txt
+
+      - uses: actions/upload-artifact@main
         with:
           name: linux
           retention-days: 1
           path: dist/*.*
-
-      - name: Get The Bds Maneger Version
-        run: |
-          sudo apt install -y jq
-          echo "BDS_VER=$(cat package.json| jq .version)" >> $GITHUB_ENV
-          echo "ELECTRON_VER=$(cat package.json| jq .devDependencies.electron|sed 's|\^||g')" >> $GITHUB_ENV
-          echo "BDS_API_VER=$(cat package.json| jq .devDependencies.bds_maneger_api|sed 's|\^||g')" >> $GITHUB_ENV
-          echo "COMMIT_ME=$(git show -s --format=%s -1)" >> $GITHUB_ENV
 
   Release-Windows:
     runs-on: windows-latest
@@ -82,7 +84,7 @@ jobs:
       - name: Build Packs
         run: npm run pack
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@main
         with:
           name: windows
           retention-days: 1
@@ -94,14 +96,18 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
 
+      - name: Getting the env in the file
+        run: |
+          cat */*release_config.txt >> $GITHUB_ENV
+
       - name: Releases
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          prerelease: true
           name: Bds Maneger Version ${{ env.BDS_VER }}
           tag_name: ${{ github.run_id }}
+          files: '*/*'
           body: |
             The Bds Maneger With Electron ${{ env.ELECTRON_VER }},
             Bds Maneger API version ${{ env.BDS_API_VER }}

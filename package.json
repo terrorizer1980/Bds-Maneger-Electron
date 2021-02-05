@@ -7,7 +7,7 @@
     "bin": "git clone https:/Bds-Maneger/Bds-Maneger.git && cd Bds-Maneger && npm install && echo Cloned && echo %cd% $PWD",
     "scripts": {
         "start": "electron . --no-sandbox",
-        "test": "node ./node_modules/mocha/bin/_mocha --require esm --timeout 20000",
+        "test": "npm i electron@latest --no-save && node ./electron_test.js",
         "pack": "electron-builder --dir && electron-builder --x64 --arm64",
         "dist": "npm run pack",
         "postinstall": "electron-builder install-app-deps"
@@ -52,13 +52,6 @@
             ],
             "packageCategory": "The bds Maneger"
         },
-        "snap": {
-            "confinement": "strict",
-            "grade": "stable",
-            "plugs": [
-                "default"
-            ]
-        },
         "win": {
             "target": "nsis",
             "icon": "./bds_pages/assents/mcpe.ico"
@@ -68,8 +61,7 @@
             "category": "The Bds Maneger",
             "target": [
                 "deb",
-                "AppImage",
-                "snap"
+                "AppImage"
             ],
             "icon": "./bds_pages/assents/mcpe256x256.png"
         }
@@ -93,8 +85,5 @@
         "esm": "^3.2.25",
         "mocha": "^8.2.1",
         "spectron": "^13.0.0"
-    },
-    "engines": {
-        "node": "^14.0.0"
     }
 }
