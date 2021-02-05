@@ -16,12 +16,6 @@ app.start().then(function () {
   console.log("Verify the window is visible")
   assert.strictEqual(isVisible, true)
 }).then(function () {
-  console.log("Get the window's title")
-  return app.client.getTitle()
-}).then(function (title) {
-  console.log("Verify the window's title")
-  assert.strictEqual(title, 'Bds Maneger \\-/ The server is stopped')
-}).then(function () {
   console.log("Stop the application")
   return app.stop()
 }).catch(function (error) {

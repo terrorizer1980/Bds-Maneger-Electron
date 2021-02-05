@@ -24,8 +24,8 @@ function createWindow () {
   }
   // Load Pages
   const win = new BrowserWindow({
-    minWidth: 640,
-    minHeight: 640,
+    minWidth: 500,
+    minHeight: 500,
     icon: path.join(process.cwd(), "bds_pages", "assents", "mcpe.png"),
     webPreferences: {
       nodeIntegration: true,
@@ -36,7 +36,7 @@ function createWindow () {
       preload: path.join(process.cwd(), 'preload.js')
     }
   });
-  win.loadFile(load_pages);
+  win.loadFile(load_pages);  
   if (!(process.env.ELECTRON_TEST.includes("true"))) {win.maximize();}
 }
 /* if (process.platform == 'darwin'){
