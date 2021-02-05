@@ -103,6 +103,7 @@ jobs:
         with:
           name: Bds Maneger Version ${{ env.BDS_VER }}
           tag_name: ${{ github.run_id }}
+          files: '*/*'
           body: |
             The Bds Maneger With Electron ${{ env.ELECTRON_VER }},
             Bds Maneger API version ${{ env.BDS_API_VER }}
