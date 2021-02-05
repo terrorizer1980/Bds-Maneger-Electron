@@ -37,7 +37,7 @@ function createWindow () {
     }
   });
   win.loadFile(load_pages);
-  win.maximize();
+  if (!(process.env.ELECTRON_TEST.includes("true"))) {win.maximize();}
 }
 /* if (process.platform == 'darwin'){
   console.log('Mac OS system Not supported, consulter https://Bds-Maneger/Bds-Maneger/wiki/systems-support#a-message-for-mac-os-users')

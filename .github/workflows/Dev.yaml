@@ -1,7 +1,7 @@
 name: Electron Dev Branch Test and Publish Release
 on: 
   push:
-    branches: [dev]
+    branches: [dev, main]
 jobs:
   npm-test:
     runs-on: windows-latest
@@ -99,7 +99,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          prerelease: true
           name: Bds Maneger Version ${{ env.BDS_VER }}
           tag_name: ${{ github.run_id }}
           body: |
