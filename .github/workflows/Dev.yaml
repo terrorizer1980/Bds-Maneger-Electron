@@ -56,7 +56,7 @@ jobs:
           echo "BDS_API_VER=$(cat package.json| jq .devDependencies.bds_maneger_api|sed 's|\^||g')" >> dist/release_config.txt
           echo "COMMIT_ME=$(git show -s --format=%s -1)" >> dist/release_config.txt
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@main
         with:
           name: linux
           retention-days: 1
@@ -84,7 +84,7 @@ jobs:
       - name: Build Packs
         run: npm run pack
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@main
         with:
           name: windows
           retention-days: 1
@@ -107,7 +107,7 @@ jobs:
         with:
           name: Bds Maneger Version ${{ env.BDS_VER }}
           tag_name: ${{ github.run_id }}
-          files: '*.*'
+          files: '*/*'
           body: |
             The Bds Maneger With Electron ${{ env.ELECTRON_VER }},
             Bds Maneger API version ${{ env.BDS_API_VER }}
