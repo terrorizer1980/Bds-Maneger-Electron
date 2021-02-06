@@ -52,13 +52,6 @@
             ],
             "packageCategory": "The bds Maneger"
         },
-        "snap": {
-            "confinement": "strict",
-            "grade": "stable",
-            "plugs": [
-                "default"
-            ]
-        },
         "win": {
             "target": "nsis",
             "icon": "./bds_pages/assents/mcpe.ico"
@@ -68,8 +61,7 @@
             "category": "The Bds Maneger",
             "target": [
                 "deb",
-                "AppImage",
-                "snap"
+                "AppImage"
             ],
             "icon": "./bds_pages/assents/mcpe256x256.png"
         }
