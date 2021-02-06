@@ -98,7 +98,7 @@ jobs:
 
       - name: Getting the env in the file
         run: |
-          cat release_config.txt >> $GITHUB_ENV
+          cat */*release_config.txt >> $GITHUB_ENV
 
       - name: Releases
         uses: softprops/action-gh-release@v1
