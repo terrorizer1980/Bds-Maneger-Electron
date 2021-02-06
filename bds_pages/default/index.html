@@ -10,11 +10,6 @@
         var kill_status = bds_kill();
         if (kill_status){localStorage.setItem('bds_status', false);location.reload()}
     </script>
-    <script>
-        const fs = require("fs")
-        const language_json = eval(`JSON.parse(fs.readFileSync(\"${__dirname}/l10n.json\")).${electron_locale_system}`) 
-        console.log(language_json)
-    </script>
 </head>
 <body>
     <nav class="navbar" id="navbarID"><!-- NAV -->
@@ -183,16 +178,16 @@
             <span class="closeConfig">&times;</span>
             <div class="config">
 
-                <label for="CConfig">Minecraft Server Configurations</label>
+                <span id="settings_fild">Minecraft Server Configurations</span>
                 <fieldset id="CConfig">
-                    <label for='drive_id'>What is the Google Drive (ID) folder: </label>
+                    <span id='drive_id_text'>What is the Google Drive (ID) folder: </span>
                     <input value="undefined" id='drive_id' type="text"><input type="submit" onclick='setID();'>
                     
                     <br>
-                    <label for="bds-Server_download">Bedrock Server Download</label>
+                    <span id="bds-Server_download_text">Bedrock Server Download</span>
                     <select id="bds-Server_download"></select><button onclick="DownloadBDS();">Download</button>
                     <br>
-                    <span id="">server when opening the Application: </span><label class="switch">
+                    <span id="start_up">server when opening the Application: </span><label class="switch">
                         <input id="autostart" type="checkbox" onclick="checkedBox();">
                         <span class="slider round"></span>
                     </label>
@@ -201,53 +196,28 @@
                     <fieldset>
                         <span id="world_name">World name: </span><label><input type="text" placeholder="Word Name (Default Bedrock level)" id="level_name"></label><br>
                         <span id="desc">Short Discription: </span><label for="name"><input placeholder="Description" type="text" id="name"></label><br>
-                        <script>
-                            document.getElementById("world_name").innerHTML = language_json.message.root.server_settings.world_name
-                            document.getElementById("desc").innerHTML = language_json.message.root.server_settings.description
-                        </script>
                         <span>Gamemode: </span><select id="gameMode">
                             <option value="survival" id="surv">Survival</option>
                             <option value="creative" id="crea">Creative</option>
                             <option value="aventure" id="aven">Aventure</option>
                         </select><br>
-                        <script>
-                            document.getElementById("surv").innerHTML = language_json.message.root.server_settings.gamemode.survival
-                            document.getElementById("crea").innerHTML = language_json.message.root.server_settings.gamemode.creative
-                            document.getElementById("aven").innerHTML = language_json.message.root.server_settings.gamemode.adventure
-                        </script>
                         <span>Difficulty: </span><select id="difficulty">
                             <option value="easy" id="eas">Easy</option>
                             <option value="normal" id="nor">Normal</option>
                             <option value="hard" id="har">hard</option>
                         </select><br>
-                        <script>
-                            document.getElementById("eas").innerHTML = language_json.message.root.server_settings.difficulty.easy
-                            document.getElementById("nor").innerHTML = language_json.message.root.server_settings.difficulty.normal
-                            document.getElementById("har").innerHTML = language_json.message.root.server_settings.difficulty.hard
-                        </script>
-                        <span>Player default Permissions: </span><select id="permissions">
+                        <span id="deafult_pl">Player default Permissions: </span><select id="permissions">
                             <option value="visitor" id="vis">Visitor</option>
                             <option value="member" id="mem">Member</option>
                             <option value="operator" id="ope">Operator</option>
                         </select><br>
-                        <script>
-                            document.getElementById("vis").innerHTML = language_json.message.root.server_settings.permission.visitor
-                            document.getElementById("mem").innerHTML = language_json.message.root.server_settings.permission.member
-                            document.getElementById("ope").innerHTML = language_json.message.root.server_settings.permission.operator
-                        </script>
-                        <span>Time out Players not moved: </span><input disabled type="number" placeholder="Default 30 Minutes" id="timeout_server"><br>
-                        <span>Maximum number of players: </span><input type="number" disabled placeholder="Default 10" min="1" id="max_pla">
+                        <span id="s_time_out">Time out Players not moved: </span><input disabled type="number" placeholder="Default 30 Minutes" id="timeout_server"><br>
+                        <span id="max_play">Maximum number of players: </span><input type="number" disabled placeholder="Default 10" min="1" id="max_pla">
                         <br><br>
-                        <span>Enable xbox Login: </span><label class="switch"><input type="checkbox" id="xbox"><span class="slider round"></span></label><br>
-                        <span>Enable whitelist: </span><label class="switch"><input type="checkbox" id="whitelist"><span class="slider round"></span></label><br>
-                        <span>Allow Cheats: </span><label class="switch"><input type="checkbox" id="cheats"><span class="slider round"></span></label><br>
-                        <!-- <script>
-                            document.getElementById("").innerHTML
-                            document.getElementById("").innerHTML
-                            document.getElementById("").innerHTML
-                            document.getElementById("").innerHTML
-                            document.getElementById("").innerHTML
-                        </script> -->
+                        <span id="sett_xb">Enable xbox Login: </span><label class="switch"><input type="checkbox" id="xbox"><span class="slider round"></span></label><br>
+                        <span id="sett_whi">Enable whitelist: </span><label class="switch"><input type="checkbox" id="whitelist"><span class="slider round"></span></label><br>
+                        <span id="sett_cheats">Allow Cheats: </span><label class="switch"><input type="checkbox" id="cheats"><span class="slider round"></span></label><br>
+
                         <button onclick="setCONFIG();">Submit</button>
                     </fieldset>
                 </fieldset>
@@ -255,18 +225,7 @@
         </div>
     </div>
 </body>
-<script>
-    document.getElementById("buttom_start").innerHTML = language_json.message.buttom.start
-    document.getElementById("buttom_stop").innerHTML = language_json.message.buttom.stop
-    document.getElementById("buttom_restart").innerHTML = language_json.message.buttom.restart
-    document.getElementById("buttom_theme").innerHTML = language_json.message.buttom.themes
-    document.getElementById("buttom_backup").innerHTML = language_json.message.buttom.backup
-    document.getElementById("buttom_settings").innerHTML = language_json.message.buttom.settings
-    document.getElementById("buttom_about").innerHTML = language_json.message.buttom.about
-    document.getElementById("cmds").placeholder = language_json.message.root.log.command_input
-    document.getElementById("comsen").value = language_json.message.root.log.send_command
-
-</script>
+<script src="./set_lang.js"></script>
 <div id="scr">
     <script src="assents/js/modal.js"></script>
     <script src="assents/js/setting_server.js"></script>

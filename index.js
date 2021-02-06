@@ -1,8 +1,18 @@
 #!/usr/bin/env node
 const bds = require('bds_maneger_api')
 const {app, BrowserWindow } = require('electron');
+// const { BrowserWindow } = require('@electron/remote')
 var fs = require("fs");
 const path = require('path')
+
+require('@electron/remote/main').initialize()
+
+const cwds = path.join(process.cwd(), "package.json")
+if (fs.existsSync(cwds))
+  var current_path = process.cwd()
+else
+  var current_path = path.resolve(".", "resources", "app")
+  console.log(`Current dire: ${__dirname}, process: ${process.cwd()}, ${current_path}`)
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 function createWindow () {
@@ -16,45 +26,33 @@ function createWindow () {
     var config_load = JSON.parse(default_config).default_pages;
   };
   if (config_load == 'default'){
-    let JSONC = JSON.parse(fs.readFileSync(`bds_pages/default/config.json`)).index
-    var load_pages = path.join(process.cwd(), 'bds_pages', 'default', JSONC)
+    let page_index = JSON.parse(fs.readFileSync(path.join(current_path, "bds_pages", "default", "config.json"))).index
+    var load_pages = path.join(current_path, 'bds_pages', 'default', page_index)
   } else {
-    var JSONC = JSON.parse(fs.readFileSync(`bds_pages/custom_pages/${config_load}/config.json`)).index
-    var load_pages = path.join(process.cwd(), 'bds_pages', 'custom_pages', config_load, JSONC)
+    var page_index = JSON.parse(fs.readFileSync(path.join(current_path, "bds_pages", "custom_pages", config_load, "config.json"))).index
+    var load_pages = path.join(current_path, 'bds_pages', 'custom_pages', config_load, page_index)
   }
   // Load Pages
   const win = new BrowserWindow({
     minWidth: 500,
     minHeight: 500,
-    icon: path.join(process.cwd(), "bds_pages", "assents", "mcpe.png"),
+    icon: path.join(current_path, "bds_pages", "assents", "mcpe.png"),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
       sandbox: false,
       experimentalFeatures: true,
-      preload: path.join(process.cwd(), 'preload.js')
+      preload: path.join(current_path, 'preload.js')
     }
   });
-  win.loadFile(load_pages);  
-  if (!(process.env.ELECTRON_TEST.includes("true"))) {win.maximize();}
+  win.loadFile(load_pages);
+  win.maximize();
 }
-/* if (process.platform == 'darwin'){
-  console.log('Mac OS system Not supported, consulter https://Bds-Maneger/Bds-Maneger/wiki/systems-support#a-message-for-mac-os-users')
-  require('electron').shell.openExternal("https://Bds-Maneger/Bds-Maneger/wiki/systems-support#a-message-for-mac-os-users")
-  app.quit()
-} */
 app.whenReady().then(() => {
   createWindow()
-  app.on('activate', function () {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
+  app.on('activate', function () {if (BrowserWindow.getAllWindows().length === 0) createWindow()})
 })
-// .catch("err", function (err){
-//   console.log(err)
-//   console.warn(`Error opening a Bds Maneger window Exiting with eror 12`)
-//   process.exit(12)
-// })
 app.on('window-all-closed', () => {
   console.log(`Deteting bds Server is reuning`)
   if (bds.detect()){
@@ -64,5 +62,6 @@ app.on('window-all-closed', () => {
     console.log('Tails?')
     console.log('Going out ...')
     app.quit()
+    process.exit(0)
 })
 app.on('activate', () => {if (BrowserWindow.getAllWindows().length === 0) {createWindow()}});

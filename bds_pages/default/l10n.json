@@ -22,8 +22,18 @@
                     "app_server_start": "Iniciar o servidor ao abrir o Aplicativo:"
                 },
                 "server_settings": {
+                    "settings_fild": "Configurações do servidor Minecraft",
+                    "drive_id_text": "Qual é a ID da pasta do Google© Drive:",
+                    "bds_Server_download_text": "Versão do Bedrock Server para fazer o Download",
+                    "start_up": "servidor ao abrir o aplicativo:",
                     "world_name": "Nome do Mundo",
                     "description": "Descrição do servidor",
+                    "max": "Numero maximo de jogadores",
+                    "default_p": "Permisão padrão para novos Players",
+                    "timeout": "Tempo parado no servidor antes de ser desconectado",
+                    "xb": "Requer altenticação na Conta do Xbox",
+                    "whi": "Ativar Whitelist",
+                    "cheats": "Liberar comandos para jogadores com permissão de Administrador",
                     "gamemode": {
                         "survival": "Sobrevivência",
                         "creative": "Criativo",
@@ -67,8 +77,18 @@
                     "app_server_start": "Start the server when opening the Application:"
                 },
                 "server_settings": {
+                    "settings_fild": "Minecraft Server Configurations",
+                    "drive_id_text": "What is the Google Drive (ID) folder:",
+                    "bds_Server_download_text": "Bedrock Server Download",
+                    "start_up": "server when opening the Application:",
                     "world_name": "Name of the World",
                     "description": "Server description",
+                    "max": "Maximum number of players",
+                    "default_p": "Default permission for new Players",
+                    "timeout": "Time stopped on the server before being disconnected",
+                    "xb": "Requires Xbox Account authentication",
+                    "whi": "Enable Whitelist",
+                    "cheats": "Release commands to players with Administrator permission",
                     "gamemode": {
                         "survival": "Survival",
                         "creative": "Creative",

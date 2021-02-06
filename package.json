@@ -6,10 +6,12 @@
     "private": false,
     "bin": "git clone https:/Bds-Maneger/Bds-Maneger.git && cd Bds-Maneger && npm install && echo Cloned && echo %cd% $PWD",
     "scripts": {
-        "start": "electron . --no-sandbox",
+        "start": "electron --no-sandbox --trace-warnings .",
         "test": "npm i electron@latest --no-save && node ./electron_test.js",
-        "pack": "electron-builder --dir && electron-builder --x64 --arm64",
-        "dist": "npm run pack",
+        "pack": "npm run dir:pack && electron-builder --x64",
+        "pack:arm64": "npm run dir:packarm64 && electron-builder --arm64",
+        "dir:pack": "electron-builder --dir --x64",
+        "dir:packarm64": "electron-builder --dir --arm64",
         "postinstall": "electron-builder install-app-deps"
     },
     "repository": {
@@ -29,9 +31,12 @@
         "asarUnpack": true,
         "nsis": {
             "oneClick": "false",
-            "artifactName": "${productName}-Setup-${version}.${ext}",
+            "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
             "allowToChangeInstallationDirectory": "true",
             "installerIcon": "./bds_pages/assents/mcpe.ico"
+        },
+        "portable": {
+            "artifactName": "${productName}-Portable-${version}-${arch}.${ext}"
         },
         "deb": {
             "depends": [
@@ -46,7 +51,10 @@
             "packageCategory": "The bds Maneger"
         },
         "win": {
-            "target": "nsis",
+            "target": [
+                "nsis",
+                "portable"
+            ],
             "icon": "./bds_pages/assents/mcpe.ico"
         },
         "linux": {
@@ -66,8 +74,9 @@
     },
     "homepage": "https://Bds-Maneger/Bds-Maneger#readme",
     "dependencies": {
-        "command-exists": "^1.2.9",
+        "@electron/remote": "^1.0.2",
         "bds_maneger_api": "^1.3.0",
+        "command-exists": "^1.2.9",
         "electron-is": "^3.0.0"
     },
     "devDependencies": {
