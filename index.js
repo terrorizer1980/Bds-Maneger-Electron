@@ -49,10 +49,12 @@ app.whenReady().then(() => {
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-}).catch(() => {
-  console.warn(`Error opening a Bds Maneger window Exiting with eror 12`)
-  process.exit(12)
 })
+// .catch("err", function (err){
+//   console.log(err)
+//   console.warn(`Error opening a Bds Maneger window Exiting with eror 12`)
+//   process.exit(12)
+// })
 app.on('window-all-closed', () => {
   console.log(`Deteting bds Server is reuning`)
   if (bds.detect()){
