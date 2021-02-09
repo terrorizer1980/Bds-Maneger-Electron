@@ -1,5 +1,6 @@
 const fs = require("fs")
 const path = require("path");
+// eslint-disable-next-line no-unused-vars
 const lang = JSON.parse(fs.readFileSync(path.join(__dirname, "l10n.json")))
 const language_json = eval(`lang.${electron_locale_system}`) 
 console.log(language_json)

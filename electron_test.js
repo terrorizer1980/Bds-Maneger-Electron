@@ -1,5 +1,5 @@
-var Application = require('spectron').Application
-var assert = require('assert')
+var Application = require("spectron").Application
+var assert = require("assert")
 var electron = require("electron")
 
 process.env.ELECTRON_TEST = true
@@ -20,6 +20,6 @@ app.start().then(function () {
   return app.stop()
 }).catch(function (error) {
   // Log any failures
-  console.error('Test failed', error.message)
+  console.error("Test failed", error.message)
   process.exit(5)
 })

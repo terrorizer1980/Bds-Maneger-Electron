@@ -1,6 +1,6 @@
 #!/bin/bash
 source /etc/os-release
-if [ $ID_LIKE == 'debian' ];then
+if [ $ID_LIKE === 'debian' ];then
     echo 'Adding the nodeJs apt repository'
     curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
     echo 'Installing NodeJs on the system'
