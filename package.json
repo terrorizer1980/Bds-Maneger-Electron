@@ -4,7 +4,6 @@
     "description": "Minimal maneger for Minecraf Bedrock Server",
     "main": "index.js",
     "private": false,
-    "bin": "git clone https:/Bds-Maneger/Bds-Maneger.git && cd Bds-Maneger && npm install && echo Cloned && echo %cd% $PWD",
     "scripts": {
         "start": "electron --no-sandbox --trace-warnings .",
         "test": "npm i electron@latest --no-save && node ./electron_test.js",
@@ -18,14 +17,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://Bds-Maneger/Bds-Maneger.git"
+        "url": "git+https://github.com/Bds-Maneger/Bds-Maneger.git"
     },
     "keywords": [
         "minecraft",
         "bds",
         "bds-server",
         "Windows",
-        "linux"
+        "linux",
+        "macos"
     ],
     "build": {
         "appId": "com.sirherobrine23.bds_maneger",
@@ -76,7 +76,7 @@
     },
     "homepage": "https://Bds-Maneger/Bds-Maneger#readme",
     "dependencies": {
-        "@electron/remote": "^1.0.2",
+        "@electron/remote": "^1.0.4",
         "@the-bds-maneger/bds_maneger_api": "^1.3.0",
         "command-exists": "^1.2.9",
         "electron-is": "^3.0.0",
@@ -85,7 +85,7 @@
     "devDependencies": {
         "chai": "^4.2.0",
         "chai-as-promised": "^7.1.1",
-        "electron": "^12.0.0-beta.22",
+        "electron": "^12.0.0",
         "electron-builder": "^22.9.1",
         "esm": "^3.2.25",
         "mocha": "^8.2.1",

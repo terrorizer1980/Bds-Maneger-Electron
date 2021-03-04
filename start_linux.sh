@@ -13,6 +13,7 @@ else
     else
         sudo apt install curl -y
         curl https://deb.nodesource.com/setup_current.x |sudo bash -
+        sudo apt install -y nodejs
     fi
 fi
 npm run start
