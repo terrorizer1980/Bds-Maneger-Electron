@@ -18,15 +18,11 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'javascript' ]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
-        # Learn more:
-        # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v1
       with:
@@ -35,7 +31,7 @@ jobs:
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
 
-    # - run: npm install
+    - run: npm install
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1

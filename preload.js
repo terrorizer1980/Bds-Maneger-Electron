@@ -1,6 +1,6 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
-const bds = require("bds_maneger_api");
+const bds = require("@the-bds-maneger/bds_maneger_api");
 const fs = require("fs")
 const path = require("path")
 process.once("loaded", () => {

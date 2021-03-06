@@ -29,7 +29,8 @@
         "node_modules",
         ".github",
         ".vscode",
-        ".devcontainer"
+        ".devcontainer",
+        "test"
     ],
     "extends": "eslint:recommended",
     "parserOptions": {
