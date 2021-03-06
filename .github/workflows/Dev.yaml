@@ -2,6 +2,8 @@ name: Electron Dev Branch Test and Publish Release
 on: 
   push:
     branches: [dev, main]
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   npm-test:
     runs-on: windows-latest
