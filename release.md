@@ -1,1 +1,0 @@
-Modifications to CI / CD files and some minor modifications to the project

@@ -1,3 +1,5 @@
+# Security
+
 Updates are very important not only for new features, but also for improvements and bug fixes.
 
 Currently we have as main support the latest versions of Minecraft Bedrock Server, new features will be implemented to keep up.
