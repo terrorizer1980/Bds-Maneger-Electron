@@ -12,12 +12,11 @@
         "pack": "npm run dir:pack && electron-builder --x64",
         "pack:arm64": "npm run dir:packarm64 && electron-builder --arm64",
         "dir:pack": "electron-builder --dir --x64",
-        "dir:packarm64": "electron-builder --dir --arm64",
-        "postinstall": "electron-builder install-app-deps"
+        "dir:packarm64": "electron-builder --dir --arm64"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Bds-Maneger/Bds-Maneger.git"
+        "url": "git+https://github.com/The-Bds-Maneger/Bds-Maneger.git"
     },
     "keywords": [
         "minecraft",
@@ -72,9 +71,9 @@
     "author": "Matheus Sampaio Queiroga (Sirherobrine23) <srherobrine20@gmail.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://Bds-Maneger/Bds-Maneger/issues"
+        "url": "https://github.com/The-Bds-Maneger/issues"
     },
-    "homepage": "https://Bds-Maneger/Bds-Maneger#readme",
+    "homepage": "https://github.com/The-Bds-Maneger#readme",
     "dependencies": {
         "@electron/remote": "^1.0.4",
         "@the-bds-maneger/core": "^1.6.0",
