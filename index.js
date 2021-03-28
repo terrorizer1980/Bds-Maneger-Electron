@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const bds = require("@the-bds-maneger/bds_maneger_api")
+const bds = require("@the-bds-maneger/core")
 const {app, BrowserWindow } = require("electron");
 // const { BrowserWindow } = require('@electron/remote')
 var fs = require("fs");
