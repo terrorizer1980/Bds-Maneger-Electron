@@ -1,7 +1,7 @@
 {
     "name": "bds-manege",
-    "version": "1.2.0",
-    "description": "Minimal maneger for Minecraf Bedrock Server",
+    "version": "1.2.5",
+    "description": "The Bds Maneger, control your server with Electron",
     "main": "index.js",
     "private": false,
     "scripts": {
@@ -26,6 +26,24 @@
         "linux",
         "macos"
     ],
+    "author": "Matheus Sampaio Queiroga (Sirherobrine23) <srherobrine20@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/The-Bds-Maneger/issues"
+    },
+    "homepage": "https://github.com/The-Bds-Maneger#readme",
+    "dependencies": {
+        "@electron/remote": "^1.0.4",
+        "@the-bds-maneger/core": "^1.8.4",
+        "command-exists": "^1.2.9"
+    },
+    "devDependencies": {
+        "electron": "^12.0.0",
+        "electron-builder": "^22.9.1",
+        "electron-is": "^3.0.0",
+        "eslint": "^7.21.0",
+        "xmldom": ">=0.5.0"
+    },
     "build": {
         "appId": "com.sirherobrine23.bds_maneger",
         "asar": false,
@@ -67,23 +85,5 @@
             ],
             "icon": "./bds_pages/assents/mcpe256x256.png"
         }
-    },
-    "author": "Matheus Sampaio Queiroga (Sirherobrine23) <srherobrine20@gmail.com>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/The-Bds-Maneger/issues"
-    },
-    "homepage": "https://github.com/The-Bds-Maneger#readme",
-    "dependencies": {
-        "@electron/remote": "^1.0.4",
-        "@the-bds-maneger/core": "^1.6.0",
-        "command-exists": "^1.2.9"
-    },
-    "devDependencies": {
-        "electron": "^12.0.0",
-        "electron-builder": "^22.9.1",
-        "electron-is": "^3.0.0",
-        "eslint": "^7.21.0",
-        "xmldom": ">=0.5.0"
     }
 }

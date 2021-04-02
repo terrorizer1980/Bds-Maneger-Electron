@@ -67,6 +67,16 @@ div,html{
   background-color: var(--bg-primary);
 }
 
+.command_area {
+  height: 100%;
+  width: 70%;
+}
+
+.command_send {
+  height: 100%;
+  margin-left: 2vh;
+}
+
 /* The Modal (background) */
 .modal {
   transition: var(--transition-speed);
@@ -129,7 +139,7 @@ padding: 1rem;
 .navbar {
 position: fixed;
 background-color: var(--bg-primary);
-transition: width 600ms ease;
+/* transition: width 600ms ease; */
 overflow: scroll;
 }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title id="title">null</title>
+    <title id="title">Loading</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
     <script>
@@ -11,7 +11,7 @@
         if (kill_status){localStorage.setItem('bds_status', false);location.reload()}
     </script>
 </head>
-<body>
+<body class="DarkColors">
     <nav class="navbar" id="navbarID"><!-- NAV -->
         <ul class="navbar-nav">
             <!-- Logo -->
@@ -76,17 +76,6 @@
                 </a>
             </li>
             <!-- World Backup -->
-            <!-- Give Item
-            <li class="nav-item" id="giveMENU">
-                <a href="#" class="nav-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="2%" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-                    </svg>
-                    <span class="link-text">Give Item</span>
-                </a>
-            </li> -->
-            <!-- Give Item -->
             <!-- Settings -->
             <li class="nav-item" id="configbuttom">
                 <a href="#" class="nav-link">
@@ -118,28 +107,20 @@
         <div>
             <p id="SystemProcess"></p>
             <textarea class="logTEXT" disabled id="LOG"></textarea>
-            <input id="cmds" id="btn2" size="100%" placeholder="Command to send to server: /" class="commands" onkeydown="sendco(this)" type="text">
-            <input type="submit" value="null" id='comsen' onclick="sendcomand();return false">
-            <script>function sendco(ele){if(event.keyCode === 13) {document.getElementById("comsen").click()}}</script>
+        </div>
+        <div class="root_command">
+            <script>
+                function checkCommand(){
+                    const currentCommand = document.getElementById("cmds").value;
+                    if (currentCommand.charAt(0) === "/") document.getElementById("cmds").value = currentCommand.replace("/", "");
+                }
+                function clearCommand(){document.getElementById("command").value = ""}
+            </script>
+            <input class="command_area" id="cmds" id="btn2" size="100%" placeholder="The command is here, there is no need to include the '/'" oninput="checkCommand();" type="text" id="command" onkeydown="if(event.keyCode === 13) document.getElementById('command_send').click()">
+            <input class="command_send" id="command_send" type="submit" onclick="sendcomand(); clearCommand()">
         </div>
         <!--End Main Display-->
 
-        <!-- The Modal for Give items -->
-        <!-- <div id="GIVEM" class="modal">
-            <div class="modal-content">
-                <span class="closeG">&times; <label for="give-C">Give Item</label></span>
-                <h3>! Some Items cannot work as the java item list is being used !</h3>
-                <div class="give">
-                    <fieldset id="give-C">
-                        <select id="giveI"></select>
-                        <input type="text" id="userI">
-                        <input type="number" id="tant">
-                        <input type="submit" onclick="getI();">
-                    </fieldset>
-                </div>
-            </div>
-        </div> -->
-        <!-- The Modal for Give items end -->
         <!-- The Modal Info -->
         <div id="Info" class="modal">
             <div class="modal-content">
@@ -147,22 +128,22 @@
                 <div class="info"><!--Infos-->
                     <img src="../assents/mcpe.png" width="7%">
                     <a>BDS MANEGER GUI &#9400;</a>
-                    <div class="mantedor"><!-- Lista de mantedores -->
-                        <a>Lista de Mantedores:</a>
-                        <p><a href="mailto:sirherobrine20@gmail.com">Matheus Sampaio Queiroga (Sirherobrine23)</a></p>
-                    </div><!-- Lista de mantedores end-->
                     <fieldset><!--Simples info-->
                         <a>BDS Maneger Info:</a>
                         <div class="info_after">
                             <p>App local Version: <script>document.write(bds_app_version)</script></p>
+                            <div class="mantedor"><!-- Lista de mantedores -->
+                                <a>Lista de Mantedores:</a>
+                                <p><a href="mailto:sirherobrine20@gmail.com">Matheus Sampaio Queiroga (Sirherobrine23)</a></p>
+                            </div><!-- Lista de mantedores end-->
                             <div id="before_get_update"></div>
                         </div>
                     </fieldset><!--Simples info end-->
                     <fieldset><!-- App Infos -->
                         <a>Minecraft Server Info:</a>
                         <div class="info_after">
-                            <p>Latest Server Version: <script>document.write(localStorage.getItem('bds_server_latestV'))</script></p>
-                            <p>Local  Server Version: <script>document.write(localStorage.getItem('bds_server_version'))</script>(Baseado no downloads)</p>
+                            <p>Latest Bedrock Server Version: <script>document.write(bds_core.bedrock_latest)</script></p>
+                            <p>Latest Java Server Version: <script>document.write(bds_core.java_latest)</script></p>
                         </div>
                     </fieldset><!-- App Infos end-->
                 </div><!--Infos end-->
@@ -181,16 +162,35 @@
                 <span id="settings_fild">Minecraft Server Configurations</span>
                 <fieldset id="CConfig">
                     <span id='drive_id_text'>What is the Google Drive (ID) folder: </span>
-                    <input value="undefined" id='drive_id' type="text"><input type="submit" onclick='setID();'>
-                    
+                    <input onchange="UpdategoogleDriveID()" id="drive_id" type="text">
+                    <script>const GetGoogleDriveID = setTimeout(() => {document.getElementById("drive_id").value = bds_core.bds_config.Google_Drive_root_backup_id;clearTimeout(GetGoogleDriveID);}, 100);function UpdategoogleDriveID(){bds_core.save_google_id(document.getElementById("drive_id").value);console.log(document.getElementById("drive_id").value);}</script>
                     <br>
-                    <span id="bds-Server_download_text">Bedrock Server Download</span>
-                    <select id="bds-Server_download"></select><button onclick="DownloadBDS();">Download</button>
+                    <span>Bds Maneger Platform</span>
+                        <select id="bds_platform" onchange='bds_core.change_platform(document.getElementById("bds_platform").value);document.getElementById("reloadPage").style.display = "block"'>
+                            <option value="bedrock">Bedrock</option>
+                            <option value="java">Java</option>
+                        </select>
+                    <br>
+                    <span id="bds-Server_download_text">Server Download</span>
+                        <select id="bds-Server_download"></select>
+                        <button onclick="DownloadBDS();">Download</button>
+                        <script>
+                            document.getElementById("bds_platform").value = bds_core.bds_config.bds_platform
+                            fetch("https://raw.githubusercontent.com/The-Bds-Maneger/Raw_files/main/Server.json").then(Response => Response.json()).then(function (versionsL){
+                                let DownloadVersion = document.getElementById("bds-Server_download")
+                                const versions = Object.getOwnPropertyNames(versionsL[bds_core.bds_config.bds_platform])
+                                for (let index in versions){
+                                    DownloadVersion.innerHTML += `<option value="${versions[index]}">${versions[index]}</option>\n`
+                                    console.log(`<option value="${versions[index]}">${versions[index]}</option>`);
+                                }
+                            });
+                        </script>
                     <br>
                     <span id="start_up">server when opening the Application: </span><label class="switch">
                         <input id="autostart" type="checkbox" onclick="checkedBox();">
                         <span class="slider round"></span>
                     </label>
+                    <button onclick="location.reload(true)" id="reloadPage" style="display: none;">Reload Page</button>
                 </fieldset>
                 <fieldset>
                     <fieldset>
@@ -227,8 +227,8 @@
 </body>
 <script src="./set_lang.js"></script>
 <div id="scr">
-    <script src="assents/js/modal.js"></script>
-    <script src="assents/js/setting_server.js"></script>
+    <script src="./assents/js/modal.js"></script>
+    <script src="./assents/js/setting_server.js"></script>
     <script>
         const themeMap = {
             dark: "light",
@@ -249,23 +249,17 @@
 function startServer(){
     if (!(bds_detect())){
         var bds_EXIT = document.getElementById("LOG").innerHTML
-        if (bds_EXIT.includes("Quit correctly")){
-            document.getElementById("LOG").innerHTML = ""
-        }
+        // if (bds_EXIT.includes("Quit correctly")) document.getElementById("LOG").innerHTML = ""
         global.serverstated = bds_start();
         serverstated.stdout.on("data", function (data) {
             document.getElementById("LOG").innerHTML += data;
             document.getElementById("LOG").scrollTo(0, 9999)
         });
-    } else {
-        alert("Your server is running")
-    }
+    } else alert("Your server is running")
 }
 
 function restartServer(){
-    if (bds_detect()){
-        bds_stop()
-    }
+    if (bds_detect()) bds_stop()
     startServer();
 }
 
@@ -281,7 +275,7 @@ function sendcomand() {
         alert("Use Stop in options");
         document.getElementById("cmds").value = blank
     } else {
-        if (command === blank) {
+        if (command === "") {
             document.getElementById("comsen").removeAttribute("disabled")
             alert("command is blank")
         } else {
@@ -299,14 +293,10 @@ function log_save(){
 bds_control.telegram.launch();
 
 setInterval(() => {
-    var str = document.getElementById("title");
-    var bds_status = localStorage.getItem("bds_status");
-    if (bds_status === "true"){
-        var msg = "The server is running"
-    } else {
-        var msg = "The server is stopped"
-    }
-    str.innerHTML = `Bds Maneger \\-/ ${msg}`
+    var msg
+    if (bds_detect() === true) msg = language_json.message.title.started
+    else msg = language_json.message.title.stoped
+    document.getElementById("title").innerHTML = `Bds Maneger \\-/ ${msg}`
 }, 1000);
 
 function setID(){

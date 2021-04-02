@@ -1,8 +1,6 @@
-const fs = require("fs")
-const path = require("path");
 // eslint-disable-next-line no-unused-vars
-const lang = JSON.parse(fs.readFileSync(path.join(__dirname, "l10n.json")))
-const language_json = eval(`lang.${electron_locale_system}`) 
+const LangJson = JSON.parse(require("fs").readFileSync(require("path").resolve(__dirname, "l10n.json")))
+const language_json = (LangJson[navigator.language]||LangJson["en-US"])
 console.log(language_json)
 
 document.getElementById("world_name").innerHTML = language_json.message.root.server_settings.world_name
@@ -42,4 +40,4 @@ document.getElementById("buttom_backup").innerHTML = language_json.message.butto
 document.getElementById("buttom_settings").innerHTML = language_json.message.buttom.settings
 document.getElementById("buttom_about").innerHTML = language_json.message.buttom.about
 document.getElementById("cmds").placeholder = language_json.message.root.log.command_input
-document.getElementById("comsen").value = language_json.message.root.log.send_command
+document.getElementById("command_send").value = language_json.message.root.log.send_command

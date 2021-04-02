@@ -1,6 +1,10 @@
 {
-    "pt_BR": {
+    "pt-BR": {
         "message": {
+            "title": {
+                "started": "O Servidor esta executando",
+                "stoped":  "O Servidor Esta parado"
+            },
             "buttom": {
                 "start": "Iniciar o servidor",
                 "stop": "Parar o servidor",
@@ -12,7 +16,7 @@
             },
             "root": {
                 "log": {
-                    "command_input": "Qual é o comando?",
+                    "command_input": "Qual é o comando?, Não precisar incluir o '/'",
                     "send_command": "Enviar comando!"
                 },
                 "settings": {
@@ -54,8 +58,12 @@
         },
         "alert": {}
     },
-    "en_US":{
+    "en-US":{
         "message": {
+            "title": {
+                "started": "O Servidor esta executando",
+                "stoped":  "O Servidor Esta parado"
+            },
             "buttom": {
                 "start": "Start the server",
                 "stop": "Stop the server",
@@ -67,7 +75,7 @@
             },
             "root": {
                 "log": {
-                    "command_input": "What is the command?",
+                    "command_input": "What is the command ?, Do not need to include the '/'",
                     "send_command": "Send command!"
                 },
                 "settings": {
