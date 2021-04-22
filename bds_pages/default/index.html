@@ -3,12 +3,23 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title id="title">Loading</title>
+    <title id="title">The Bds Maneger Electron</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='assents/css/index.css'>
     <script>
-        var kill_status = bds_kill();
-        if (kill_status){localStorage.setItem('bds_status', false);location.reload()}
+        var kill_status = bds_kill();if (kill_status){location.reload(true)}
+        function BdsManegerSettings(){
+            let filesettings = require("path").resolve(__dirname, "config.html");
+            let openedConfig = open(filesettings)
+            console.log(openedConfig);
+            const checkClosed = setInterval(() => {
+                if (openedConfig.closed) {
+                    document.getElementById("StopButtom").click()
+                    // location.reload(true)
+                }
+            }, 500);
+        }
     </script>
 </head>
 <body class="DarkColors">
@@ -77,7 +88,7 @@
             </li>
             <!-- World Backup -->
             <!-- Settings -->
-            <li class="nav-item" id="configbuttom">
+            <li class="nav-item" onclick="BdsManegerSettings()">
                 <a href="#" class="nav-link">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="2%" viewBox="0 0 24 24">
                         <g>
@@ -90,7 +101,7 @@
             </li>
             <!-- Settings -->
             <!-- Project Infor -->
-            <li class="nav-item" id="InfoB">
+            <li class="nav-item" id="ProjectAbout">
                 <a href="#" class="nav-link">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="2%" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0z" fill="none"/>
@@ -99,153 +110,109 @@
                     <span class="link-text" id="buttom_about">About</span>
                 </a>
             </li>
+            <script>
+                document.getElementById("ProjectAbout").onclick = () => {
+                    open(require("path").resolve(__dirname, "About.html"))
+                }
+            </script>
         </ul>
     </nav><!-- End NAV -->
     
     <div class="root" id="root_container">
-        <!-- Main Home -->
+        <!-- Log Area -->
         <div>
-            <p id="SystemProcess"></p>
+            <div style="text-align: center;">
+                <span style="color: green;display: none;" id="Reunning">Running</span><span style="color: red;display: none;" id="Stopped">Stopped</span>
+            </div>
+            <script>
+                setInterval(() => {
+                    if (bds_core.bds_detect()) {
+                        document.getElementById("Reunning").style.display = "block";
+                        document.getElementById("Stopped").style.display = "none"
+                    } else {
+                        document.getElementById("Stopped").style.display = "block";
+                        document.getElementById("Reunning").style.display = "none"
+                    }
+                }, 300);
+            </script>
             <textarea class="logTEXT" disabled id="LOG"></textarea>
         </div>
-        <div class="root_command">
-            <script>
-                function checkCommand(){
-                    const currentCommand = document.getElementById("cmds").value;
-                    if (currentCommand.charAt(0) === "/") document.getElementById("cmds").value = currentCommand.replace("/", "");
-                }
-                function clearCommand(){document.getElementById("command").value = ""}
-            </script>
-            <input class="command_area" id="cmds" id="btn2" size="100%" placeholder="The command is here, there is no need to include the '/'" oninput="checkCommand();" type="text" id="command" onkeydown="if(event.keyCode === 13) document.getElementById('command_send').click()">
-            <input class="command_send" id="command_send" type="submit" onclick="sendcomand(); clearCommand()">
-        </div>
-        <!--End Main Display-->
 
-        <!-- The Modal Info -->
-        <div id="Info" class="modal">
-            <div class="modal-content">
-                <span class="infoclose">&times;</span>
-                <div class="info"><!--Infos-->
-                    <img src="../assents/mcpe.png" width="7%">
-                    <a>BDS MANEGER GUI &#9400;</a>
-                    <fieldset><!--Simples info-->
-                        <a>BDS Maneger Info:</a>
-                        <div class="info_after">
-                            <p>App local Version: <script>document.write(bds_app_version)</script></p>
-                            <div class="mantedor"><!-- Lista de mantedores -->
-                                <a>Lista de Mantedores:</a>
-                                <p><a href="mailto:sirherobrine20@gmail.com">Matheus Sampaio Queiroga (Sirherobrine23)</a></p>
-                            </div><!-- Lista de mantedores end-->
-                            <div id="before_get_update"></div>
-                        </div>
-                    </fieldset><!--Simples info end-->
-                    <fieldset><!-- App Infos -->
-                        <a>Minecraft Server Info:</a>
-                        <div class="info_after">
-                            <p>Latest Bedrock Server Version: <script>document.write(bds_core.bedrock_latest)</script></p>
-                            <p>Latest Java Server Version: <script>document.write(bds_core.java_latest)</script></p>
-                        </div>
-                    </fieldset><!-- App Infos end-->
-                </div><!--Infos end-->
-            </div>
+        <!-- Command Area -->
+        <div class="root_command" id="CommandAreaDiv">
+            <input class="command_area" placeholder="The command is here, there is no need to include the '/'" id="CommandAreaInput" size="100%" type="text">
+            <input class="command_send" id="CommandSendID" type="submit" value="Command">
         </div>
-        <!-- The Modal Info end -->
+        <div class="SystemInfo">
+            <p>
+                <span>CPU: <progress id="CpuUtilization" value="0" max="100"></progress></span>,
+                <span>Server utilization CPU: <progress id="BdsCpuUtilization" value="0" max="100"></progress></span>
+            </p>
+        </div>
+        <script>
+            global.HistoricNumber = 0
+            // Command input
+            global.TheCommands = JSON.parse((localStorage.getItem("CommmandHistoric") || "[]"))
+            const commandArea = document.getElementById("CommandAreaInput")
+            commandArea.onkeydown = () => {
+                // console.log(event.keyCode);
+                if(event.keyCode === 38) {
+                    global.HistoricNumber = global.HistoricNumber + 1
+                    if (global.TheCommands[global.HistoricNumber]) commandArea.value = global.TheCommands[global.HistoricNumber]
+                    else global.HistoricNumber = global.HistoricNumber - 1
+                }
+                if(event.keyCode === 40) {
+                    global.HistoricNumber = global.HistoricNumber - 1
+                    if (global.TheCommands[global.HistoricNumber]) commandArea.value = global.TheCommands[global.HistoricNumber]
+                    else global.HistoricNumber = global.HistoricNumber + 1
+                }
+                if(event.keyCode === 13) {
+                    global.TheCommands.push(commandArea.value);
+                    localStorage.setItem("CommmandHistoric", JSON.stringify(global.TheCommands, null, 4))
+                    document.getElementById("CommandSendID").click();
+                }
+            }
+            commandArea.oninput = () => {
+                if (commandArea.value.charAt(0) === "/") commandArea.value = commandArea.value.replace("/", "");
+                if (commandArea.value === "stop") {alert("User the giant button here on the side or down here");commandArea.value = ""};
+            }
+
+            // Command click
+            const CommandClick = document.getElementById("CommandSendID")
+            CommandClick.onclick = () => {
+                if (bds_core.bds_detect()) {
+                    bds_core.command(commandArea.value);
+                    global.HistoricNumber = 0
+                    commandArea.value = "";
+                } alert("Start the Server")
+            }
+        </script>
     </div>
     <!--End Root-->
-
-    <!-- The Modal Config Menu -->
-    <div id="configmodal" class="modal">
-        <div class="modal-content">
-            <span class="closeConfig">&times;</span>
-            <div class="config">
-
-                <span id="settings_fild">Minecraft Server Configurations</span>
-                <fieldset id="CConfig">
-                    <span id='drive_id_text'>What is the Google Drive (ID) folder: </span>
-                    <input onchange="UpdategoogleDriveID()" id="drive_id" type="text">
-                    <script>const GetGoogleDriveID = setTimeout(() => {document.getElementById("drive_id").value = bds_core.bds_config.Google_Drive_root_backup_id;clearTimeout(GetGoogleDriveID);}, 100);function UpdategoogleDriveID(){bds_core.save_google_id(document.getElementById("drive_id").value);console.log(document.getElementById("drive_id").value);}</script>
-                    <br>
-                    <span>Bds Maneger Platform</span>
-                        <select id="bds_platform" onchange='bds_core.change_platform(document.getElementById("bds_platform").value);document.getElementById("reloadPage").style.display = "block"'>
-                            <option value="bedrock">Bedrock</option>
-                            <option value="java">Java</option>
-                        </select>
-                    <br>
-                    <span id="bds-Server_download_text">Server Download</span>
-                        <select id="bds-Server_download"></select>
-                        <button onclick="DownloadBDS();">Download</button>
-                        <script>
-                            document.getElementById("bds_platform").value = bds_core.bds_config.bds_platform
-                            fetch("https://raw.githubusercontent.com/The-Bds-Maneger/Raw_files/main/Server.json").then(Response => Response.json()).then(function (versionsL){
-                                let DownloadVersion = document.getElementById("bds-Server_download")
-                                const versions = Object.getOwnPropertyNames(versionsL[bds_core.bds_config.bds_platform])
-                                for (let index in versions){
-                                    DownloadVersion.innerHTML += `<option value="${versions[index]}">${versions[index]}</option>\n`
-                                    console.log(`<option value="${versions[index]}">${versions[index]}</option>`);
-                                }
-                            });
-                        </script>
-                    <br>
-                    <span id="start_up">server when opening the Application: </span><label class="switch">
-                        <input id="autostart" type="checkbox" onclick="checkedBox();">
-                        <span class="slider round"></span>
-                    </label>
-                    <button onclick="location.reload(true)" id="reloadPage" style="display: none;">Reload Page</button>
-                </fieldset>
-                <fieldset>
-                    <fieldset>
-                        <span id="world_name">World name: </span><label><input type="text" placeholder="Word Name (Default Bedrock level)" id="level_name"></label><br>
-                        <span id="desc">Short Discription: </span><label for="name"><input placeholder="Description" type="text" id="name"></label><br>
-                        <span>Gamemode: </span><select id="gameMode">
-                            <option value="survival" id="surv">Survival</option>
-                            <option value="creative" id="crea">Creative</option>
-                            <option value="aventure" id="aven">Aventure</option>
-                        </select><br>
-                        <span>Difficulty: </span><select id="difficulty">
-                            <option value="easy" id="eas">Easy</option>
-                            <option value="normal" id="nor">Normal</option>
-                            <option value="hard" id="har">hard</option>
-                        </select><br>
-                        <span id="deafult_pl">Player default Permissions: </span><select id="permissions">
-                            <option value="visitor" id="vis">Visitor</option>
-                            <option value="member" id="mem">Member</option>
-                            <option value="operator" id="ope">Operator</option>
-                        </select><br>
-                        <span id="s_time_out">Time out Players not moved: </span><input disabled type="number" placeholder="Default 30 Minutes" id="timeout_server"><br>
-                        <span id="max_play">Maximum number of players: </span><input type="number" disabled placeholder="Default 10" min="1" id="max_pla">
-                        <br><br>
-                        <span id="sett_xb">Enable xbox Login: </span><label class="switch"><input type="checkbox" id="xbox"><span class="slider round"></span></label><br>
-                        <span id="sett_whi">Enable whitelist: </span><label class="switch"><input type="checkbox" id="whitelist"><span class="slider round"></span></label><br>
-                        <span id="sett_cheats">Allow Cheats: </span><label class="switch"><input type="checkbox" id="cheats"><span class="slider round"></span></label><br>
-
-                        <button onclick="setCONFIG();">Submit</button>
-                    </fieldset>
-                </fieldset>
-            <div>
-        </div>
-    </div>
 </body>
-<script src="./set_lang.js"></script>
-<div id="scr">
-    <script src="./assents/js/modal.js"></script>
-    <script src="./assents/js/setting_server.js"></script>
-    <script>
-        const themeMap = {
-            dark: "light",
-            light: "DarkColors",
-            DarkColors: "dark"};
-        const theme = localStorage.getItem('theme')||(tmp = Object.keys(themeMap)[0], localStorage.setItem('theme', tmp), tmp);
-        const bodyClass = document.body.classList;
-        bodyClass.add(theme);
-        function toggleTheme() {
-            const current = localStorage.getItem('theme');
-            const next = themeMap[current];
-            bodyClass.replace(current, next);
-            localStorage.setItem('theme', next);};
-        document.getElementById('themeButton').onclick = toggleTheme;
-    </script>
-    <!-- <script src="assents/js/setting_server.js"></script> -->
-    <script>
+
+<script>
+
+const systemMonitor = bds_core.system_monitor
+setInterval(() => {
+    document.getElementById("CpuUtilization").value = systemMonitor.current_cpu
+    document.getElementById("BdsCpuUtilization").value = systemMonitor.bds_cpu
+}, 1200);
+
+const themeMap = {
+    dark: "light",
+    light: "DarkColors",
+    DarkColors: "dark"};
+const theme = localStorage.getItem('theme') || (tmp = Object.keys(themeMap)[0], localStorage.setItem('theme', tmp), tmp);
+const bodyClass = document.body.classList;
+bodyClass.add(theme);
+function toggleTheme() {
+    const current = localStorage.getItem('theme');
+    const next = themeMap[current];
+    bodyClass.replace(current, next);
+    localStorage.setItem('theme', next);};
+document.getElementById('themeButton').onclick = toggleTheme;
+
 function startServer(){
     if (!(bds_detect())){
         var bds_EXIT = document.getElementById("LOG").innerHTML
@@ -263,48 +230,8 @@ function restartServer(){
     startServer();
 }
 
-function DownloadBDS(){
-    bds_download(document.getElementById("bds-Server_download").value)
-}
-document.getElementById("bds-Server_download").innerHTML = bds_control.version_select;
-function sendcomand() {
-    document.getElementById("comsen").setAttribute("disabled","")
-    var blank = "";
-    var command = document.getElementById("cmds").value
-    if (command === "stop"){
-        alert("Use Stop in options");
-        document.getElementById("cmds").value = blank
-    } else {
-        if (command === "") {
-            document.getElementById("comsen").removeAttribute("disabled")
-            alert("command is blank")
-        } else {
-            document.getElementById("comsen").removeAttribute("disabled")
-            document.getElementById("cmds").value = ""
-            bds_command(command)
-        }
-    }
-}
-
 function log_save(){
     alert("Your log file is being automatically saved to the Server directory")
 }
-
-bds_control.telegram.launch();
-
-setInterval(() => {
-    var msg
-    if (bds_detect() === true) msg = language_json.message.title.started
-    else msg = language_json.message.title.stoped
-    document.getElementById("title").innerHTML = `Bds Maneger \\-/ ${msg}`
-}, 1000);
-
-function setID(){
-    const gd_id = document.getElementById("drive_id").value
-    localStorage.setItem("GDID", gd_id);
-    alert("Sucess")
-}
-document.getElementById("drive_id").value = localStorage.getItem("GDID")
-    </script>
-</div>
+bds_control.telegram.launch();</script>
 </html>

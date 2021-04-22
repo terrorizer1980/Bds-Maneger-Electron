@@ -1,0 +1,12 @@
+.GoogleDriveId {
+    width: 16rem;
+}
+.Config_Root {
+    --relative: 5vh;
+    margin-top: 3rem;
+    margin-left: var(--relative);
+    margin-right: var(--relative);
+}
+.Center {
+    text-align: center;
+}

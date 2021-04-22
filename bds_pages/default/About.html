@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title id="title">The Bds Maneger Project</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
+</head>
+<body class="DarkColors">
+    <div class="info">
+        <div style="text-align: center;margin-bottom: 25px;margin-top: 13vh;">
+            <img src="../assents/mcpe.png" style="width: 30vh; height: 30vh; margin-left: -10vh;"> <span>The Bds Manger Project &#9400;</span>
+        </div>
+        <fieldset>
+            <a>BDS Maneger Info:</a>
+            <div class="info_after">
+                <p>Bds Maneger Core version: <script>document.write(bds_core_version)</script>, <a href="https://github.com/The-Bds-Maneger/Bds-Maneger-Core" target="_blank">Bds Maneger Core Github repository</a></p>
+                <p>Bds Maneger Gui version: <script>document.write(bds_maneger_version)</script>, <a href="https://github.com/The-Bds-Maneger/Bds-Maneger" target="_blank">Bds Maneger Gui (Electron) Github repository</a></p>
+                <div class="mantedor"><!-- Lista de mantedores -->
+                    <a>List of Maintainers:</a>
+                    <fieldset id="MaintenerList">
+                        <p><span>Github applications <a href="https://github.com" target="_blank">(Website)</a></span></p>
+                    </fieldset>
+                    <script>
+                        // id: MaintenerList
+                        for (let index of bds_core.package_json.contributors) {
+                            var email = "", url = "";
+                            if (index.email) email = `<a href="mailto:${index.email}">(E-Mail)</a>`
+                            if (index.url) url = `<a href="${index.url}" target="_blank">(Website)</a>`
+                            document.getElementById("MaintenerList").innerHTML += `<p><span>${index.name} ${email} ${url}</span></p>`
+                        }
+                    </script>
+                </div><!-- Lista de mantedores end-->
+                <div id="before_get_update"></div>
+            </div>
+        </fieldset><!--Simples info end-->
+        <fieldset><!-- App Infos -->
+            <a>Minecraft Server Info:</a>
+            <div class="info_after">
+                <p>Latest Bedrock Server Version: <script>document.write(bds_core.bedrock_latest)</script></p>
+                <p>Latest Java Server Version: <script>document.write(bds_core.java_latest)</script></p>
+                <p>Latest Pocketmine-MP Server Version: <script>document.write(bds_core.SERVER_URLs.PocketMine_latest)</script></p>
+            </div>
+        </fieldset><!-- App Infos end-->
+    </div><!--Infos end-->
+</body>
+
+<script>document.body.classList.add((localStorage.getItem('theme') || (tmp = "dark", localStorage.setItem('theme', tmp), tmp)));</script>
+</html>

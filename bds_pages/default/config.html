@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Settings Bds Maneger and Bds Maneger Core</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='assents/css/settings.css'>
+</head>
+<body class="DarkColors">
+    <div class="Config_Root">
+        <div class="config">
+            <span id="settings_fild">Minecraft Server Configurations</span>
+            <fieldset id="CConfig">
+                <span id='drive_id_text'>What is the Google Drive (ID) folder: </span>
+                <input onchange="UpdategoogleDriveID()" id="drive_id" class="GoogleDriveId" type="text">
+                <script>const GetGoogleDriveID = setTimeout(() => {document.getElementById("drive_id").value = bds_core.bds_config.Google_Drive_root_backup_id;clearTimeout(GetGoogleDriveID);}, 100);function UpdategoogleDriveID(){bds_core.save_google_id(document.getElementById("drive_id").value);console.log(document.getElementById("drive_id").value);}</script>
+                
+                <!-- Bds Maneger Plaform Version's -->
+                <p>
+                    <span>Bds Maneger Platform</span>
+                    <select id="bds_platform_download" onchange="ChangePlaformVersion()">
+                        <option value="bedrock">Bedrock</option>
+                        <option value="java">Java</option>
+                        <option value="pocketmine">Pocketmine-MP</option>
+                    </select>
+                </p>
+
+                <p>
+                    <span id="bds-Server_download_text">Server Download
+                        <select id="Bds_server_download"></select>
+                        <button id="ButtomDownload" onclick="DownloadBDS();">Download</button>
+                        <script>
+                            document.getElementById("ButtomDownload").onclick = () => {
+                                let version = document.getElementById("Bds_server_download").value
+                                console.log(version);
+                                bds_download(version)
+                            }
+                        </script>
+                    </span>
+                </p>
+
+                <span id="start_up">server when opening the Application: </span><label class="switch">
+                    <input id="autostart" type="checkbox" onclick="checkedBox();">
+                    <span class="slider round"></span>
+                </label>
+            </fieldset>
+            <fieldset>
+                <fieldset>
+                    <!-- World Name -->
+                    <p>
+                        <span id="world_name">World name: </span>
+                        <input type="text" placeholder="Word Name (Default Bedrock level)" id="level_name">
+                    </p>
+                    
+                    <!-- Metd / Description -->
+                    <p>
+                        <span id="desc">Short Discription: </span>
+                        <input placeholder="Description" type="text" id="name">
+                    </p>
+
+                    <!-- Gamemode -->
+                    <p>
+                        <span>Gamemode: </span>
+                    <select id="gameMode">
+                        <option value="survival" id="surv">Survival</option>
+                        <option value="creative" id="crea">Creative</option>
+                        <option value="aventure" id="aven">Aventure</option>
+                    </select>
+                    </p>
+
+                    <!-- Difficulty -->
+                    <p>
+                        <span>Difficulty: </span>
+                        <select id="difficulty">
+                            <option value="easy" id="eas">Easy</option>
+                            <option value="normal" id="nor">Normal</option>
+                            <option value="hard" id="har">hard</option>
+                        </select>
+                    </p>
+
+                    <!-- Minecraft Bedrock User Permission -->
+                    <div id="BedrockPermission">
+                        <p>
+                            <span id="deafult_pl">Player default Permissions: </span><select id="permissions">
+                                <option value="visitor" id="vis">Visitor</option>
+                                <option value="member" id="mem">Member</option>
+                                <option value="operator" id="ope">Operator</option>
+                            </select>
+                        </p>
+                    </div>
+
+                    <p>
+                        <span id="max_play">Maximum number of players: </span>
+                        <input type="number" disabled placeholder="Default 10" min="1" id="max_pla">
+                    </p>
+
+                    <p>
+                        <span id="sett_xb">You need to be logged in with an account to connect to the server: </span>
+                        <label class="switch">
+                            <input type="checkbox" id="xbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </p>
+                    
+                    <p>
+                        <span id="sett_whi">Enable whitelist: </span>
+                        <label class="switch">
+                            <input type="checkbox" id="whitelist">
+                            <span class="slider round"></span>
+                        </label>
+                    </p>
+                    
+                    <p>
+                        <span id="sett_cheats">Allow Cheats: </span>
+                        <label class="switch">
+                            <input type="checkbox" id="cheats">
+                            <span class="slider round"></span>
+                        </label>
+                    </p>
+
+                    <div class="Center"><input type="submit" id="SaveServerConfig" value="Save server.proprieties"></div>
+                </fieldset>
+            </fieldset>
+        <div>
+    </div>
+</body>
+
+<script>
+function ChangePlaformVersion(){
+    const Json_version = bds_core.SERVER_URLs
+    const platform = document.getElementById("bds_platform_download").value
+    var HtmlSelect="";
+    bds_core.change_platform(platform)
+    if (platform === "java") for (let index of Object.getOwnPropertyNames(Json_version.java)) HtmlSelect += `<option value="${index}">Java: ${index}</option>`;
+    else if (platform === "bedrock") for (let index of Object.getOwnPropertyNames(Json_version.bedrock)) HtmlSelect += `<option value="${index}">Bedrock: ${index}</option>`;
+    else if (platform === "pocketmine") for (let index of Object.getOwnPropertyNames(Json_version.PocketMine)) HtmlSelect += `<option value="${index}">Pocketmine-MP: ${index}</option>`;
+    document.getElementById("Bds_server_download").innerHTML = HtmlSelect
+}
+document.getElementById("bds_platform_download").value = bds_core.platform
+ChangePlaformVersion()
+
+var CONFIGS = bds_get_settings()
+document.getElementById("name").value = CONFIGS.server_name;
+document.getElementById("gameMode").value = CONFIGS.gamemode;
+document.getElementById("difficulty").value = CONFIGS.difficulty;
+document.getElementById("level_name").value = CONFIGS.level_name;
+document.getElementById("permissions").value = CONFIGS.default_player_permission_level;
+document.getElementById("max_pla").value = CONFIGS.max_players
+
+// cheats
+if (CONFIGS.allow_cheats === "true"){document.getElementById("cheats").checked = true} else {document.getElementById("cheats").checked = false}
+// online mode
+if (CONFIGS.online_mode === "true"){document.getElementById("xbox").checked = true} else {document.getElementById("xbox").checked = false}
+// cheats
+if (CONFIGS.white_list === "true"){document.getElementById("whitelist").checked = true} else {document.getElementById("whitelist").checked = false}
+
+
+document.getElementById("SaveServerConfig").onclick = () => {
+    if (document.getElementById("name").value === "") return alert("Add a description")
+    if (document.getElementById("level_name").value === "") return alert("Choose a name for your map")
+    bds_settings(JSON.stringify({
+        "name": document.getElementById("level_name").value,
+        "description": document.getElementById("name").value,
+        "gamemode": document.getElementById("gameMode").value,
+        "difficulty": document.getElementById("difficulty").value,
+        "cheats": document.getElementById("cheats").checked,
+        "players": document.getElementById("max_pla").value,
+        "xbox": document.getElementById("xbox").checked,
+        "white_list": document.getElementById("whitelist").checked,
+        "port": 19132,
+        "port6": 19133,
+        "player_permission": document.getElementById("permissions").value
+    }, null, 4))
+}
+
+const themeMap = {
+    dark: "light",
+    light: "DarkColors",
+    DarkColors: "dark"
+};
+
+document.body.classList.add((localStorage.getItem('theme') || (tmp = Object.keys(themeMap)[0], localStorage.setItem('theme', tmp), tmp)));
+
+function setID(){
+    const gd_id = document.getElementById("drive_id").value
+    localStorage.setItem("GDID", gd_id);
+    alert("Sucess")
+}
+document.getElementById("drive_id").value = localStorage.getItem("GDID")
+
+</script>
+</html>

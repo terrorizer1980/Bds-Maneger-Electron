@@ -1,6 +1,6 @@
 {
     "name": "bds-manege",
-    "version": "1.2.5",
+    "version": "1.2.6",
     "description": "The Bds Maneger, control your server with Electron",
     "main": "index.js",
     "private": false,
@@ -34,7 +34,7 @@
     "homepage": "https://github.com/The-Bds-Maneger#readme",
     "dependencies": {
         "@electron/remote": "^1.0.4",
-        "@the-bds-maneger/core": "^1.8.7",
+        "@the-bds-maneger/core": "^77.2520.69",
         "command-exists": "^1.2.9"
     },
     "devDependencies": {
