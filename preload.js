@@ -10,6 +10,7 @@ process.once("loaded", () => {
   process.env.ENABLE_BDS_API = true
   global.bds_control = bds;
   global.bds_core = bds;
+  global.bds = bds;
   global.bds_maneger_api = bds.rest;
   global.bds_stop = bds.stop;
   global.bds_start = bds.start;
@@ -28,5 +29,5 @@ process.once("loaded", () => {
   let loadConfig = JSON.parse(readFileSync(resolve(__dirname, "bds_pages", bds.bds_config.bds_pages, "config.json"), "utf8"))
   if (loadConfig.Package)
     if (loadConfig.Package.length > 0)
-      for (let PackageInstall of loadConfig.Package) console.log("Package Install: " + execSync(`npm install --no-save ${PackageInstall}`, {cwd: __dirname}).toString());
+      for (let PackageInstall of loadConfig.Package) console.log(`Package Install: ${PackageInstall}, log: `+ execSync(`npm install --no-save ${PackageInstall}`, {cwd: __dirname}).toString());
 });

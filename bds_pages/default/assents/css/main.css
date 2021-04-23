@@ -18,6 +18,40 @@ it's still basic CSS.
 *{
   font-family: "minecraft", "minecraft-bold", "minecraft-regular";
 }
+
+.dark {
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --box-primary: rgba(0,0,0,0.4);
+  --border-color: rgba(255, 255, 255, 0.5);
+  --color-error: rgb(164, 29, 29);
+  --color-success: rgb(17, 173, 14);
+}
+
+.light {
+  --text-primary: #1f1f1f;
+  --text-secondary: #000000;
+  --bg-primary: #ffffff;
+  --bg-secondary: #e4e4e4;
+  --box-primary: rgba(0,0,0,0.4);
+  --border-color: rgba(0,0,0,0.5);
+  --color-error: red;
+  --color-success: rgb(17, 173, 14);
+}
+
+.DarkColors{
+  --text-primary: #fff;
+  --text-secondary: #fff;
+  --bg-primary: #1d1d1d;
+  --bg-secondary: #3e3e3e;
+  --box-primary: rgba(0,0,0,0.4);
+  --border-color: rgba(0,0,0,0.5);
+  --color-error: rgb(164, 29, 29);
+  --color-success: rgb(17, 173, 14);
+}
+
 /*input[type="text"] {
   width: 97%;
 }*/
@@ -287,32 +321,6 @@ font-size: small;
   }
 }
 
-.dark {
-  --text-primary: #b6b6b6;
-  --text-secondary: #ececec;
-  --bg-primary: #23232e;
-  --bg-secondary: #141418;
-  --box-primary: rgba(0,0,0,0.4);
-  --border-color: rgba(255, 255, 255, 0.5);
-}
-
-.light {
-  --text-primary: #1f1f1f;
-  --text-secondary: #000000;
-  --bg-primary: #ffffff;
-  --bg-secondary: #e4e4e4;
-  --box-primary: rgba(0,0,0,0.4);
-  --border-color: rgba(0,0,0,0.5);
-}
-
-.DarkColors{
-  --text-primary: #fff;
-  --text-secondary: #fff;
-  --bg-primary: #1d1d1d;
-  --bg-secondary: #3e3e3e;
-  --box-primary: rgba(0,0,0,0.4);
-  --border-color: rgba(0,0,0,0.5);
-}
 .theme-icon {display: none}
 .dark #darkIcon {display: block}
 .DarkColors #system {display: block}

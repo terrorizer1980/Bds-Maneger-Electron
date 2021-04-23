@@ -50,54 +50,58 @@
                 <fieldset>
                     <!-- World Name -->
                     <p>
-                        <span id="world_name">World name: </span>
-                        <input type="text" placeholder="Word Name (Default Bedrock level)" id="level_name">
+                        <span id="SpanWorld">World name: </span>
+                        <input type="text" placeholder="Word Name (Default Bedrock level)" id="world_name">
                     </p>
                     
-                    <!-- Metd / Description -->
+                    <!-- Description -->
                     <p>
-                        <span id="desc">Short Discription: </span>
-                        <input placeholder="Description" type="text" id="name">
+                        <span id="SpanDescription">Short Discription: </span>
+                        <input placeholder="Description" type="text" id="world_descripition">
                     </p>
 
                     <!-- Gamemode -->
                     <p>
                         <span>Gamemode: </span>
-                    <select id="gameMode">
+                    <select id="Gamemode">
                         <option value="survival" id="surv">Survival</option>
                         <option value="creative" id="crea">Creative</option>
-                        <option value="aventure" id="aven">Aventure</option>
+                        <!-- <option value="aventure" id="aven">Aventure</option> -->
                     </select>
                     </p>
 
                     <!-- Difficulty -->
                     <p>
                         <span>Difficulty: </span>
-                        <select id="difficulty">
+                        <select id="Difficulty">
                             <option value="easy" id="eas">Easy</option>
                             <option value="normal" id="nor">Normal</option>
                             <option value="hard" id="har">hard</option>
                         </select>
                     </p>
 
-                    <!-- Minecraft Bedrock User Permission -->
-                    <div id="BedrockPermission">
-                        <p>
-                            <span id="deafult_pl">Player default Permissions: </span><select id="permissions">
-                                <option value="visitor" id="vis">Visitor</option>
-                                <option value="member" id="mem">Member</option>
-                                <option value="operator" id="ope">Operator</option>
-                            </select>
-                        </p>
-                    </div>
-
                     <p>
-                        <span id="max_play">Maximum number of players: </span>
-                        <input type="number" disabled placeholder="Default 10" min="1" id="max_pla">
+                        <span>Maximum number of players: </span>
+                        <input type="number" placeholder="Default 10" min="1" id="maxplayers">
                     </p>
 
                     <p>
-                        <span id="sett_xb">You need to be logged in with an account to connect to the server: </span>
+                        <span>Server Port: </span>
+                        <input type="number" id="portv4" placeholder="Default 10" min="1" id="max_pla">
+                    </p>
+
+                    <p>
+                        <span>Server Port to IPv6: </span>
+                        <input type="number" id="portv6" disabled placeholder="Default 10" min="1" id="max_pla">
+                    </p>
+
+                    <p>
+                        <span>Minecraft Server default seed: </span>
+                        <input type="number" id="seed" placeholder="By default it will be nothing" min="1" id="max_pla">
+                    </p>
+
+                    <p>
+                        <span id="needsaccount">You need to be logged in with an account to connect to the server: </span>
                         <label class="switch">
                             <input type="checkbox" id="xbox">
                             <span class="slider round"></span>
@@ -105,7 +109,7 @@
                     </p>
                     
                     <p>
-                        <span id="sett_whi">Enable whitelist: </span>
+                        <span id="whitelist">Enable whitelist: </span>
                         <label class="switch">
                             <input type="checkbox" id="whitelist">
                             <span class="slider round"></span>
@@ -113,7 +117,7 @@
                     </p>
                     
                     <p>
-                        <span id="sett_cheats">Allow Cheats: </span>
+                        <span id="commands">Allow commands: </span>
                         <label class="switch">
                             <input type="checkbox" id="cheats">
                             <span class="slider round"></span>
@@ -136,43 +140,66 @@ function ChangePlaformVersion(){
     if (platform === "java") for (let index of Object.getOwnPropertyNames(Json_version.java)) HtmlSelect += `<option value="${index}">Java: ${index}</option>`;
     else if (platform === "bedrock") for (let index of Object.getOwnPropertyNames(Json_version.bedrock)) HtmlSelect += `<option value="${index}">Bedrock: ${index}</option>`;
     else if (platform === "pocketmine") for (let index of Object.getOwnPropertyNames(Json_version.PocketMine)) HtmlSelect += `<option value="${index}">Pocketmine-MP: ${index}</option>`;
-    document.getElementById("Bds_server_download").innerHTML = HtmlSelect
+    document.getElementById("Bds_server_download").innerHTML = HtmlSelect;
+
+    const ServerConfig = bds_core.get_config()
+    let JsoConfig = {
+        world: 'Bds Maneger',
+        description: 'The Bds Maneger',
+        gamemode: 'creative',
+        difficulty: 'normal',
+        players: 10,
+        account: true,
+        whitelist: true,
+        portv4: 19132,
+        portv6: 19133,
+        seed: '',
+        commands: true
+    }
+
+    document.getElementById("world_name").value = ServerConfig.world;
+    document.getElementById("world_descripition").value = ServerConfig.description;
+    document.getElementById("Gamemode").value = ServerConfig.gamemode;
+    document.getElementById("Difficulty").value = ServerConfig.difficulty;
+    document.getElementById("maxplayers").value = ServerConfig.players
+    
+    document.getElementById("portv4").value = ServerConfig.portv4
+    document.getElementById("portv6").value = ServerConfig.portv6
+
+    document.getElementById("seed").value = ServerConfig.seed
+
+    // Needds account
+    document.getElementById("needsaccount").checked = ServerConfig.account
+
+    // cheats
+    document.getElementById("commands").checked = ServerConfig.commands
+
+    // whitelist
+    document.getElementById("whitelist").checked = ServerConfig.whitelist
+
+    console.log(ServerConfig);
 }
 document.getElementById("bds_platform_download").value = bds_core.platform
 ChangePlaformVersion()
 
-var CONFIGS = bds_get_settings()
-document.getElementById("name").value = CONFIGS.server_name;
-document.getElementById("gameMode").value = CONFIGS.gamemode;
-document.getElementById("difficulty").value = CONFIGS.difficulty;
-document.getElementById("level_name").value = CONFIGS.level_name;
-document.getElementById("permissions").value = CONFIGS.default_player_permission_level;
-document.getElementById("max_pla").value = CONFIGS.max_players
-
-// cheats
-if (CONFIGS.allow_cheats === "true"){document.getElementById("cheats").checked = true} else {document.getElementById("cheats").checked = false}
-// online mode
-if (CONFIGS.online_mode === "true"){document.getElementById("xbox").checked = true} else {document.getElementById("xbox").checked = false}
-// cheats
-if (CONFIGS.white_list === "true"){document.getElementById("whitelist").checked = true} else {document.getElementById("whitelist").checked = false}
-
-
 document.getElementById("SaveServerConfig").onclick = () => {
-    if (document.getElementById("name").value === "") return alert("Add a description")
-    if (document.getElementById("level_name").value === "") return alert("Choose a name for your map")
-    bds_settings(JSON.stringify({
-        "name": document.getElementById("level_name").value,
-        "description": document.getElementById("name").value,
-        "gamemode": document.getElementById("gameMode").value,
-        "difficulty": document.getElementById("difficulty").value,
-        "cheats": document.getElementById("cheats").checked,
-        "players": document.getElementById("max_pla").value,
-        "xbox": document.getElementById("xbox").checked,
-        "white_list": document.getElementById("whitelist").checked,
-        "port": 19132,
-        "port6": 19133,
-        "player_permission": document.getElementById("permissions").value
-    }, null, 4))
+    if (document.getElementById("world_descripition").value === "") return alert("Add a description")
+    if (document.getElementById("world_name").value === "") return alert("Choose a name for your map")
+    let JsonConfig = {
+        world: document.getElementById("world_name").value,
+        description: document.getElementById("world_descripition").value,
+        gamemode: document.getElementById("Gamemode").value,
+        difficulty: document.getElementById("Difficulty").value,
+        players: parseInt(document.getElementById("maxplayers").value),
+        port: parseInt(document.getElementById("portv4").value),
+        portv6: parseInt(document.getElementById("portv6").value),
+        commands: document.getElementById("commands").checked,
+        account: document.getElementById("needsaccount").checked,
+        whitelist: document.getElementById("whitelist").checked,
+        seed: document.getElementById("seed").value
+    }
+    console.log(JsonConfig);
+    bds_settings(JsonConfig)
 }
 
 const themeMap = {

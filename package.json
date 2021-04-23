@@ -1,6 +1,6 @@
 {
     "name": "bds-manege",
-    "version": "1.2.6",
+    "version": "1.8.8.5",
     "description": "The Bds Maneger, control your server with Electron",
     "main": "index.js",
     "private": false,
@@ -34,7 +34,7 @@
     "homepage": "https://github.com/The-Bds-Maneger#readme",
     "dependencies": {
         "@electron/remote": "^1.0.4",
-        "@the-bds-maneger/core": "^77.2520.69",
+        "@the-bds-maneger/core": "^77.5933.521",
         "command-exists": "^1.2.9"
     },
     "devDependencies": {
@@ -50,12 +50,12 @@
         "asarUnpack": true,
         "nsis": {
             "oneClick": "false",
-            "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
+            "artifactName": "${productName}-Setup-${version}-${arch}-${os}.${ext}",
             "allowToChangeInstallationDirectory": "true",
             "installerIcon": "./bds_pages/assents/mcpe.ico"
         },
         "portable": {
-            "artifactName": "${productName}-Portable-${version}-${arch}.${ext}"
+            "artifactName": "${productName}-Portable-${version}-${arch}-${os}.${ext}"
         },
         "deb": {
             "depends": [
@@ -65,7 +65,8 @@
                 "libappindicator1",
                 "libxtst6",
                 "libnss3",
-                "curl"
+                "curl",
+                "wget"
             ],
             "packageCategory": "The bds Maneger"
         },
@@ -77,7 +78,7 @@
             "icon": "./bds_pages/assents/mcpe.ico"
         },
         "linux": {
-            "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
+            "artifactName": "${productName}-Setup-${version}-${arch}-${os}.${ext}",
             "category": "The Bds Maneger",
             "target": [
                 "deb",
