@@ -1,6 +1,6 @@
 {
     "name": "bds-manege",
-    "version": "1.8.8.5",
+    "version": "1.9.0",
     "description": "The Bds Maneger, control your server with Electron",
     "main": "index.js",
     "private": false,
@@ -34,7 +34,7 @@
     "homepage": "https://github.com/The-Bds-Maneger#readme",
     "dependencies": {
         "@electron/remote": "^1.0.4",
-        "@the-bds-maneger/core": "^77.5933.521",
+        "@the-bds-maneger/core": "^1.9.0",
         "command-exists": "^1.2.9"
     },
     "devDependencies": {
@@ -45,17 +45,18 @@
         "xmldom": ">=0.6.0"
     },
     "build": {
-        "appId": "com.sirherobrine23.bds_maneger",
+        "appId": "com.thebdsmanegerproject.bdsmaneger",
         "asar": false,
         "asarUnpack": true,
+        "copyright": "Copyright © 2021 ${author",
+        "productName": "TheBdsManegerElectron",
         "nsis": {
             "oneClick": "false",
-            "artifactName": "${productName}-Setup-${version}-${arch}-${os}.${ext}",
-            "allowToChangeInstallationDirectory": "true",
-            "installerIcon": "./bds_pages/assents/mcpe.ico"
+            "artifactName": "${productName}-Setup-${version}-${arch}-${os}-${platform}.${ext}",
+            "allowToChangeInstallationDirectory": "true"
         },
         "portable": {
-            "artifactName": "${productName}-Portable-${version}-${arch}-${os}.${ext}"
+            "artifactName": "${productName}-Portable-${version}-${arch}-${os}-${platform}.${ext}"
         },
         "deb": {
             "depends": [
@@ -65,26 +66,33 @@
                 "libappindicator1",
                 "libxtst6",
                 "libnss3",
-                "curl",
-                "wget"
-            ],
-            "packageCategory": "The bds Maneger"
+                "curl"
+            ]
         },
         "win": {
             "target": [
                 "nsis",
                 "portable"
-            ],
-            "icon": "./bds_pages/assents/mcpe.ico"
+            ]
+        },
+        "AppImage": {
+            "artifactName": "${productName}-Portable-${version}-${arch}-${os}-${platform}.${ext}"
         },
         "linux": {
-            "artifactName": "${productName}-Setup-${version}-${arch}-${os}.${ext}",
-            "category": "The Bds Maneger",
+            "artifactName": "${productName}-Setup-${version}-${arch}-${os}-${platform}.${ext}",
+            "category": "Maneger",
             "target": [
                 "deb",
-                "AppImage"
-            ],
-            "icon": "./bds_pages/assents/mcpe256x256.png"
+                "AppImage",
+                "zip",
+                "7z"
+            ]
+        },
+        "mac": {
+            "target": [
+                "dmg",
+                "zip"
+            ]
         }
     }
 }

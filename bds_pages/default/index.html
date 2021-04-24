@@ -105,8 +105,9 @@
             <script>
                 document.getElementById("WorldBackupIndrive").onclick = () => {
                     if ((bds_core.bds_config.Google_Drive_root_backup_id === undefined || bds_core.bds_config.Google_Drive_root_backup_id === "" || bds_core.bds_config.Google_Drive_root_backup_id === null || bds_core.bds_config.Google_Drive_root_backup_id === undefined)) alert("The Save Backup in Root Drive")
-                    bds_core.drive_backup(function (id){
-                        alert(`Backup save, ID: ${id}`)
+                    bds_core.drive_backup((file) => {
+                        console.log(file);
+                        alert(`Backup save, ID: ${JSON.stringify(file.data.id)}`)
                     })
                 }
             </script>
