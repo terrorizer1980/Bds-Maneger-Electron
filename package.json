@@ -75,9 +75,6 @@
                 "portable"
             ]
         },
-        "AppImage": {
-            "artifactName": "${productName}-Portable-${version}-${arch}-${os}-${platform}.${ext}"
-        },
         "linux": {
             "artifactName": "${productName}-Setup-${version}-${arch}-${os}-${platform}.${ext}",
             "category": "Maneger",
