@@ -34,7 +34,7 @@
     "homepage": "https://github.com/The-Bds-Maneger#readme",
     "dependencies": {
         "@electron/remote": "^1.0.4",
-        "@the-bds-maneger/core": "^79.6930.881",
+        "@the-bds-maneger/core": "^80.5511.789",
         "command-exists": "^1.2.9"
     },
     "devDependencies": {
