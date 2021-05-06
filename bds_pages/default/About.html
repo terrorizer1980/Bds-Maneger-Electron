@@ -24,12 +24,20 @@
                     </fieldset>
                     <script>
                         // id: MaintenerList
-                        for (let index of bds_core.package_json.contributors) {
-                            var email = "", url = "";
-                            if (index.email) email = `<a href="mailto:${index.email}">(E-Mail)</a>`
-                            if (index.url) url = `<a href="${index.url}" target="_blank">(Website)</a>`
-                            document.getElementById("MaintenerList").innerHTML += `<p><span>${index.name} ${email} ${url}</span></p>`
-                        }
+                        fetch("https://api.github.com/repos/The-Bds-Maneger/Bds-Maneger-Core/contributors").then(res => {if (res.ok) return res.json(); else throw new Error(res)}).then(res => {
+                            for (let contri of res) {
+                                if (contri.type === "User") {
+                                    fetch(contri.url).then(res => {if (res.ok) return res.json(); else throw new Error(res)}).then(res => {
+                                        var email = "", url = "", twitter = "", github = "";
+                                        if (res.email) email = `<a href="mailto:${res.email}">(E-Mail)</a>`
+                                        if (res.url) url = `<a href="#${res.name}" onclick="require('electron').shell.openExternal('${res.blog.split(/\?+/)[0]}?from=bds-maneger-project')">(Website)</a>`
+                                        if (res.twitter_username) twitter = `<a href="#${res.name}" onclick="require('electron').shell.openExternal('https://twitter.com/${res.twitter_username}')">(Twitter)</a>`
+                                        if (res.html_url) github = `<a href="#${res.name}" onclick="require('electron').shell.openExternal('${res.html_url}')">(Github)</a>`
+                                        document.getElementById("MaintenerList").innerHTML += `<p><span id="${res.name}">${res.name} (${res.login}, location: ${res.location}) ${email} ${url} ${twitter} ${github}</span></p>`
+                                    })
+                                }
+                            }
+                        }).catch(err => console.error(err))
                     </script>
                 </div><!-- Lista de mantedores end-->
                 <div id="before_get_update"></div>

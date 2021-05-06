@@ -1,6 +1,6 @@
 {
     "name": "bds-manege",
-    "version": "1.9.0",
+    "version": "1.9.2",
     "description": "The Bds Maneger, control your server with Electron",
     "main": "index.js",
     "private": false,
@@ -9,10 +9,10 @@
         "test": "npm run eslint",
         "eslint": "eslint .",
         "eslint:fix": "eslint . --fix",
-        "pack": "npm run dir:pack && electron-builder --x64",
-        "pack:arm64": "npm run dir:packarm64 && electron-builder --arm64",
-        "dir:pack": "electron-builder --dir --x64",
-        "dir:packarm64": "electron-builder --dir --arm64"
+        "dist": "npm run pack && npm run pack:arm64 && npm run pack:ia32",
+        "pack": "electron-builder --x64",
+        "pack:arm64": "electron-builder --arm64",
+        "pack:ia32": "electron-builder --ia32"
     },
     "repository": {
         "type": "git",
@@ -34,8 +34,7 @@
     "homepage": "https://github.com/The-Bds-Maneger#readme",
     "dependencies": {
         "@electron/remote": "^1.0.4",
-        "@the-bds-maneger/core": "^80.9684.855",
-        "command-exists": "^1.2.9"
+        "@the-bds-maneger/core": "^81.5457.620"
     },
     "devDependencies": {
         "electron": "^12.0.6",
@@ -48,7 +47,7 @@
         "appId": "com.thebdsmanegerproject.bdsmaneger",
         "asar": false,
         "asarUnpack": true,
-        "copyright": "Copyright © 2021 ${author",
+        "copyright": "Copyright © 2021 ${author}",
         "productName": "TheBdsManegerElectron",
         "nsis": {
             "oneClick": "false",
@@ -59,37 +58,19 @@
             "artifactName": "${productName}-Portable-${version}-${arch}-${os}-${platform}.${ext}"
         },
         "deb": {
-            "depends": [
-                "gconf2",
-                "gconf-service",
-                "libnotify4",
-                "libappindicator1",
-                "libxtst6",
-                "libnss3",
-                "curl"
-            ]
+            "depends": ["gconf2", "gconf-service", "libnotify4", "libappindicator1", "libxtst6", "libnss3", "curl", "qemu-user-static"]
         },
         "win": {
-            "target": [
-                "nsis",
-                "portable"
-            ]
+            "target": ["nsis", "portable"]
         },
         "linux": {
-            "artifactName": "${productName}-Setup-${version}-${arch}-${os}-${platform}.${ext}",
+            "artifactName": "${productName}-${version}-${arch}-${os}-${platform}.${ext}",
             "category": "Maneger",
-            "target": [
-                "deb",
-                "AppImage",
-                "zip",
-                "7z"
-            ]
+            "icon": "bds_pages/assents/mcpe.png",
+            "target": ["deb", "AppImage", "zip"]
         },
         "mac": {
-            "target": [
-                "dmg",
-                "zip"
-            ]
+            "target": ["dmg", "zip"]
         }
     }
 }
