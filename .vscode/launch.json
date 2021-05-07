@@ -15,6 +15,7 @@
         },
         "args" : [
           "--no-sandbox",
+          "--no-warnings",
           "."
         ],
         "outputCapture": "std"

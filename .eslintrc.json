@@ -30,7 +30,8 @@
         ".github",
         ".vscode",
         ".devcontainer",
-        "test"
+        "test",
+        "bds_pages"
     ],
     "extends": "eslint:recommended",
     "parserOptions": {

@@ -34,7 +34,7 @@
     "homepage": "https://github.com/The-Bds-Maneger#readme",
     "dependencies": {
         "@electron/remote": "^1.0.4",
-        "@the-bds-maneger/core": "^81.5457.620"
+        "@the-bds-maneger/core": "^1.9.3"
     },
     "devDependencies": {
         "electron": "^12.0.6",
@@ -58,19 +58,38 @@
             "artifactName": "${productName}-Portable-${version}-${arch}-${os}-${platform}.${ext}"
         },
         "deb": {
-            "depends": ["gconf2", "gconf-service", "libnotify4", "libappindicator1", "libxtst6", "libnss3", "curl", "qemu-user-static"]
+            "depends": [
+                "gconf2",
+                "gconf-service",
+                "libnotify4",
+                "libappindicator1",
+                "libxtst6",
+                "libnss3",
+                "curl",
+                "qemu-user-static"
+            ]
         },
         "win": {
-            "target": ["nsis", "portable"]
+            "target": [
+                "nsis",
+                "portable"
+            ]
         },
         "linux": {
             "artifactName": "${productName}-${version}-${arch}-${os}-${platform}.${ext}",
             "category": "Maneger",
             "icon": "bds_pages/assents/mcpe.png",
-            "target": ["deb", "AppImage", "zip"]
+            "target": [
+                "deb",
+                "AppImage",
+                "zip"
+            ]
         },
         "mac": {
-            "target": ["dmg", "zip"]
+            "target": [
+                "dmg",
+                "zip"
+            ]
         }
     }
 }

@@ -7,19 +7,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assents/css/main.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='assents/css/index.css'>
-    <script>
-        var kill_status = bds_kill();if (kill_status){location.reload(true)}
-        function BdsManegerSettings(){
-            let filesettings = require("path").resolve(__dirname, "config.html");
-            let openedConfig = open(filesettings)
-            const checkClosed = setInterval(() => {
-                if (openedConfig.closed) {
-                    document.getElementById("StopButtom").click()
-                    // location.reload(true)
-                }
-            }, 500);
-        }
-    </script>
+    <script>if (bds_kill()){location.reload(true)}</script>
 </head>
 <body class="DarkColors">
     <nav class="navbar" id="navbarID"><!-- NAV -->
@@ -99,12 +87,6 @@
                     <span class="link-text" id="buttom_backup">Local Backup</span>
                 </a>
             </li>
-            <script>
-                document.getElementById("WorldBackup").onclick = () => {
-                    let backup_folder = bds_core.backup();
-                    alert(`Backup file in path: ${backup_folder.file_path}`)
-                }
-            </script>
             <!-- World Backup -->
             <!-- World Backup in Drive -->
             <li class="nav-item" id="WorldBackupIndrive">
@@ -116,15 +98,6 @@
                     <span class="link-text" id="buttom_backup">Google drive Backup</span>
                 </a>
             </li>
-            <script>
-                document.getElementById("WorldBackupIndrive").onclick = () => {
-                    if ((bds_core.bds_config.Google_Drive_root_backup_id === undefined || bds_core.bds_config.Google_Drive_root_backup_id === "" || bds_core.bds_config.Google_Drive_root_backup_id === null || bds_core.bds_config.Google_Drive_root_backup_id === undefined)) alert("The Save Backup in Root Drive")
-                    bds_core.drive_backup((file) => {
-                        console.log(file);
-                        alert(`Backup save, ID: ${JSON.stringify(file.data.id)}`)
-                    })
-                }
-            </script>
             <!-- World Backup -->
             <!-- Settings -->
             <li class="nav-item" onclick="BdsManegerSettings()">
@@ -149,11 +122,6 @@
                     <span class="link-text" id="buttom_about">About</span>
                 </a>
             </li>
-            <script>
-                document.getElementById("ProjectAbout").onclick = () => {
-                    open(require("path").resolve(__dirname, "About.html"))
-                }
-            </script>
         </ul>
     </nav><!-- End NAV -->
     
@@ -163,17 +131,6 @@
             <div style="text-align: center;">
                 <span style="color: var(--color-success);display: none;" id="Reunning">Running</span><span style="color: var(--color-error);display: none;" id="Stopped">Stopped</span>
             </div>
-            <script>
-                setInterval(() => {
-                    if (bds_core.bds_detect()) {
-                        document.getElementById("Reunning").style.display = "block";
-                        document.getElementById("Stopped").style.display = "none"
-                    } else {
-                        document.getElementById("Stopped").style.display = "block";
-                        document.getElementById("Reunning").style.display = "none"
-                    }
-                }, 300);
-            </script>
             <textarea class="logTEXT" disabled id="LOG"></textarea>
         </div>
 
@@ -182,80 +139,9 @@
             <input class="command_area" placeholder="The command is here, there is no need to include the '/'" id="CommandAreaInput" size="100%" type="text">
             <input class="command_send" id="CommandSendID" type="submit" value="Command">
         </div>
-        <script>
-            global.HistoricNumber = 0
-            // Command input
-            global.TheCommands = JSON.parse((localStorage.getItem("CommmandHistoric") || "[]"))
-            const commandArea = document.getElementById("CommandAreaInput")
-            commandArea.onkeydown = () => {
-                // console.log(event.keyCode);
-                if(event.keyCode === 38) {
-                    global.HistoricNumber = global.HistoricNumber + 1
-                    if (global.TheCommands[global.HistoricNumber]) commandArea.value = global.TheCommands[global.HistoricNumber]; else global.HistoricNumber = global.HistoricNumber - 1
-                }
-                if(event.keyCode === 40) {
-                    global.HistoricNumber = global.HistoricNumber - 1
-                    if (global.TheCommands[global.HistoricNumber]) commandArea.value = global.TheCommands[global.HistoricNumber]; else global.HistoricNumber = global.HistoricNumber + 1
-                }
-                if(event.keyCode === 13) {
-                    global.TheCommands.push(commandArea.value);
-                    localStorage.setItem("CommmandHistoric", JSON.stringify(global.TheCommands, null, 4))
-                    document.getElementById("CommandSendID").click();
-                }
-            }
-            commandArea.oninput = () => {
-                if (commandArea.value.charAt(0) === "/") commandArea.value = commandArea.value.replace("/", "");
-                if (commandArea.value === "stop") {alert("User the giant button here on the side or down here");commandArea.value = ""};
-            }
-
-            // Command click
-            const CommandClick = document.getElementById("CommandSendID")
-            CommandClick.onclick = () => {
-                if (bds_core.bds_detect()) {
-                    bds_core.command(commandArea.value);
-                    global.HistoricNumber = 0
-                    commandArea.value = "";
-                } alert("Start the Server")
-            }
-        </script>
     </div>
     <!--End Root-->
 </body>
 
-<script>
-const themeMap = {
-    dark: "light",
-    light: "DarkColors",
-    DarkColors: "dark"};
-const theme = localStorage.getItem('theme') || (tmp = Object.keys(themeMap)[0], localStorage.setItem('theme', tmp), tmp);
-const bodyClass = document.body.classList;
-bodyClass.add(theme);
-function toggleTheme() {
-    const current = localStorage.getItem('theme');
-    const next = themeMap[current];
-    bodyClass.replace(current, next);
-    localStorage.setItem('theme', next);};
-document.getElementById('themeButton').onclick = toggleTheme;
-
-function startServer(){
-    if (!(bds_detect())){
-        var bds_EXIT = document.getElementById("LOG").innerHTML
-        // if (bds_EXIT.includes("Quit correctly")) document.getElementById("LOG").innerHTML = ""
-        global.serverstated = bds_start();
-        serverstated.stdout.on("data", function (data) {
-            document.getElementById("LOG").innerHTML += data;
-            document.getElementById("LOG").scrollTo(0, 9999)
-        });
-    } else alert("Your server is running")
-}
-
-function restartServer(){
-    if (bds_detect()) bds_stop()
-    startServer();
-}
-
-function log_save(){
-    alert("Your log file is being automatically saved to the Server directory")
-}
-bds_control.telegram.launch();</script>
+<script src="./index.js"></script>
 </html>
