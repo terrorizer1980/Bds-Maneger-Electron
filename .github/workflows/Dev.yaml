@@ -111,6 +111,7 @@ jobs:
         run: npm install
 
       - name: Build Packs
+        continue-on-error: true
         run: npm run pack
 
       - uses: actions/upload-artifact@main
