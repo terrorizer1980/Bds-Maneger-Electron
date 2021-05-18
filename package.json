@@ -33,11 +33,10 @@
     },
     "homepage": "https://github.com/The-Bds-Maneger#readme",
     "dependencies": {
-        "@electron/remote": "^1.0.4",
-        "@the-bds-maneger/core": "^1.9.3"
+        "@the-bds-maneger/core": "^85.1940.177"
     },
     "devDependencies": {
-        "electron": "^12.0.8",
+        "electron": "^13.0.0-beta.27",
         "electron-builder": "^22.11.4",
         "electron-is": "^3.0.0",
         "eslint": "^7.26.0",

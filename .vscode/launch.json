@@ -1,25 +1,24 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Debug Main Process",
-        "type": "node",
-        "request": "launch",
-        "cwd": "${workspaceFolder}",
-        "sourceMaps": true,
-        "windows": {
-          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
-        },
-        "linux": {
-          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-        },
-        "args" : [
-          "--no-sandbox",
-          "--no-warnings",
-          "."
-        ],
-        "outputCapture": "std"
-      }
-    ]
-  }
-  
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Main Process",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "sourceMaps": true,
+      "windows": {
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+      },
+      "linux": {
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      },
+      "args" : [
+        "--no-sandbox",
+        "--no-warnings",
+        "."
+      ],
+      "outputCapture": "std"
+    }
+  ]
+}
