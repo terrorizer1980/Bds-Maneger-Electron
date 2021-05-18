@@ -37,7 +37,7 @@
         "@the-bds-maneger/core": "^1.9.3"
     },
     "devDependencies": {
-        "electron": "^12.0.6",
+        "electron": "^12.0.8",
         "electron-builder": "^22.11.4",
         "electron-is": "^3.0.0",
         "eslint": "^7.26.0",
