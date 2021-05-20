@@ -1,8 +1,7 @@
 const { resolve } = require("path")
 
 function BdsManegerSettings(){
-    resolve(__dirname, "config.html");
-    open(filesettings);
+    open(resolve(__dirname, "config.html"));
 }
 
 document.getElementById("WorldBackup").onclick = () => {

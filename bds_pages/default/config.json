@@ -2,5 +2,6 @@
     "index": "index.html",
     "name": "Default",
     "Description": "Default Bds Manager theme",
+    "preload": "preload.js",
     "Package": []
 }

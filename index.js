@@ -4,7 +4,7 @@ const { app, BrowserWindow } = require("electron");
 const fs = require("fs");
 const path = require("path");
 const {resolve, join} = path;
-const { bds_dir } = require("@the-bds-maneger/core/bdsgetPaths");
+const { bds_dir } = require("@the-bds-maneger/core/");
 
 // Load remote
 const custom_pagesPath = join(bds_dir, "CustomPages");
