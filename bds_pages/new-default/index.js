@@ -1,5 +1,8 @@
+const bds = require("@the-bds-maneger/core");
+const { resolve } = require("path");
+
 function start (){
-    const current_server = require("@the-bds-maneger/core").start();
+    const current_server = bds.start();
     current_server.log(function (data){
         data = data.split(/\n/).join("<br>\n")
         document.getElementsByClassName("server_log")[0].innerHTML += data
@@ -12,4 +15,8 @@ function start (){
         const TextCommand = document.getElementById("command_area").value
         current_server.command(TextCommand)
     }
+}
+document.getElementById("settinsbuttom").onclick = function (){
+    const SettingsPagePath = resolve(__dirname, "settings.html")
+    return open(SettingsPagePath)
 }
