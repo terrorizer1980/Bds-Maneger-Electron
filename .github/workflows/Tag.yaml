@@ -1,6 +1,6 @@
 name: Electron Tag Build
 on: 
- push: 
+  push: 
     tags:
       - v**
       - V**
@@ -48,7 +48,7 @@ jobs:
         run: npm install
 
       - name: Build Packs
-        run: npm run pack
+        run: npm run nexe
 
       - name: Get The Bds Maneger Version
         run: |
@@ -62,7 +62,7 @@ jobs:
         with:
           name: linux
           retention-days: 1
-          path: dist/*.*
+          path: Bds_Maneger_Bin*
 
   Release-Macos:
     runs-on: macos-latest
@@ -84,13 +84,13 @@ jobs:
         run: npm install
 
       - name: Build Packs
-        run: npm run pack
+        run: npm run nexe
 
       - uses: actions/upload-artifact@main
         with:
           name: macos
           retention-days: 1
-          path: dist/*.*
+          path: Bds_Maneger_Bin*
 
   Release-Windows:
     runs-on: windows-latest
@@ -112,13 +112,13 @@ jobs:
         run: npm install
 
       - name: Build Packs
-        run: npm run pack
+        run: npm run nexe
 
       - uses: actions/upload-artifact@main
         with:
           name: windows
           retention-days: 1
-          path: dist/*.*
+          path: Bds_Maneger_Bin*
 
   Release:
     runs-on: ubuntu-latest

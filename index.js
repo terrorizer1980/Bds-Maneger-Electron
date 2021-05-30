@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -9,20 +10,33 @@ const bds = require("@the-bds-maneger/core");
 const { existsSync, writeFileSync, readFileSync } = require("fs");
 const uuid = require("uuid").v4
 const bodyParser = require("body-parser");
-const BdsPort = (process.env.PORT || 3000)
+const { exit } = require("process");
+
+const options = require("minimist")(process.argv.slice(2));
+
+if (options.h || options.help){
+    const help = [
+        ""
+    ]
+    console.log(help.join("\n"));
+    exit()
+}
+
+const BdsPort = (options.port || options.p || 3000)
+const PathExec = (options.path || options.cwd || process.cwd())
 
 // Register
-const UserConfig = resolve(process.cwd(), "User.json");
+const UserConfig = resolve(PathExec, "User.json");
 if(!(existsSync(UserConfig))) writeFileSync(UserConfig, "{}")
 
-const ConfigPath = resolve(process.cwd(), "Config.json");
+const ConfigPath = resolve(PathExec, "Config.json");
 var Config = {
     register: true,
     api: true
 };
 if(!(existsSync(ConfigPath))) writeFileSync(ConfigPath, JSON.stringify(Config, null, 4)); else Config = JSON.parse(readFileSync(ConfigPath, "utf8"))
 
-const UserRegister = resolve(process.cwd(), "Register.json");
+const UserRegister = resolve(PathExec, "Register.json");
 writeFileSync(UserRegister, "{}")
 
 console.log((function(){
@@ -196,3 +210,7 @@ app.post("/service", (req, res) => {
 server.listen(BdsPort, () => {
   console.log(`listening on *:${BdsPort}`);
 });
+
+module.exports.app = app;
+module.exports.server = server;
+module.exports.express = express;
