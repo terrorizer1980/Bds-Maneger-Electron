@@ -166,7 +166,7 @@ if (Config.register){
     })
 } else {
     app.get("/register", (req, res) => {
-        res.redirect("/login", 302)
+        res.redirect("/login")
     })
 }
 app.get("/login", (req, res) => {res.sendFile(resolve(__dirname, "page/login.html"))})
