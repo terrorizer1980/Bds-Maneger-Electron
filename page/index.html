@@ -6,25 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var socket = io();
+        const UserUUID="@UUID"
+        const socket = io();
+        setInterval(() => {if (socket.disconnected) location.href = "/login"}, 500);
     </script>
     <title>Bds Maneger</title>
 </head>
+<header>
+    <form action="/logout">
+        <button type="submit">Logout<input type="hidden" name="uuid" id="logoutButtom"></button>
+    </form>
+    <script>document.getElementById("logoutButtom").value = UserUUID</script>
+</header>
 <body>
     <div>
         <a href="#Start" id="start">Start</a>
+        <a href="#Stop" id="stop">Stop</a>
     </div>
     <div class="logDiv" id="logDir"></div>
 </body>
 <script>
     document.getElementById("start").onclick = function(){
-        fetch("/service", {
-            headers: {
-                command: "start"
-            },
-            "method": "POST",
-            "mode": "cors"
-        })
+        fetch("/service", {headers: {command: "start", uuid: UserUUID}, method: "POST", mode: "cors"})
+            .then(res => {if (res.ok) return res.text(); else throw res})
+            .then(res => sessionStorage.setItem("bdsCoreUuid", res))
+            .catch(err => alert(err));
+    }
+    document.getElementById("stop").onclick = function(){
+        fetch("/service", {headers: {command: "stop", uuid: UserUUID, bdscoreUuid: sessionStorage.getItem("bdsCoreUuid")}, method: "POST", mode: "cors"})
+            .then(res => {if (res.ok) sessionStorage.removeItem("bdsCoreUuid"); else alert("Try again there was an Error")})
     }
     const log = document.getElementById("logDir")
     socket.on("BdsLog", function(msg) {

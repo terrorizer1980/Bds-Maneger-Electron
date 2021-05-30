@@ -6,7 +6,7 @@
     "private": false,
     "scripts": {
         "start": "node index.js",
-        "dev": "nodemon index.js",
+        "dev": "nodemon -e js,html,css index.js",
         "test": "npm run eslint",
         "eslint:fix": "eslint . --fix",
         "nexe": "node NexeBuild.js"
