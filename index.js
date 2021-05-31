@@ -110,6 +110,7 @@ function sendLog(data){
 }
 
 // URi
+app.use("/assents", express.static(resolve(__dirname, "page/assents/")))
 app.get("/", (req, res) => res.redirect("/login"));
 
 app.get("/index", (req, res)=>{

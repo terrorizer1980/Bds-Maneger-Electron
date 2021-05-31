@@ -119,10 +119,10 @@ jobs:
 
       - name: Getting the env in the file
         run: |
-          cat */*release_config.txt >> $GITHUB_ENV
-          cat */*release_config.txt
-
-      - run: rm -fv $(find -L -maxdepth 1 -type f -name '*.y*ml' | sed 's|./||g' | sed 's|\.||g') */*release_config.txt
+          PATH_re=$(find . -name 'release_config.txt')
+          cat ${PATH_re} >> $GITHUB_ENV
+          cat ${PATH_re}
+          rm -rfv ${PATH_re}
 
       - name: Releases
         uses: softprops/action-gh-release@v1
@@ -131,7 +131,7 @@ jobs:
         with:
           name: Bds Maneger Version ${{ env.BDS_VER }}
           tag_name: ${{ github.run_id }}
-          files: '*/*'
+          files: '*'
           prerelease: true
           body: |
             The Bds Maneger With Electron: ${{ env.ELECTRON_VER }},

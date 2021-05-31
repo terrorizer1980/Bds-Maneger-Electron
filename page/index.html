@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="/assents/index.css">
     <script>
         const UserUUID="@UUID"
         const socket = io();
@@ -14,39 +15,18 @@
 </head>
 <header>
     <form action="/logout">
-        <button type="submit">Logout<input type="hidden" name="uuid" id="logoutButtom"></button>
+        <button type="submit" class="logoutbuttom">Logout<input type="hidden" name="uuid" id="logoutButtom"></button>
     </form>
+    <div class="BasicButtons"><a href="#Start" id="start">Start</a><a href="#Stop" id="stop">Stop</a></div>
     <script>document.getElementById("logoutButtom").value = UserUUID</script>
 </header>
-<body>
-    <div class="BasicButtons">
-        <a href="#Start" id="start">Start</a>
-        <a href="#Stop" id="stop">Stop</a>
-    </div>
-    <div>
+<body class="dark">
+    <div class="logDiv" id="logDir"></div>
+    <div class="CommandArea">
         <input type="hidden" name="uuid" value="@UUID">
         <div id="SendCommand">Command: <input type="text" id="command" name="command"></div>
-        <script>
-            const doC = document.getElementById("SendCommand");
-            doC.onkeypress = function(event){
-                const code = event.which
-                if (code === 13) {
-                    const uid = sessionStorage.getItem("bdsCoreUuid");
-                    const command = document.getElementById("command").value;
-                    fetch("/command", {
-                        method: "POST",
-                        mode: "cors",
-                        headers: {
-                            command: command,
-                            coreuid: uid,
-                            uuid: UserUUID
-                        }
-                    })
-                }
-            }
-        </script>
+        <script>const doC = document.getElementById("SendCommand");doC.onkeypress = function(event){const code = event.which;if (code === 13) {const uid = sessionStorage.getItem("bdsCoreUuid");const command = document.getElementById("command").value;fetch("/command", {method: "POST", mode: "cors", headers: {command: command, coreuid: uid, uuid: UserUUID}})}}</script>
     </div>
-    <div class="logDiv" id="logDir"></div>
 </body>
 <script>
     document.getElementById("start").onclick = function(){
