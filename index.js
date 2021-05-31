@@ -16,14 +16,18 @@ const options = require("minimist")(process.argv.slice(2));
 
 if (options.h || options.help){
     const help = [
-        ""
+        "Bds Maneger [options]",
+        "",
+        "Options:",
+        "   -p or --port            Bds Maneger Port, default 3000",
+        `   -cwd                    Path to storage files, default current folder (${process.cwd()})`,
     ]
     console.log(help.join("\n"));
     exit()
 }
 
 const BdsPort = (options.port || options.p || 3000)
-const PathExec = (options.path || options.cwd || process.cwd())
+const PathExec = (options.cwd || process.cwd())
 
 // Register
 const UserConfig = resolve(PathExec, "User.json");
@@ -205,12 +209,19 @@ app.post("/service", (req, res) => {
         return res.send(global.BdsExecs[JsS.bdscoreUuid].stop())
     }
     return res.statusCode(401)
+});
+
+app.post("/command", (req, res) => {
+    console.log("Command request");
+    const body = req.headers
+    console.log(body);
+    if (!(checkUUID(body.uuid))) return res.status(402).send("UUID Error");
+    const coreuid = body["coreuid"]
+    if (global.BdsExecs[coreuid]) {
+        global.BdsExecs[coreuid].command(body.command, function(d){res.send(d)})
+    } else res.status(401).send("Core UID Not exist"+ coreuid)
 })
 
 server.listen(BdsPort, () => {
   console.log(`listening on *:${BdsPort}`);
 });
-
-module.exports.app = app;
-module.exports.server = server;
-module.exports.express = express;

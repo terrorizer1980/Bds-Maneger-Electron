@@ -2,7 +2,7 @@ name: Electron main builds
 on: 
   push:
     branches:
-     - main
+      - main
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -40,9 +40,6 @@ jobs:
         with:
           node-version: 15.x
 
-      - name: Update
-        run: npm update
-
       - name: Install
         run: npm install
 
@@ -52,10 +49,10 @@ jobs:
       - name: Get The Bds Maneger Version
         run: |
           sudo apt install -y jq
-          echo "BDS_VER=\"$(cat package.json| jq -r .version)\"" >> dist/release_config.txt
-          echo "ELECTRON_VER=$(cat package.json| jq -r .devDependencies.electron)" >> dist/release_config.txt
-          echo "BDS_CORE_VER=$(cat package.json| jq -r '.dependencies["@the-bds-maneger/core"]')" >> dist/release_config.txt
-          echo "COMMIT_ME=\"$(git show -s --format=%s -1)\"" >> dist/release_config.txt
+          echo "BDS_VER=\"$(cat package.json| jq -r .version)\"" >> release_config.txt
+          echo "ELECTRON_VER=$(cat package.json| jq -r .devDependencies.electron)" >> release_config.txt
+          echo "BDS_CORE_VER=$(cat package.json| jq -r '.dependencies["@the-bds-maneger/core"]')" >> release_config.txt
+          echo "COMMIT_ME=\"$(git show -s --format=%s -1)\"" >> release_config.txt
 
       - uses: actions/upload-artifact@main
         with:
@@ -75,9 +72,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 15.x
-
-      - name: Update
-        run: npm update
 
       - name: Install
         run: npm install
@@ -103,9 +97,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 15.x
-
-      - name: Update
-        run: npm update
 
       - name: Install
         run: npm install

@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Iniciar o Programa",
+            "name": "Start Express",
             "program": "${workspaceFolder}/index.js"
         }
     ]

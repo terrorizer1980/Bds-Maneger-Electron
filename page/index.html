@@ -19,9 +19,32 @@
     <script>document.getElementById("logoutButtom").value = UserUUID</script>
 </header>
 <body>
-    <div>
+    <div class="BasicButtons">
         <a href="#Start" id="start">Start</a>
         <a href="#Stop" id="stop">Stop</a>
+    </div>
+    <div>
+        <input type="hidden" name="uuid" value="@UUID">
+        <div id="SendCommand">Command: <input type="text" id="command" name="command"></div>
+        <script>
+            const doC = document.getElementById("SendCommand");
+            doC.onkeypress = function(event){
+                const code = event.which
+                if (code === 13) {
+                    const uid = sessionStorage.getItem("bdsCoreUuid");
+                    const command = document.getElementById("command").value;
+                    fetch("/command", {
+                        method: "POST",
+                        mode: "cors",
+                        headers: {
+                            command: command,
+                            coreuid: uid,
+                            uuid: UserUUID
+                        }
+                    })
+                }
+            }
+        </script>
     </div>
     <div class="logDiv" id="logDir"></div>
 </body>
