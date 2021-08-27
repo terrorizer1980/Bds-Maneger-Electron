@@ -1,4 +1,0 @@
-[submodule "bds_pages/custom_pages/simples"]
-	path = bds_pages/custom_pages/simples
-	url = https://github.com/Bds-Maneger/Pages_template.git
-	branch = main
