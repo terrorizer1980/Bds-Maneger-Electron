@@ -33,7 +33,7 @@
     },
     "homepage": "https://github.com/The-Bds-Maneger#readme",
     "dependencies": {
-        "@the-bds-maneger/core": "^99.9529.328"
+        "@the-bds-maneger/core": "^1.13.6"
     },
     "devDependencies": {
         "electron": "13.2.2",
